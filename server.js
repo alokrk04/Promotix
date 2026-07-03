@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const fs = require('fs');
 const path = require('path');
+const helmet = require('helmet');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,8 +28,12 @@ function saveContent(data) {
   fs.writeFileSync(CONTENT_FILE, JSON.stringify(data, null, 2), 'utf-8');
 }
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const loginAttempts = new Map();
+setInterval(() => loginAttempts.clear(), 15 * 60 * 1000);
+
+app.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false }));
+app.use(express.json({ limit: '1mb' }));
+app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 app.use(session({
   secret: SESSION_SECRET,
   resave: false,
@@ -49,15 +54,27 @@ app.get('/api/content', (req, res) => {
 });
 
 app.post('/api/login', (req, res) => {
+  const ip = req.ip;
+  const now = Date.now();
+  const attempts = loginAttempts.get(ip) || [];
+  const recent = attempts.filter(t => now - t < 15 * 60 * 1000);
+  if (recent.length >= 10) return res.status(429).json({ error: 'Too many attempts. Try again later.' });
+  recent.push(now);
+  loginAttempts.set(ip, recent);
   const { username, password } = req.body;
+  if (typeof username !== 'string' || typeof password !== 'string') return res.status(400).json({ error: 'Invalid input' });
   if (username === ADMIN_USER && password === ADMIN_PASS) {
+    loginAttempts.delete(ip);
     if (activeAdminSession) {
       const store = req.sessionStore;
       store.destroy(activeAdminSession, () => {});
     }
-    req.session.isAdmin = true;
-    activeAdminSession = req.session.id;
-    return res.json({ ok: true });
+    req.session.regenerate(() => {
+      req.session.isAdmin = true;
+      activeAdminSession = req.session.id;
+      res.json({ ok: true });
+    });
+    return;
   }
   res.status(401).json({ error: 'Invalid credentials' });
 });
@@ -82,11 +99,15 @@ app.post('/api/content', requireAdmin, (req, res) => {
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'promotix-website.html')));
 
 app.post('/api/contact', (req, res) => {
-  const { name, email, company, service, message } = req.body;
+  const s = v => typeof v === 'string' ? v.trim().slice(0, 2000) : '';
+  const name = s(req.body.name), email = s(req.body.email), message = s(req.body.message);
   if (!name || !email || !message) return res.status(400).json({ error: 'Name, email, and message required' });
+  if (name.length < 1 || email.length < 3 || message.length < 2) return res.status(400).json({ error: 'Fields too short' });
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ error: 'Invalid email' });
+  const company = s(req.body.company), service = s(req.body.service);
   let msgs = [];
   try { msgs = JSON.parse(fs.readFileSync(MESSAGES_FILE, 'utf-8') || '[]'); } catch { msgs = []; }
-  msgs.push({ id: Date.now(), name, email, company: company || '', service: service || '', message, date: new Date().toISOString(), read: false });
+  msgs.push({ id: Date.now(), name, email, company, service, message, date: new Date().toISOString(), read: false });
   fs.writeFileSync(MESSAGES_FILE, JSON.stringify(msgs, null, 2));
   res.json({ ok: true });
 });
@@ -121,6 +142,13 @@ app.use(express.static(__dirname, {
     }
   }
 }));
+
+app.use((err, req, res, next) => {
+  console.error('Server error:', err.message);
+  res.status(500).json({ error: 'Internal server error' });
+});
+
+app.use((req, res) => res.status(404).sendFile(path.join(__dirname, 'promotix-website.html')));
 
 app.listen(PORT, () => {
   console.log(`Promotix server running at http://localhost:${PORT}`);

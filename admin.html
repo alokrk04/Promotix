@@ -86,6 +86,7 @@ body{font-family:'Space Grotesk',sans-serif;background:#f1f5f9;color:#1e293b;min
       <button class="btn-outline" onclick="logout()">Logout</button>
     </div>
   </div>
+  <div style="text-align:center;font-size:.75rem;color:#94a3b8;padding:.3rem 0;border-bottom:1px solid #e2e8f0">Ctrl+S to save · Messages load automatically</div>
 
   <div class="dash-wrap" id="editor"></div>
 
@@ -192,7 +193,7 @@ function renderEditor() {
   ]);
   html += renderPricingEditor();
   html += renderStatsEditor();
-  html += `<div class="section" id="messages-section"><h3>📬 Contact Messages</h3><div id="messages-list">Loading...</div></div>`;
+  html += `<div class="section" id="messages-section"><h3>📬 Contact Messages <span id="msg-badge" style="display:none;font-size:.72rem;background:#7C3AED;color:#fff;padding:.15rem .6rem;border-radius:50px;vertical-align:middle"></span></h3><input id="msg-search" type="text" placeholder="Search messages..." style="width:100%;padding:.6rem .9rem;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:.85rem;margin-bottom:.8rem;outline:none" oninput="loadMessages()"><div id="messages-list">Loading...</div></div>`;
 
   editor.innerHTML = html;
   loadMessages();
@@ -347,15 +348,28 @@ function removeItem(el) {
   }
 }
 
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    const btn = document.getElementById('saveBtn');
+    if (!btn.disabled) saveAll();
+  }
+});
+
 async function loadMessages() {
   const el = document.getElementById('messages-list');
   if (!el) return;
+  const q = (document.getElementById('msg-search')?.value || '').toLowerCase();
   try {
     const r = await fetch('/api/messages');
     if (!r.ok) { el.innerHTML = '<p style="color:#64748b">Login required</p>'; return; }
     const msgs = await r.json();
-    if (!msgs.length) { el.innerHTML = '<p style="color:#64748b">No messages yet</p>'; return; }
-    el.innerHTML = msgs.map(m => `
+    const unread = msgs.filter(m => !m.read).length;
+    const badge = document.getElementById('msg-badge');
+    if (badge) { badge.textContent = unread; badge.style.display = unread ? 'inline' : 'none'; }
+    const filtered = q ? msgs.filter(m => (m.name+' '+m.email+' '+m.message+' '+(m.company||'')+' '+(m.service||'')).toLowerCase().includes(q)) : msgs;
+    if (!filtered.length) { el.innerHTML = '<p style="color:#64748b">'+(q?'No messages match your search':'No messages yet')+'</p>'; return; }
+    el.innerHTML = filtered.map(m => `
       <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:1rem;margin-bottom:.8rem;${m.read?'':'border-left:3px solid #7C3AED;background:#FAF5FF'}">
         <div style="display:flex;justify-content:space-between;align-items:start;gap:1rem;flex-wrap:wrap">
           <div><strong>${escHtml(m.name)}</strong>${m.company?' · '+escHtml(m.company):''} · ${escHtml(m.email)}${m.service?' · '+escHtml(m.service):''}</div>

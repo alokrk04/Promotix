@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PROMOTIX – Your Vision, Our Strategy</title>
 <meta name="description" content="High-End Marketing Agency. Ads, Reels & Brand Promotions that turn ideas into powerful brands.">
+<meta name="theme-color" content="#7C3AED">
+<meta property="og:title" content="PROMOTIX – Your Vision, Our Strategy">
+<meta property="og:description" content="Premium marketing agency &amp; real estate solutions. Promotix Connect builds your brand, Promotix Properties finds your space.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://promotix.in">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PROMOTIX – Your Vision, Our Strategy">
+<meta name="twitter:description" content="Premium marketing agency &amp; real estate solutions. Promotix Connect builds your brand, Promotix Properties finds your space.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Promotix","description":"Premium marketing agency and real estate solutions provider","url":"https://promotix.in","contactPoint":{"@type":"ContactPoint","telephone":"+91-9380712430","contactType":"sales"},"address":{"@type":"PostalAddress","addressLocality":"Nipani","addressRegion":"Karnataka","addressCountry":"IN"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -275,6 +284,9 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
 .news-btn{padding:.6rem 1.1rem;background:var(--gp);border:none;border-radius:9px;color:#fff;font-size:.83rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .3s}
 .news-btn:hover{transform:translateY(-2px)}
 
+/* ── Reduced Motion ──────────────────────────── */
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}#loader{display:none!important}.tst-track{animation:none!important}.cur,.cur-f,.mglow{display:none!important}#bg{opacity:.15!important}.rv{opacity:1!important;transform:none!important}}
+
 /* ── Animations ──────────────────────────────── */
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.08)}}
 @keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
@@ -303,9 +315,13 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
   .ct-grid{gap:2rem}
 }
 @media(max-width:768px){
-  nav{padding:1rem 5%}
+  nav{padding:.8rem 5%}
   .n-links,.n-cta{display:none}
   .n-hamburger{display:flex}
+  .n-logo img{height:56px!important}
+  .n-name{font-size:1rem}
+  .n-hamburger{gap:4px}
+  .n-hamburger span{width:20px;height:2px}
   section{padding:3rem 5%}
   .sh{font-size:clamp(1.7rem,5vw,2.4rem);margin-bottom:.8rem}
   .ss{font-size:.95rem;line-height:1.65}
@@ -393,7 +409,7 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
 
 <div id="loader">
   <div class="l-logo">
-    <img src="resources/logo.png" alt="Promotix" style="height:72px;width:auto;">
+    <img src="resources/logo.png" alt="Promotix" style="height:120px;width:auto;">
     <div class="l-name">PROMOTIX</div>
   </div>
   <div class="l-track"><div class="l-bar" id="lbar"></div></div>
@@ -412,7 +428,7 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
 
 <nav id="nav">
   <a href="#" class="n-logo">
-    <img src="resources/logo.png" alt="Promotix" style="height:52px;width:auto;">
+    <img src="resources/logo.png" alt="Promotix" style="height:100px;width:auto;">
     <span class="n-name">PROMOTIX</span>
   </a>
   <ul class="n-links">
@@ -510,7 +526,6 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
         <div class="abt-vis rv">
         <div class="abt-box abt-b1"><div><div style="font-size:3.2rem;margin-bottom:.8rem">🚀</div><div style="font-size:1.1rem;font-weight:700">Promotix Connect</div><div style="color:var(--slate);font-size:.85rem;margin-top:.3rem">Marketing & Branding</div></div></div>
         <div class="abt-box abt-b2"><div><div style="font-size:2.2rem;margin-bottom:.5rem">🏡</div><div style="font-size:.95rem;font-weight:600">Promotix Properties</div></div></div>
-        <div class="abt-box abt-b3"><div><div style="font-size:1.7rem">⚡</div><div style="font-size:.75rem;font-weight:600;margin-top:.2rem">Two Divisions</div></div></div>
       </div>
     </div>
   </div>
@@ -691,7 +706,7 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
     <div class="ft-grid">
       <div>
         <a href="#" class="n-logo" style="margin-bottom:1rem;display:inline-flex">
-          <img src="resources/logo.png" alt="Promotix" style="height:52px;width:auto;">
+          <img src="resources/logo.png" alt="Promotix" style="height:100px;width:auto;">
           <span class="n-name">PROMOTIX</span>
         </a>
         <p class="ft-ct">The parent brand behind Promotix Connect (Marketing) and Promotix Properties (Real Estate) — turning ideas into brands, brands into homes.</p>
@@ -766,7 +781,8 @@ const scene = new THREE.Scene();
 const cam = new THREE.PerspectiveCamera(60, W/H, 0.1, 1000);
 cam.position.z = 32;
 
-const PC = 1400;
+const isMobile = window.innerWidth < 768;
+const PC = isMobile ? 400 : 1400;
 const pos = new Float32Array(PC * 3);
 for (let i = 0; i < PC * 3; i += 3) {
   pos[i]   = (Math.random() - 0.5) * 110;
@@ -779,8 +795,9 @@ const pMat = new THREE.PointsMaterial({size:0.18, color:0x7C3AED, transparent:tr
 const particles = new THREE.Points(pGeo, pMat);
 scene.add(particles);
 
-const pos2 = new Float32Array(600 * 3);
-for (let i = 0; i < 600 * 3; i += 3) {
+const PC2 = isMobile ? 150 : 600;
+const pos2 = new Float32Array(PC2 * 3);
+for (let i = 0; i < PC2 * 3; i += 3) {
   pos2[i]   = (Math.random() - 0.5) * 130;
   pos2[i+1] = (Math.random() - 0.5) * 130;
   pos2[i+2] = (Math.random() - 0.5) * 60;
@@ -832,8 +849,13 @@ document.addEventListener('mousemove', e => {
   my = -(e.clientY / innerHeight - 0.5) * 2;
 });
 
-let t = 0;
+let t = 0, animActive = true;
+document.addEventListener('visibilitychange', () => {
+  animActive = !document.hidden;
+  if (!document.hidden) animate();
+});
 function animate() {
+  if (!animActive) return;
   requestAnimationFrame(animate);
   t += 0.004;
   tcx += (mx - tcx) * 0.04;
