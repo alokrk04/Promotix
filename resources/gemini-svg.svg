@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <!-- Gradient matching the Blue to Pink transition -->
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3322ff" />
+      <stop offset="50%" stop-color="#b81cd4" />
+      <stop offset="100%" stop-color="#ff007a" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Ring -->
+  <circle cx="50" cy="50" r="42" fill="none" stroke="url(#logoGrad)" stroke-width="4.5" />
+  
+  <!-- Inner Play/Rocket Shape -->
+  <path d="M 33 30 
+           L 33 52 
+           L 25 65 
+           L 39 59 
+           L 31 77 
+           L 47 62 
+           L 72 36 
+           Z" 
+        fill="url(#logoGrad)" />
+</svg>
