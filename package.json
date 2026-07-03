@@ -1,0 +1,15 @@
+{
+  "name": "promotix-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Promotix website with admin content management",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-session": "^1.17.3"
+  }
+}

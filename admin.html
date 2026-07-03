@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promotix Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Space Grotesk',sans-serif;background:#f1f5f9;color:#1e293b;min-height:100vh}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
+.login-box{background:#fff;border-radius:20px;padding:3rem;width:100%;max-width:400px;box-shadow:0 25px 60px rgba(0,0,0,.1);text-align:center}
+.login-box h1{font-size:1.6rem;font-weight:800;margin-bottom:.3rem;background:linear-gradient(135deg,#5B21B6 0%,#7C3AED 50%,#06B6D4 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.login-box p{color:#64748b;font-size:.9rem;margin-bottom:2rem}
+.login-box input{width:100%;padding:.85rem 1rem;border:1.5px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:.92rem;margin-bottom:1rem;outline:none;transition:border-color .3s}
+.login-box input:focus{border-color:#7C3AED}
+.login-box button{width:100%;padding:.85rem;background:linear-gradient(135deg,#7C3AED,#4F46E5);border:none;border-radius:10px;color:#fff;font-family:inherit;font-size:.97rem;font-weight:600;cursor:pointer;transition:all .3s}
+.login-box button:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(124,58,237,.4)}
+.login-box .err{color:#ef4444;font-size:.85rem;margin-top:.7rem;display:none}
+#dash{display:none}
+.topbar{background:#fff;border-bottom:1px solid #e2e8f0;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.topbar h2{font-size:1.2rem;font-weight:700}
+.topbar .btns{display:flex;gap:.7rem}
+.topbar button{padding:.5rem 1.1rem;border-radius:8px;border:none;font-family:inherit;font-size:.84rem;font-weight:600;cursor:pointer;transition:all .25s}
+.btn-outline{background:transparent;border:1.5px solid #e2e8f0!important;color:#1e293b}
+.btn-outline:hover{border-color:#7C3AED!important;background:rgba(124,58,237,.06)}
+.dash-wrap{padding:2rem;max-width:960px;margin:0 auto}
+.section{margin-bottom:2.5rem}
+.section h3{font-size:1.05rem;font-weight:700;margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:2px solid #e2e8f0;text-transform:capitalize}
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:.82rem;font-weight:600;color:#64748b;margin-bottom:.35rem;text-transform:capitalize}
+.field input,.field textarea,.field .editor-item{width:100%;padding:.7rem .9rem;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:.9rem;outline:none;transition:border-color .25s;background:#fff}
+.field input:focus,.field textarea:focus,.field .editor-item:focus-within{border-color:#7C3AED;box-shadow:0 0 0 3px rgba(124,58,237,.08)}
+.field textarea{min-height:70px;resize:vertical}
+.editor-list .editor-item{display:flex;gap:.5rem;margin-bottom:.5rem;align-items:flex-start}
+.editor-item input{flex:1;margin-bottom:0}
+.editor-item textarea{flex:2;margin-bottom:0;min-height:50px}
+.editor-item .del-btn{background:#fee2e2;border:none;border-radius:6px;width:32px;height:32px;cursor:pointer;font-size:1rem;color:#ef4444;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.add-btn{background:rgba(124,58,237,.1);border:1px dashed rgba(124,58,237,.3);border-radius:8px;padding:.5rem 1rem;color:#7C3AED;font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;width:100%;transition:all .25s;margin-top:.3rem}
+.add-btn:hover{background:rgba(124,58,237,.18)}
+.save-bar{position:sticky;bottom:0;background:#fff;border-top:1px solid #e2e8f0;padding:1rem 2rem;display:flex;justify-content:center;gap:1rem;z-index:10}
+.save-bar button{padding:.85rem 2.5rem;border-radius:10px;border:none;font-family:inherit;font-size:.97rem;font-weight:600;cursor:pointer;transition:all .3s}
+.save-btn{background:linear-gradient(135deg,#059669,#10B981);color:#fff}
+.save-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(5,150,105,.35)}
+.save-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.toast{position:fixed;top:1.5rem;right:1.5rem;padding:.85rem 1.5rem;border-radius:10px;color:#fff;font-weight:600;font-size:.9rem;z-index:999;opacity:0;transform:translateY(-12px);transition:all .35s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.ok{background:#059669}
+.toast.err{background:#ef4444}
+#messages-list .btn-outline{padding:.3rem .6rem!important;font-size:.78rem!important}
+#messages-list .del-btn{width:28px;height:28px;font-size:.8rem}
+
+@media(max-width:640px){
+  .login-box{padding:2rem 1.5rem}
+  .dash-wrap{padding:1.2rem}
+  .topbar{padding:.8rem 1.2rem;flex-direction:column;gap:.6rem}
+  .topbar h2{font-size:1rem}
+  .editor-item{flex-wrap:wrap}
+  .editor-item input,.editor-item textarea{flex:1 1 100%!important}
+  .save-bar{padding:.8rem 1.2rem}
+}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div class="login-wrap">
+    <div class="login-box">
+      <h1>Promotix Admin</h1>
+      <p>Sign in to manage website content</p>
+      <form onsubmit="return login(event)">
+        <input type="text" id="username" placeholder="Username" required autocomplete="username">
+        <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+        <button type="submit">Sign In</button>
+        <div class="err" id="loginErr">Invalid credentials</div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="dash">
+  <div class="topbar">
+    <h2>✏️ Website Editor</h2>
+    <div class="btns">
+      <button class="btn-outline" onclick="viewSite()">View Site</button>
+      <button class="btn-outline" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="dash-wrap" id="editor"></div>
+
+  <div class="save-bar">
+    <button class="save-btn" id="saveBtn" onclick="saveAll()">Save Changes</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let content = {};
+
+async function login(e) {
+  e.preventDefault();
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  try {
+    const r = await fetch('/api/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({username, password})
+    });
+    if (r.ok) {
+      await loadDash();
+    } else {
+      document.getElementById('loginErr').style.display = 'block';
+    }
+  } catch { toast('Connection error','err'); }
+  return false;
+}
+
+async function loadDash() {
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('dash').style.display = 'block';
+  try {
+    const r = await fetch('/api/content');
+    content = await r.json();
+    renderEditor();
+  } catch { toast('Failed to load content','err'); }
+}
+
+async function checkAuth() {
+  try {
+    const r = await fetch('/api/check-auth');
+    const d = await r.json();
+    if (d.isAdmin) await loadDash();
+  } catch {}
+}
+
+function renderEditor() {
+  const editor = document.getElementById('editor');
+  const fields = [
+    {section:'hero', items:[
+      {key:'line1', type:'text', label:'Title Line 1'},
+      {key:'line2', type:'text', label:'Title Line 2'},
+      {key:'subtitle', type:'textarea', label:'Subtitle'}
+    ]},
+    {section:'about', items:[
+      {key:'tagline', type:'textarea', label:'Tagline (HTML allowed)'},
+      {key:'paragraph1', type:'textarea', label:'Paragraph 1'},
+      {key:'paragraph2', type:'textarea', label:'Paragraph 2'}
+    ]},
+    {section:'contact', items:[
+      {key:'location', type:'text', label:'Location'},
+      {key:'phone', type:'text', label:'Phone'},
+      {key:'email', type:'text', label:'Email'},
+      {key:'instagram', type:'text', label:'Instagram'},
+      {key:'hours', type:'text', label:'Working Hours'}
+    ]}
+  ];
+
+  let html = '';
+  fields.forEach(group => {
+    html += `<div class="section"><h3>${group.section}</h3>`;
+    group.items.forEach(f => {
+      const val = content[group.section]?.[f.key] || '';
+      html += `<div class="field"><label>${f.label}</label>`;
+      if (f.type === 'textarea') {
+        html += `<textarea data-path="${group.section}.${f.key}">${escHtml(val)}</textarea>`;
+      } else {
+        html += `<input data-path="${group.section}.${f.key}" value="${escHtml(val)}">`;
+      }
+      html += `</div>`;
+    });
+    html += `</div>`;
+  });
+
+  html += renderListEditor('Services - Connect', 'services.connect.items', [
+    {key:'name', label:'Name', type:'text'},
+    {key:'desc', label:'Description', type:'textarea'}
+  ]);
+  html += renderListEditor('Services - Properties', 'services.properties.items', [
+    {key:'name', label:'Name', type:'text'},
+    {key:'desc', label:'Description', type:'textarea'}
+  ]);
+  html += renderListEditor('Process Steps', 'process.steps', [
+    {key:'name', label:'Name', type:'text'},
+    {key:'desc', label:'Description', type:'textarea'}
+  ]);
+  html += renderListEditor('FAQ', 'faq', [
+    {key:'q', label:'Question', type:'text'},
+    {key:'a', label:'Answer', type:'textarea'}
+  ]);
+  html += renderPricingEditor();
+  html += renderStatsEditor();
+  html += `<div class="section" id="messages-section"><h3>📬 Contact Messages</h3><div id="messages-list">Loading...</div></div>`;
+
+  editor.innerHTML = html;
+  loadMessages();
+}
+
+function renderListEditor(title, path, fields) {
+  let items = getNested(content, path) || [];
+  let html = `<div class="section"><h3>${title}</h3><div class="editor-list" data-path="${path}">`;
+  items.forEach((item, i) => {
+    html += `<div class="editor-item" data-index="${i}">`;
+    fields.forEach(f => {
+      const val = item[f.key] || '';
+      if (f.type === 'textarea') {
+        html += `<textarea data-key="${f.key}" rows="2">${escHtml(val)}</textarea>`;
+      } else {
+        html += `<input data-key="${f.key}" value="${escHtml(val)}">`;
+      }
+    });
+    html += `<button class="del-btn" onclick="removeItem(this)" title="Remove">✕</button>`;
+    html += `</div>`;
+  });
+  html += `</div><button class="add-btn" onclick="addItem('${path}')">+ Add Item</button></div>`;
+  return html;
+}
+
+function renderPricingEditor() {
+  let html = `<div class="section"><h3>Pricing - Premium</h3>`;
+  const p = content.pricing?.premium || {};
+  html += `<div class="field"><label>Plan Name</label><input data-path="pricing.premium.name" value="${escHtml(p.name||'')}"></div>`;
+  html += `<div class="field"><label>Price</label><input data-path="pricing.premium.price" value="${escHtml(p.price||'')}"></div>`;
+  html += `<div class="field"><label>Period</label><input data-path="pricing.premium.period" value="${escHtml(p.period||'')}"></div>`;
+  html += `<div class="field"><label>Features (one per line)</label><textarea data-path="pricing.premium.features" rows="4">${escHtml((p.features||[]).join('\n'))}</textarea></div>`;
+  html += `</div>`;
+
+  html += `<div class="section"><h3>Pricing - Premium Plus</h3>`;
+  const pp = content.pricing?.premium_plus || {};
+  html += `<div class="field"><label>Plan Name</label><input data-path="pricing.premium_plus.name" value="${escHtml(pp.name||'')}"></div>`;
+  html += `<div class="field"><label>Price</label><input data-path="pricing.premium_plus.price" value="${escHtml(pp.price||'')}"></div>`;
+  html += `<div class="field"><label>Period</label><input data-path="pricing.premium_plus.period" value="${escHtml(pp.period||'')}"></div>`;
+  html += `<div class="field"><label>Badge</label><input data-path="pricing.premium_plus.badge" value="${escHtml(pp.badge||'')}"></div>`;
+  html += `<div class="field"><label>Features (one per line)</label><textarea data-path="pricing.premium_plus.features" rows="5">${escHtml((pp.features||[]).join('\n'))}</textarea></div>`;
+  html += `</div>`;
+  return html;
+}
+
+function renderStatsEditor() {
+  let html = `<div class="section"><h3>Statistics</h3>`;
+  const stats = content.stats || {};
+  const keys = ['brands','followers','years','satisfaction'];
+  keys.forEach(k => {
+    const s = stats[k] || {};
+    html += `<div style="display:flex;gap:.5rem;margin-bottom:.5rem">`;
+    html += `<div class="field" style="flex:1;margin-bottom:0"><label>${k} Value</label><input data-path="stats.${k}.value" value="${escHtml(s.value||'')}"></div>`;
+    html += `<div class="field" style="flex:1;margin-bottom:0"><label>${k} Label</label><input data-path="stats.${k}.label" value="${escHtml(s.label||'')}"></div>`;
+    html += `</div>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+function getNested(obj, path) {
+  return path.split('.').reduce((o, k) => o?.[k], obj);
+}
+
+function setNested(obj, path, val) {
+  const keys = path.split('.');
+  let cur = obj;
+  for (let i = 0; i < keys.length - 1; i++) {
+    if (!cur[keys[i]]) cur[keys[i]] = {};
+    cur = cur[keys[i]];
+  }
+  cur[keys[keys.length - 1]] = val;
+}
+
+function escHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function collectContent() {
+  const updated = JSON.parse(JSON.stringify(content));
+  document.querySelectorAll('[data-path]').forEach(el => {
+    const path = el.dataset.path;
+    let val = el.value;
+    if (el.tagName === 'TEXTAREA' && path.includes('.features')) {
+      val = val.split('\n').filter(s => s.trim());
+    }
+    setNested(updated, path, val);
+  });
+  document.querySelectorAll('.editor-list').forEach(list => {
+    const path = list.dataset.path;
+    const items = [];
+    list.querySelectorAll('.editor-item').forEach(item => {
+      const obj = {};
+      item.querySelectorAll('[data-key]').forEach(field => {
+        obj[field.dataset.key] = field.value;
+      });
+      items.push(obj);
+    });
+    setNested(updated, path, items);
+  });
+  return updated;
+}
+
+async function saveAll() {
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+  try {
+    const updated = collectContent();
+    const r = await fetch('/api/content', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(updated)
+    });
+    if (r.ok) {
+      content = updated;
+      toast('Changes saved!','ok');
+    } else {
+      toast('Failed to save','err');
+    }
+  } catch { toast('Connection error','err'); }
+  btn.disabled = false;
+  btn.textContent = 'Save Changes';
+}
+
+function addItem(path) {
+  const list = document.querySelector(`.editor-list[data-path="${path}"]`);
+  if (!list) return;
+  const first = list.querySelector('.editor-item');
+  const fields = first ? first.querySelectorAll('[data-key]') : [];
+  const div = document.createElement('div');
+  div.className = 'editor-item';
+  fields.forEach(f => {
+    const tag = f.tagName;
+    const el = document.createElement(tag);
+    el.dataset.key = f.dataset.key;
+    if (tag === 'TEXTAREA') { el.rows = 2; }
+    div.appendChild(el);
+  });
+  const del = document.createElement('button');
+  del.className = 'del-btn';
+  del.textContent = '✕';
+  del.onclick = function(){ removeItem(this); };
+  div.appendChild(del);
+  list.appendChild(div);
+}
+
+function removeItem(el) {
+  if (confirm('Remove this item?')) {
+    el.closest('.editor-item').remove();
+  }
+}
+
+async function loadMessages() {
+  const el = document.getElementById('messages-list');
+  if (!el) return;
+  try {
+    const r = await fetch('/api/messages');
+    if (!r.ok) { el.innerHTML = '<p style="color:#64748b">Login required</p>'; return; }
+    const msgs = await r.json();
+    if (!msgs.length) { el.innerHTML = '<p style="color:#64748b">No messages yet</p>'; return; }
+    el.innerHTML = msgs.map(m => `
+      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:1rem;margin-bottom:.8rem;${m.read?'':'border-left:3px solid #7C3AED;background:#FAF5FF'}">
+        <div style="display:flex;justify-content:space-between;align-items:start;gap:1rem;flex-wrap:wrap">
+          <div><strong>${escHtml(m.name)}</strong>${m.company?' · '+escHtml(m.company):''} · ${escHtml(m.email)}${m.service?' · '+escHtml(m.service):''}</div>
+          <div style="display:flex;gap:.5rem;align-items:center">
+            <span style="font-size:.78rem;color:#94a3b8">${new Date(m.date).toLocaleDateString()+' '+new Date(m.date).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>
+            ${m.read?'<span style="font-size:.75rem;color:#94a3b8">Read</span>':`<button class="btn-outline" style="padding:.3rem .6rem!important;font-size:.78rem!important" onclick="markRead(${m.id})">Mark Read</button>`}
+            <button class="del-btn" style="width:28px;height:28px;font-size:.8rem" onclick="deleteMsg(${m.id})">✕</button>
+          </div>
+        </div>
+        <div style="margin-top:.6rem;color:#1e293b;font-size:.9rem;line-height:1.5">${escHtml(m.message)}</div>
+      </div>
+    `).join('');
+  } catch { el.innerHTML = '<p style="color:#ef4444">Failed to load messages</p>'; }
+}
+
+async function markRead(id) {
+  await fetch('/api/messages/read/' + id, {method:'POST'});
+  loadMessages();
+}
+
+async function deleteMsg(id) {
+  if (!confirm('Delete this message?')) return;
+  await fetch('/api/messages/delete/' + id, {method:'POST'});
+  loadMessages();
+}
+
+function viewSite() {
+  window.open('/','_blank');
+}
+
+async function logout() {
+  await fetch('/api/logout', {method:'POST'});
+  location.reload();
+}
+
+function toast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type + ' show';
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+checkAuth();
+</script>
+</body>
+</html>
