@@ -54,9 +54,9 @@ export default function Home() {
         {hero?.is_visible && <Hero content={hero.content} stats={stats?.content} />}
         {services?.is_visible && <Services content={services.content} connectServices={getServices('connect')} propertiesServices={getServices('properties')} />}
         {about?.is_visible && <About content={about.content} />}
-        {<Portfolio items={data?.portfolio || []} />}
+        {data?.portfolio?.length > 0 && <Portfolio items={data?.portfolio} />}
         {process?.is_visible && <Process content={process.content} />}
-        {<Testimonials items={data?.testimonials || []} />}
+        {data?.testimonials?.length > 0 && <Testimonials items={data?.testimonials} />}
         {pricing?.is_visible && <Pricing content={pricing.content} />}
         {faq?.is_visible && <FAQ items={faq.content} />}
         {contact?.is_visible && <Contact content={contact.content} />}

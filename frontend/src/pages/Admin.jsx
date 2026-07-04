@@ -117,10 +117,16 @@ function ListManager({ title, items, fields, onCreate, onUpdate, onDelete }) {
   const [newItem, setNewItem] = useState({})
 
   const handleCreate = async () => {
-    if (!newItem.name) return
-    await onCreate(newItem)
+    if (!newItem[fields[0]?.key]) return
+    const payload = { ...newItem }
+    for (const f of fields) {
+      if (f.type === 'number') payload[f.key] = parseInt(payload[f.key], 10) || 0
+    }
+    await onCreate(payload)
     setNewItem({})
   }
+
+  const fieldValue = (item, key) => item[key] ?? ''
 
   return (
     <div className="space-y-4">
@@ -131,11 +137,13 @@ function ListManager({ title, items, fields, onCreate, onUpdate, onDelete }) {
             <input
               key={f.key}
               className="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-sm outline-none focus:border-violet"
-              defaultValue={item[f.key] || ''}
+              type={f.type || 'text'}
+              defaultValue={fieldValue(item, f.key)}
               placeholder={f.label}
               onBlur={(e) => {
-                if (e.target.value !== (item[f.key] || '')) {
-                  onUpdate(item.id, { [f.key]: e.target.value })
+                const val = f.type === 'number' ? parseInt(e.target.value, 10) || 0 : e.target.value
+                if (val !== fieldValue(item, f.key)) {
+                  onUpdate(item.id, { [f.key]: val })
                 }
               }}
             />
@@ -161,8 +169,9 @@ function ListManager({ title, items, fields, onCreate, onUpdate, onDelete }) {
           <input
             key={f.key}
             className="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-sm outline-none focus:border-violet"
+            type={f.type || 'text'}
             placeholder={`New ${f.label}`}
-            value={newItem[f.key] || ''}
+            value={newItem[f.key] ?? ''}
             onChange={(e) => setNewItem((s) => ({ ...s, [f.key]: e.target.value }))}
           />
         ))}
@@ -295,6 +304,7 @@ export default function Admin() {
               { key: 'section', label: 'Section (connect/properties)' },
               { key: 'name', label: 'Name' },
               { key: 'description', label: 'Description' },
+              { key: 'order', label: 'Order', type: 'number' },
             ]}
             onCreate={(body) => api.createService(body).then(() => api.getServices().then(setServices))}
             onUpdate={(id, body) => api.updateService(id, body).then(() => api.getServices().then(setServices))}
@@ -309,6 +319,7 @@ export default function Admin() {
               { key: 'title', label: 'Title' },
               { key: 'category', label: 'Category' },
               { key: 'emoji', label: 'Emoji' },
+              { key: 'order', label: 'Order', type: 'number' },
             ]}
             onCreate={(body) => api.createPortfolio(body).then(() => api.getPortfolio().then(setPortfolio))}
             onUpdate={(id, body) => api.updatePortfolio(id, body).then(() => api.getPortfolio().then(setPortfolio))}
@@ -324,6 +335,8 @@ export default function Admin() {
               { key: 'name', label: 'Name' },
               { key: 'role', label: 'Role' },
               { key: 'content', label: 'Content' },
+              { key: 'rating', label: 'Rating (1-5)', type: 'number' },
+              { key: 'order', label: 'Order', type: 'number' },
             ]}
             onCreate={(body) => api.createTestimonial(body).then(() => api.getTestimonials().then(setTestimonials))}
             onUpdate={(id, body) => api.updateTestimonial(id, body).then(() => api.getTestimonials().then(setTestimonials))}
