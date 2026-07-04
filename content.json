@@ -1,7 +1,9 @@
 {
   "hero": {
     "line1": "Promotion That Sticks.",
+    "line2": "",
     "subtitle": "A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
+
   },
   "about": {
     "tagline": "Your Vision,<br><span class=\"gt\">Our Strategy</span>",
@@ -14,20 +16,47 @@
     "connect": {
       "heading": "Promotix Connect — Marketing Agency",
       "items": [
-        {"name": "Branding", "desc": "Visual identity, logo design, brand guidelines, and strategic positioning that tells your unique story."},
-        {"name": "Social Media Marketing", "desc": "Scroll-stopping content, viral reels, and community management that builds genuine connections."},
-        {"name": "Performance Marketing", "desc": "Data-driven paid campaigns on Meta, Google & beyond that deliver measurable ROI every time."},
-        {"name": "Content Creation", "desc": "Cinematic video, photography, copywriting, and creative assets that captivate your audience."},
-        {"name": "Premium Single-Video Package", "desc": "A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."}
+        {
+          "name": "Branding",
+          "desc": "Visual identity, logo design, brand guidelines, and strategic positioning that tells your unique story."
+        },
+        {
+          "name": "Social Media Marketing",
+          "desc": "Scroll-stopping content, viral reels, and community management that builds genuine connections."
+        },
+        {
+          "name": "Performance Marketing",
+          "desc": "Data-driven paid campaigns on Meta, Google & beyond that deliver measurable ROI every time."
+        },
+        {
+          "name": "Content Creation",
+          "desc": "Cinematic video, photography, copywriting, and creative assets that captivate your audience."
+        },
+        {
+          "name": "Premium Single-Video Package",
+          "desc": "A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
+        }
       ]
     },
     "properties": {
       "heading": "Promotix Properties — Real Estate Solutions",
       "items": [
-        {"name": "Property Listings", "desc": "Curated residential and commercial properties across Karnataka with detailed market insights and guidance."},
-        {"name": "Real Estate Photography", "desc": "Professional photography, cinematic walkthroughs, and drone footage that make every property stand out."},
-        {"name": "Property Marketing", "desc": "Targeted ad campaigns, listing optimization, and digital strategy to sell or rent properties faster."},
-        {"name": "Consultation & Staging", "desc": "Interior styling advice, renovation guidance, and market analysis for buyers, sellers, and investors."}
+        {
+          "name": "Property Listings",
+          "desc": "Curated residential and commercial properties across Karnataka with detailed market insights and guidance."
+        },
+        {
+          "name": "Real Estate Photography",
+          "desc": "Professional photography, cinematic walkthroughs, and drone footage that make every property stand out."
+        },
+        {
+          "name": "Property Marketing",
+          "desc": "Targeted ad campaigns, listing optimization, and digital strategy to sell or rent properties faster."
+        },
+        {
+          "name": "Consultation & Staging",
+          "desc": "Interior styling advice, renovation guidance, and market analysis for buyers, sellers, and investors."
+        }
       ]
     }
   },
@@ -35,20 +64,53 @@
     "heading": "Our 6-Step Process",
     "subtitle": "A proven framework that transforms raw ideas into brands that dominate their markets.",
     "steps": [
-      {"num": "01", "name": "Discover", "desc": "Deep-dive into your brand, audience, and competitive landscape to uncover hidden opportunities and strategic insights."},
-      {"num": "02", "name": "Strategy", "desc": "Craft a comprehensive roadmap with clear goals, messaging frameworks, channel strategies, and measurable KPIs."},
-      {"num": "03", "name": "Design", "desc": "Create stunning visuals, brand assets, and creative concepts that authentically capture your brand's unique essence."},
-      {"num": "04", "name": "Development", "desc": "Build and implement everything — from websites to full campaign assets — with technical precision and excellence."},
-      {"num": "05", "name": "Launch & Market", "desc": "Amplify across channels to maximize reach, engagement, and conversions with data-backed precision and creativity."},
-      {"num": "06", "name": "Scale & Grow", "desc": "Continuous analysis, iteration, and intelligent scaling to drive sustainable, compounding growth for your brand."}
+      {
+        "name": "Discover",
+        "desc": "Deep-dive into your brand, audience, and competitive landscape to uncover hidden opportunities and strategic insights."
+      },
+      {
+        "name": "Strategy",
+        "desc": "Craft a comprehensive roadmap with clear goals, messaging frameworks, channel strategies, and measurable KPIs."
+      },
+      {
+        "name": "Design",
+        "desc": "Create stunning visuals, brand assets, and creative concepts that authentically capture your brand's unique essence."
+      },
+      {
+        "name": "Development",
+        "desc": "Build and implement everything — from websites to full campaign assets — with technical precision and excellence."
+      },
+      {
+        "name": "Launch & Market",
+        "desc": "Amplify across channels to maximize reach, engagement, and conversions with data-backed precision and creativity."
+      },
+      {
+        "name": "Scale & Grow",
+        "desc": "Continuous analysis, iteration, and intelligent scaling to drive sustainable, compounding growth for your brand."
+      }
     ]
   },
   "faq": [
-    {"q": "What makes Promotix different from other agencies?", "a": "Promotix combines premium creative production with data-driven strategy. We don't just create content — we craft campaigns that drive measurable results. Our local expertise in Karnataka paired with global creative standards gives clients the best of both worlds."},
-    {"q": "How long does it take to see results?", "a": "Most clients see significant improvements in brand visibility within 30–60 days. For organic growth and SEO, expect meaningful results within 3–6 months. Paid campaigns can drive immediate results from day one of launch."},
-    {"q": "Do you work with businesses outside Nipani/Belagavi?", "a": "Absolutely! We're based in Nipani but work with clients across India. All projects are managed remotely with regular video calls and full transparency through our project management system."},
-    {"q": "Can I upgrade or change my plan anytime?", "a": "Yes! You can upgrade, downgrade, or customize your plan at any time. We offer flexible arrangements because we understand that business needs evolve. Just reach out to your account manager."},
-    {"q": "What's included in the free consultation?", "a": "A 30-minute strategy call where we audit your current brand presence, identify quick wins, and share initial strategy thoughts — at no cost. No pressure, just genuine value to help you make an informed decision."}
+    {
+      "q": "What makes Promotix different from other agencies?",
+      "a": "Promotix combines premium creative production with data-driven strategy. We don't just create content — we craft campaigns that drive measurable results. Our local expertise in Karnataka paired with global creative standards gives clients the best of both worlds."
+    },
+    {
+      "q": "How long does it take to see results?",
+      "a": "Most clients see significant improvements in brand visibility within 30–60 days. For organic growth and SEO, expect meaningful results within 3–6 months. Paid campaigns can drive immediate results from day one of launch."
+    },
+    {
+      "q": "Do you work with businesses outside Nipani/Belagavi?",
+      "a": "Absolutely! We're based in Nipani but work with clients across India. All projects are managed remotely with regular video calls and full transparency through our project management system."
+    },
+    {
+      "q": "Can I upgrade or change my plan anytime?",
+      "a": "Yes! You can upgrade, downgrade, or customize your plan at any time. We offer flexible arrangements because we understand that business needs evolve. Just reach out to your account manager."
+    },
+    {
+      "q": "What's included in the free consultation?",
+      "a": "A 30-minute strategy call where we audit your current brand presence, identify quick wins, and share initial strategy thoughts — at no cost. No pressure, just genuine value to help you make an informed decision."
+    }
   ],
   "contact": {
     "location": "Nipani, Karnataka, India",
@@ -58,24 +120,52 @@
     "hours": "Mon–Sat, 9 AM – 7 PM IST"
   },
   "stats": {
-    "brands": {"value": "150+", "label": "Brands & Properties"},
-    "followers": {"value": "12.1K", "label": "Instagram Followers"},
-    "years": {"value": "3+", "label": "Years of Excellence"},
-    "satisfaction": {"value": "98%", "label": "Client Satisfaction"}
+    "brands": {
+      "value": "150+",
+      "label": "Brands & Properties"
+    },
+    "followers": {
+      "value": "12.1K",
+      "label": "Instagram Followers"
+    },
+    "years": {
+      "value": "3+",
+      "label": "Years of Excellence"
+    },
+    "satisfaction": {
+      "value": "98%",
+      "label": "Client Satisfaction"
+    }
   },
   "pricing": {
     "premium": {
       "name": "Premium",
       "price": "₹7,499",
       "period": "Perfect for growing businesses",
-      "features": ["Brand Consultation Session", "8 Social Media Posts/Month", "2 Reels/Month", "Basic SEO Setup", "Monthly Performance Report", "Email Support"]
+      "features": [
+        "Brand Consultation Session",
+        "8 Social Media Posts/Month",
+        "2 Reels/Month",
+        "Basic SEO Setup",
+        "Monthly Performance Report",
+        "Email Support"
+      ]
     },
     "premium_plus": {
       "name": "Premium Plus",
       "price": "₹19,999",
       "period": "Perfect for brands ready to scale",
       "badge": "✨ BEST VALUE",
-      "features": ["Complete Brand Identity & Guidelines", "15 Social Media Posts/Month", "5 Cinematic Reels/Month", "Advanced SEO & Content Strategy", "Meta & Google Ads Management", "Landing Page Design", "Weekly Performance Reports", "WhatsApp Priority Support"]
+      "features": [
+        "Complete Brand Identity & Guidelines",
+        "15 Social Media Posts/Month",
+        "5 Cinematic Reels/Month",
+        "Advanced SEO & Content Strategy",
+        "Meta & Google Ads Management",
+        "Landing Page Design",
+        "Weekly Performance Reports",
+        "WhatsApp Priority Support"
+      ]
     }
   }
 }

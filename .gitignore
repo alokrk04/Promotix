@@ -4,4 +4,10 @@ node_modules/
 messages.json
 .env
 logs/
+certs/
+backend/venv/
+backend/*.db
+backend/__pycache__/
+frontend/dist/
+frontend/node_modules/
 

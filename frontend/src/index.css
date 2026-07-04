@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+}
+
+body {
+  @apply font-jakarta bg-[#F8F9FA] text-frost overflow-x-hidden;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@layer components {
+  .tag {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 text-xs font-bold tracking-widest uppercase
+           rounded-full border border-violet/30 bg-violet/10 text-violet-light;
+  }
+  .sh {
+    @apply text-[clamp(2.2rem,4.5vw,3.6rem)] font-extrabold leading-[1.08] tracking-tight mb-5;
+  }
+  .ss {
+    @apply text-slate text-base leading-relaxed max-w-[620px];
+  }
+  .btn-p {
+    @apply inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-white
+           bg-gradient-to-r from-violet to-indigo-600 shadow-lg shadow-violet/40
+           transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-violet/60;
+  }
+  .btn-s {
+    @apply inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-frost
+           border border-black/15 bg-transparent
+           transition-all duration-300 hover:border-violet-light hover:bg-violet/10 hover:-translate-y-1;
+  }
+  .gcard {
+    @apply bg-black/[0.02] border border-black/10 rounded-2xl
+           transition-all duration-300 hover:bg-black/[0.04] hover:border-violet/30 hover:shadow-[0_25px_60px_rgba(124,58,237,0.12)];
+  }
+  .gt {
+    @apply bg-gradient-to-r from-indigo-700 via-violet to-cyan bg-clip-text text-transparent;
+  }
+}

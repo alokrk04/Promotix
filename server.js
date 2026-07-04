@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 
@@ -20,6 +21,10 @@ if (!ADMIN_USER || !ADMIN_PASS || !SESSION_SECRET) {
 const effectiveAdminUser = ADMIN_USER || 'admin';
 const effectiveAdminPass = ADMIN_PASS || 'promotix123';
 const effectiveSessionSecret = SESSION_SECRET || 'promotix-super-secret-key-change-in-production';
+
+const SSL_KEY = process.env.SSL_KEY || path.join(__dirname, 'certs', 'localhost.key');
+const SSL_CERT = process.env.SSL_CERT || path.join(__dirname, 'certs', 'localhost.crt');
+const SSL_PASSPHRASE = process.env.SSL_PASSPHRASE || '';
 
 let activeAdminSession = null;
 
@@ -136,6 +141,14 @@ app.post('/api/content', requireAdmin, (req, res) => {
   res.json({ ok: true });
 });
 
+function requireAdminPage(req, res, next) {
+  if (req.session && req.session.isAdmin && req.session.id === activeAdminSession) return next();
+  res.redirect('/login.html');
+}
+
+app.get('/login.html', (req, res) => res.sendFile(path.join(__dirname, 'login.html')));
+app.get('/admin.html', requireAdminPage, (req, res) => res.sendFile(path.join(__dirname, 'admin.html')));
+app.get('/admin', (req, res) => res.redirect('/admin.html'));
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'promotix-website.html')));
 
 app.post('/api/contact', contactLimiter, (req, res) => {
@@ -190,7 +203,26 @@ app.use((err, req, res, next) => {
 
 app.use((req, res) => res.status(404).sendFile(path.join(__dirname, 'promotix-website.html')));
 
-app.listen(PORT, () => {
-  console.log(`Promotix server running at http://localhost:${PORT}`);
-  console.log(`Admin panel at http://localhost:${PORT}/admin.html`);
+const HTTP_PORT = PORT;
+const HTTPS_PORT = parseInt(process.env.HTTPS_PORT, 10) || 3443;
+
+app.listen(HTTP_PORT, () => {
+  console.log(`Promotix running at http://localhost:${HTTP_PORT}`);
+  console.log(`Admin login at http://localhost:${HTTP_PORT}/login.html`);
 });
+
+try {
+  if (fs.existsSync(SSL_KEY) && fs.existsSync(SSL_CERT)) {
+    const sslOptions = {
+      key: fs.readFileSync(SSL_KEY),
+      cert: fs.readFileSync(SSL_CERT),
+    };
+    if (SSL_PASSPHRASE) sslOptions.passphrase = SSL_PASSPHRASE;
+    https.createServer(sslOptions, app).listen(HTTPS_PORT, () => {
+      console.log(`Promotix running at https://localhost:${HTTPS_PORT}`);
+      console.log(`Admin login at https://localhost:${HTTPS_PORT}/login.html`);
+    });
+  }
+} catch (err) {
+  console.warn('Could not start HTTPS server:', err.message);
+}

@@ -8,15 +8,6 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Space Grotesk',sans-serif;background:#f1f5f9;color:#1e293b;min-height:100vh}
-.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
-.login-box{background:#fff;border-radius:20px;padding:3rem;width:100%;max-width:400px;box-shadow:0 25px 60px rgba(0,0,0,.1);text-align:center}
-.login-box h1{font-size:1.6rem;font-weight:800;margin-bottom:.3rem;background:linear-gradient(135deg,#5B21B6 0%,#7C3AED 50%,#06B6D4 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.login-box p{color:#64748b;font-size:.9rem;margin-bottom:2rem}
-.login-box input{width:100%;padding:.85rem 1rem;border:1.5px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:.92rem;margin-bottom:1rem;outline:none;transition:border-color .3s}
-.login-box input:focus{border-color:#7C3AED}
-.login-box button{width:100%;padding:.85rem;background:linear-gradient(135deg,#7C3AED,#4F46E5);border:none;border-radius:10px;color:#fff;font-family:inherit;font-size:.97rem;font-weight:600;cursor:pointer;transition:all .3s}
-.login-box button:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(124,58,237,.4)}
-.login-box .err{color:#ef4444;font-size:.85rem;margin-top:.7rem;display:none}
 #dash{display:none}
 .topbar{background:#fff;border-bottom:1px solid #e2e8f0;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
 .topbar h2{font-size:1.2rem;font-weight:700}
@@ -51,7 +42,6 @@ body{font-family:'Space Grotesk',sans-serif;background:#f1f5f9;color:#1e293b;min
 #messages-list .del-btn{width:28px;height:28px;font-size:.8rem}
 
 @media(max-width:640px){
-  .login-box{padding:2rem 1.5rem}
   .dash-wrap{padding:1.2rem}
   .topbar{padding:.8rem 1.2rem;flex-direction:column;gap:.6rem}
   .topbar h2{font-size:1rem}
@@ -62,21 +52,6 @@ body{font-family:'Space Grotesk',sans-serif;background:#f1f5f9;color:#1e293b;min
 </style>
 </head>
 <body>
-
-<div id="login">
-  <div class="login-wrap">
-    <div class="login-box">
-      <h1>Promotix Admin</h1>
-      <p>Sign in to manage website content</p>
-      <form onsubmit="return login(event)">
-        <input type="text" id="username" placeholder="Username" required autocomplete="username">
-        <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
-        <button type="submit">Sign In</button>
-        <div class="err" id="loginErr">Invalid credentials</div>
-      </form>
-    </div>
-  </div>
-</div>
 
 <div id="dash">
   <div class="topbar">
@@ -100,27 +75,7 @@ body{font-family:'Space Grotesk',sans-serif;background:#f1f5f9;color:#1e293b;min
 <script>
 let content = {};
 
-async function login(e) {
-  e.preventDefault();
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-  try {
-    const r = await fetch('/api/login', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({username, password})
-    });
-    if (r.ok) {
-      await loadDash();
-    } else {
-      document.getElementById('loginErr').style.display = 'block';
-    }
-  } catch { toast('Connection error','err'); }
-  return false;
-}
-
 async function loadDash() {
-  document.getElementById('login').style.display = 'none';
   document.getElementById('dash').style.display = 'block';
   try {
     const r = await fetch('/api/content');
@@ -129,12 +84,8 @@ async function loadDash() {
   } catch { toast('Failed to load content','err'); }
 }
 
-async function checkAuth() {
-  try {
-    const r = await fetch('/api/check-auth');
-    const d = await r.json();
-    if (d.isAdmin) await loadDash();
-  } catch {}
+function checkAuth() {
+  loadDash();
 }
 
 function renderEditor() {
