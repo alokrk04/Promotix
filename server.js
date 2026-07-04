@@ -1,20 +1,32 @@
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const fs = require('fs');
 const path = require('path');
 const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const ADMIN_USER = process.env.ADMIN_USER || 'admin';
-const ADMIN_PASS = process.env.ADMIN_PASS || 'promotix123';
-const SESSION_SECRET = process.env.SESSION_SECRET || 'promotix-super-secret-key-change-in-production';
+const ADMIN_USER = process.env.ADMIN_USER;
+const ADMIN_PASS = process.env.ADMIN_PASS;
+const SESSION_SECRET = process.env.SESSION_SECRET;
+
+if (!ADMIN_USER || !ADMIN_PASS || !SESSION_SECRET) {
+  console.warn('WARNING: Using default credentials/secret. Set ADMIN_USER, ADMIN_PASS, and SESSION_SECRET in .env for production.');
+}
+
+const effectiveAdminUser = ADMIN_USER || 'admin';
+const effectiveAdminPass = ADMIN_PASS || 'promotix123';
+const effectiveSessionSecret = SESSION_SECRET || 'promotix-super-secret-key-change-in-production';
 
 let activeAdminSession = null;
 
 const CONTENT_FILE = path.join(__dirname, 'content.json');
 const MESSAGES_FILE = path.join(__dirname, 'messages.json');
+
+const VALID_CONTENT_KEYS = ['hero', 'about', 'services', 'process', 'faq', 'contact', 'stats', 'pricing'];
 
 function loadContent() {
   try {
@@ -31,14 +43,36 @@ function saveContent(data) {
 const loginAttempts = new Map();
 setInterval(() => loginAttempts.clear(), 15 * 60 * 1000);
 
-app.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false }));
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  message: { error: 'Too many messages. Try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", 'https://cdnjs.cloudflare.com', "'unsafe-inline'"],
+      scriptSrcAttr: ["'unsafe-inline'"],
+      styleSrc: ["'self'", 'https://fonts.googleapis.com', "'unsafe-inline'"],
+      fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+      connectSrc: ["'self'"],
+      imgSrc: ["'self'", 'data:'],
+      baseUri: ["'self'"],
+    },
+  },
+  crossOriginEmbedderPolicy: false,
+}));
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 app.use(session({
-  secret: SESSION_SECRET,
+  secret: effectiveSessionSecret,
   resave: false,
   saveUninitialized: false,
-  cookie: { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }
+  cookie: { httpOnly: true, secure: false, sameSite: 'lax', maxAge: 24 * 60 * 60 * 1000 }
 }));
 
 function requireAdmin(req, res, next) {
@@ -63,7 +97,7 @@ app.post('/api/login', (req, res) => {
   loginAttempts.set(ip, recent);
   const { username, password } = req.body;
   if (typeof username !== 'string' || typeof password !== 'string') return res.status(400).json({ error: 'Invalid input' });
-  if (username === ADMIN_USER && password === ADMIN_PASS) {
+  if (username === effectiveAdminUser && password === effectiveAdminPass) {
     loginAttempts.delete(ip);
     if (activeAdminSession) {
       const store = req.sessionStore;
@@ -90,15 +124,21 @@ app.get('/api/check-auth', (req, res) => {
 });
 
 app.post('/api/content', requireAdmin, (req, res) => {
+  if (!req.body || typeof req.body !== 'object') return res.status(400).json({ error: 'Invalid content data' });
   const current = loadContent();
-  const updated = { ...current, ...req.body };
+  const updated = { ...current };
+  for (const key of Object.keys(req.body)) {
+    if (VALID_CONTENT_KEYS.includes(key)) {
+      updated[key] = req.body[key];
+    }
+  }
   saveContent(updated);
   res.json({ ok: true });
 });
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'promotix-website.html')));
 
-app.post('/api/contact', (req, res) => {
+app.post('/api/contact', contactLimiter, (req, res) => {
   const s = v => typeof v === 'string' ? v.trim().slice(0, 2000) : '';
   const name = s(req.body.name), email = s(req.body.email), message = s(req.body.message);
   if (!name || !email || !message) return res.status(400).json({ error: 'Name, email, and message required' });

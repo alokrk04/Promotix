@@ -6,6 +6,7 @@
 <title>PROMOTIX – Your Vision, Our Strategy</title>
 <meta name="description" content="High-End Marketing Agency. Ads, Reels & Brand Promotions that turn ideas into powerful brands.">
 <meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
 <meta property="og:title" content="PROMOTIX – Your Vision, Our Strategy">
 <meta property="og:description" content="Premium marketing agency &amp; real estate solutions. Promotix Connect builds your brand, Promotix Properties finds your space.">
 <meta property="og:type" content="website">
@@ -943,10 +944,13 @@ window.addEventListener('scroll', () => {
 });
 
 function toggleMob() {
-  document.getElementById('mobnav').classList.toggle('open');
+  const nav = document.getElementById('mobnav');
+  nav.classList.toggle('open');
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
 }
 function closeMob() {
   document.getElementById('mobnav').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 function initGSAP() {
