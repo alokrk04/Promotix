@@ -8,8 +8,13 @@ async function request(path, options = {}) {
     headers['Content-Type'] = 'application/json'
   }
   const res = await fetch(`${API_BASE}${path}`, { ...options, headers })
+  if (!res.ok) {
+    const text = await res.text()
+    let detail
+    try { detail = JSON.parse(text) } catch {}
+    throw new Error(detail?.detail || detail?.error || 'Request failed')
+  }
   const data = await res.json()
-  if (!res.ok) throw new Error(data.detail || data.error || 'Request failed')
   return data
 }
 

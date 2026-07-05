@@ -1,12 +1,20 @@
+function sanitize(html) {
+  const d = document.createElement('div')
+  d.textContent = html
+  return d.innerHTML
+}
+
 export default function About({ content }) {
   const c = content || {}
+  const tagline = c.tagline || 'Your Vision,<br><span class="gt">Our Strategy</span>'
+  const paragraph1 = c.paragraph1 || ''
   return (
     <section id="about" className="py-20 px-[5%] bg-gradient-to-b from-transparent via-cyan/5 to-transparent">
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         <div className="text-center md:text-left">
           <span className="tag">About Promotix</span>
-          <h2 className="sh mt-4" dangerouslySetInnerHTML={{ __html: c.tagline || 'Your Vision,<br><span class="gt">Our Strategy</span>' }} />
-          <p className="ss mb-4" dangerouslySetInnerHTML={{ __html: c.paragraph1 || '' }} />
+          <h2 className="sh mt-4" dangerouslySetInnerHTML={{ __html: sanitize(tagline) }} />
+          <p className="ss mb-4" dangerouslySetInnerHTML={{ __html: sanitize(paragraph1) }} />
           <p className="ss">{c.paragraph2 || ''}</p>
         </div>
         <div className="relative h-[480px] min-h-[400px]">

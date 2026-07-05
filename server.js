@@ -146,10 +146,10 @@ function requireAdminPage(req, res, next) {
   res.redirect('/login.html');
 }
 
-app.get('/login.html', (req, res) => res.sendFile(path.join(__dirname, 'login.html')));
-app.get('/admin.html', requireAdminPage, (req, res) => res.sendFile(path.join(__dirname, 'admin.html')));
+app.get('/login.html', (req, res) => res.sendFile(path.join(__dirname, 'frontend', 'login.html')));
+app.get('/admin.html', requireAdminPage, (req, res) => res.sendFile(path.join(__dirname, 'frontend', 'admin.html')));
 app.get('/admin', (req, res) => res.redirect('/admin.html'));
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'promotix-website.html')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'frontend', 'promotix-website.html')));
 
 app.post('/api/contact', contactLimiter, (req, res) => {
   const s = v => typeof v === 'string' ? v.trim().slice(0, 2000) : '';
@@ -188,7 +188,8 @@ app.post('/api/messages/delete/:id', requireAdmin, (req, res) => {
   } catch { res.status(500).json({ error: 'Failed' }); }
 });
 
-app.use(express.static(__dirname, {
+app.use('/resources', express.static(path.join(__dirname, 'resources')));
+app.use(express.static(path.join(__dirname, 'frontend'), {
   setHeaders: (res, filePath) => {
     if (filePath.endsWith('.html')) {
       res.setHeader('Content-Type', 'text/html; charset=utf-8');
@@ -196,12 +197,12 @@ app.use(express.static(__dirname, {
   }
 }));
 
-app.use((err, req, res, next) => {
+app.use((err, req, res, _next) => {
   console.error('Server error:', err.message);
   res.status(500).json({ error: 'Internal server error' });
 });
 
-app.use((req, res) => res.status(404).sendFile(path.join(__dirname, 'promotix-website.html')));
+app.use((req, res) => res.status(404).sendFile(path.join(__dirname, 'frontend', 'promotix-website.html')));
 
 const HTTP_PORT = PORT;
 const HTTPS_PORT = parseInt(process.env.HTTPS_PORT, 10) || 3443;

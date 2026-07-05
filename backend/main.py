@@ -1,6 +1,9 @@
 from datetime import datetime, timezone
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
 from sqlalchemy.orm import Session
 
 from database import engine, Base, get_db
@@ -21,7 +24,7 @@ app = FastAPI(title="Promotix API", docs_url="/docs")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"],
+    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://localhost:8000", "http://127.0.0.1:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -283,3 +286,30 @@ def delete_message(message_id: int, admin: Admin = Depends(get_current_admin), d
     db.delete(msg)
     db.commit()
     return {"ok": True}
+
+
+# ─── Static Files & SPA ────────────────────────────────
+
+app.mount("/assets", StaticFiles(directory="../frontend/dist/assets"), name="assets")
+
+
+@app.get("/promotix-website.html")
+async def legacy_website():
+    return FileResponse("../frontend/promotix-website.html")
+
+
+@app.get("/admin.html")
+async def legacy_admin():
+    return FileResponse("../frontend/admin.html")
+
+
+@app.get("/login.html")
+async def legacy_login():
+    return FileResponse("../frontend/login.html")
+
+
+@app.exception_handler(StarletteHTTPException)
+async def spa_fallback(request, exc):
+    if exc.status_code == 404 and not request.url.path.startswith("/api/"):
+        return FileResponse("../frontend/dist/index.html", media_type="text/html")
+    raise exc

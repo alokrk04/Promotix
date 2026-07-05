@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promotix Admin Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Space Grotesk',sans-serif;background:#f1f5f9;color:#1e293b;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.login-wrap{background:#fff;border-radius:16px;padding:2.5rem;width:100%;max-width:400px;margin:1rem;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+h1{font-size:1.5rem;font-weight:800;text-align:center;margin-bottom:.3rem}
+p{text-align:center;color:#64748b;font-size:.9rem;margin-bottom:2rem}
+.field{margin-bottom:1.2rem}
+.field label{display:block;font-size:.82rem;font-weight:600;color:#64748b;margin-bottom:.35rem}
+.field input{width:100%;padding:.75rem .9rem;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:.9rem;outline:none;transition:border-color .25s}
+.field input:focus{border-color:#7C3AED;box-shadow:0 0 0 3px rgba(124,58,237,.08)}
+.login-btn{width:100%;padding:.85rem;border:none;border-radius:10px;background:linear-gradient(135deg,#7C3AED,#6D28D9);color:#fff;font-family:inherit;font-size:.97rem;font-weight:600;cursor:pointer;transition:all .3s}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,58,237,.35)}
+.login-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.error{color:#ef4444;font-size:.85rem;text-align:center;margin-top:.8rem;display:none}
+.toast{position:fixed;top:1.5rem;right:1.5rem;padding:.85rem 1.5rem;border-radius:10px;color:#fff;font-weight:600;font-size:.9rem;z-index:999;opacity:0;transform:translateY(-12px);transition:all .35s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.err{background:#ef4444}
+</style>
+</head>
+<body>
+
+<div class="login-wrap">
+  <h1>Promotix</h1>
+  <p>Sign in to manage your website</p>
+  <form id="loginForm" onsubmit="doLogin(event)">
+    <div class="field">
+      <label for="username">Username</label>
+      <input id="username" type="text" placeholder="admin" autocomplete="username" required>
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" required>
+    </div>
+    <div class="error" id="errorMsg">Invalid credentials</div>
+    <button class="login-btn" id="loginBtn" type="submit">Sign In</button>
+  </form>
+</div>
+
+<div class="toast err" id="toast"></div>
+
+<script>
+async function doLogin(e) {
+  e.preventDefault()
+  const btn = document.getElementById('loginBtn')
+  const errEl = document.getElementById('errorMsg')
+  btn.disabled = true
+  btn.textContent = 'Signing in...'
+  errEl.style.display = 'none'
+  try {
+    const r = await fetch('/api/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value
+      })
+    })
+    if (r.ok) {
+      window.location.href = '/admin.html'
+    } else {
+      errEl.style.display = 'block'
+    }
+  } catch {
+    const t = document.getElementById('toast')
+    t.textContent = 'Connection error'
+    t.classList.add('show')
+    setTimeout(() => t.classList.remove('show'), 2500)
+  }
+  btn.disabled = false
+  btn.textContent = 'Sign In'
+}
+</script>
+</body>
+</html>

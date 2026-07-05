@@ -1,4 +1,4 @@
-export default function Testimonials({ items }) {
+export default function Testimonials({ items = [] }) {
   const list = items.length >= 2 ? [...items, ...items] : items
 
   return (
