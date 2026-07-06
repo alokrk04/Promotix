@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
-import { api } from '../api/client'
+import { useAuth } from '../lib/auth'
+import { api } from '../lib/client'
+import Login from './Login'
 
 function SectionEditor({ sections, onUpdate }) {
   const [editStates, setEditStates] = useState({})
@@ -234,16 +234,11 @@ function MessagesPanel() {
 
 export default function Admin() {
   const { admin, loading, logout } = useAuth()
-  const navigate = useNavigate()
   const [sections, setSections] = useState([])
   const [services, setServices] = useState([])
   const [portfolio, setPortfolio] = useState([])
   const [testimonials, setTestimonials] = useState([])
   const [tab, setTab] = useState('sections')
-
-  useEffect(() => {
-    if (!loading && !admin) navigate('/login')
-  }, [admin, loading, navigate])
 
   useEffect(() => {
     if (!admin) return
@@ -253,7 +248,8 @@ export default function Admin() {
     api.getTestimonials().then(setTestimonials).catch(() => {})
   }, [admin])
 
-  if (loading || !admin) return null
+  if (loading) return null
+  if (!admin) return <Login />
 
   const tabs = [
     { key: 'sections', label: 'Sections' },

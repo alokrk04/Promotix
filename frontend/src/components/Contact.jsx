@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { api } from '../api/client'
+import { api } from '../lib/client'
 
 export default function Contact({ content }) {
   const c = content || {}

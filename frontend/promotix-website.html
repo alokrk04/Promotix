@@ -411,26 +411,17 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
 
 <div id="loader">
   <div class="l-logo">
-    <img src="resources/logo.png" alt="Promotix" style="height:440px;width:auto;">
-    <div class="l-name">PROMOTIX</div>
-  </div>
-  <div class="l-track"><div class="l-bar" id="lbar"></div></div>
-  <div class="l-txt" id="ltxt">INITIATING ENGINE...</div>
-</div>
-
-<canvas id="bg"></canvas>
-
-<div class="mob-nav" id="mobnav">
-  <a href="#services" onclick="closeMob()">Services</a>
-  <a href="#about" onclick="closeMob()">About</a>
-  <a href="#portfolio" onclick="closeMob()">Work</a>
-  <a href="#pricing" onclick="closeMob()">Pricing</a>
-  <a href="#contact" onclick="closeMob()">Contact</a>
-</div>
-
-<nav id="nav">
-  <a href="#" class="n-logo">
-    <img src="resources/logo.png" alt="Promotix" style="height:160px;width:auto;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style="height:100px;width:auto;">
+      <defs>
+        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#3322ff" />
+          <stop offset="50%" stop-color="#b81cd4" />
+          <stop offset="100%" stop-color="#ff007a" />
+        </linearGradient>
+      </defs>
+      <circle cx="50" cy="50" r="42" fill="none" stroke="url(#logoGrad)" stroke-width="4.5" />
+      <path d="M 33 30 L 33 52 L 25 65 L 39 59 L 31 77 L 47 62 L 72 36 Z" fill="url(#logoGrad)" />
+    </svg>
     <span class="n-name">PROMOTIX</span>
   </a>
   <ul class="n-links">
@@ -708,7 +699,17 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
     <div class="ft-grid">
       <div>
         <a href="#" class="n-logo" style="margin-bottom:1rem;display:inline-flex">
-          <img src="resources/logo.png" alt="Promotix" style="height:360px;width:auto;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style="height:80px;width:auto;">
+            <defs>
+              <linearGradient id="logoGradFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3322ff" />
+                <stop offset="50%" stop-color="#b81cd4" />
+                <stop offset="100%" stop-color="#ff007a" />
+              </linearGradient>
+            </defs>
+            <circle cx="50" cy="50" r="42" fill="none" stroke="url(#logoGradFooter)" stroke-width="4.5" />
+            <path d="M 33 30 L 33 52 L 25 65 L 39 59 L 31 77 L 47 62 L 72 36 Z" fill="url(#logoGradFooter)" />
+          </svg>
           <span class="n-name">PROMOTIX</span>
         </a>
         <p class="ft-ct">The parent brand behind Promotix Connect (Marketing) and Promotix Properties (Real Estate) — turning ideas into brands, brands into homes.</p>
@@ -751,7 +752,7 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
     <div class="ft-bottom">
       <div>© 2026 Promotix. All rights reserved.</div>
       <div class="ft-legal">
-        <a href="/login.html">Admin</a>
+        <a href="/admin">Admin</a>
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
       </div>
