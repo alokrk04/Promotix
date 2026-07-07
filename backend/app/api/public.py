@@ -1,4 +1,3 @@
-import json
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.core.database import get_db
@@ -47,15 +46,16 @@ def get_content_json(db: Session = Depends(get_db)):
         if s.key == "services":
             connect = db.query(Service).filter(Service.section == "connect").order_by(Service.order).all()
             properties = db.query(Service).filter(Service.section == "properties").order_by(Service.order).all()
+            content = s.content if isinstance(s.content, dict) else {}
             result["services"] = {
-                "heading": "Two Brands, One Promise",
-                "subtitle": s.content.get("subtitle", "") if isinstance(s.content, dict) else "",
+                "heading": content.get("heading", "Two Brands, One Promise"),
+                "subtitle": content.get("subtitle", ""),
                 "connect": {
-                    "heading": "Promotix Connect — Marketing Agency",
+                    "heading": content.get("connect", {}).get("heading", "Promotix Connect — Marketing Agency"),
                     "items": [{"name": svc.name, "desc": svc.description} for svc in connect],
                 },
                 "properties": {
-                    "heading": "Promotix Properties — Real Estate Solutions",
+                    "heading": content.get("properties", {}).get("heading", "Promotix Properties — Real Estate Solutions"),
                     "items": [{"name": svc.name, "desc": svc.description} for svc in properties],
                 },
             }
