@@ -46,12 +46,12 @@ if os.path.isdir("../resources"):
 
 @app.get("/")
 async def index():
-    html_path = "../frontend/promotix-website.html"
-    if os.path.isfile(html_path):
-        return FileResponse(html_path)
     spa_path = "../frontend/dist/index.html"
     if os.path.isfile(spa_path):
         return FileResponse(spa_path)
+    html_path = "../frontend/promotix-website.html"
+    if os.path.isfile(html_path):
+        return FileResponse(html_path)
     return PlainTextResponse("Not Found", status_code=404)
 
 
@@ -76,4 +76,7 @@ async def spa_fallback(request, exc):
         spa_path = "../frontend/dist/index.html"
         if os.path.isfile(spa_path):
             return FileResponse(spa_path, media_type="text/html")
+    if request.url.path.startswith("/api/"):
+        from fastapi.responses import JSONResponse
+        return JSONResponse({"error": str(exc.detail)}, status_code=exc.status_code)
     return PlainTextResponse(str(exc.detail), status_code=exc.status_code)
