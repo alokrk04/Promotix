@@ -1,9 +1,10 @@
-"""Seed the database with initial content from content.json and default data."""
+"""Seed the database with initial content from content.json and default data.
+Run with: python -m seed  (from the backend/ directory)"""
 import json
 import sys
-from database import SessionLocal, engine, Base
-from models import Admin, WebsiteSection, Service, PortfolioItem, Testimonial
-from auth import hash_password
+from app.core.database import SessionLocal, engine, Base
+from app.models import Admin, WebsiteSection, Service, PortfolioItem, Testimonial
+from app.core.security import hash_password
 
 Base.metadata.create_all(bind=engine)
 
