@@ -1,6 +1,8 @@
 function sanitize(html) {
   const d = document.createElement('div')
-  d.textContent = html
+  d.innerHTML = html
+  const scripts = d.querySelectorAll('script')
+  scripts.forEach((s) => s.remove())
   return d.innerHTML
 }
 
