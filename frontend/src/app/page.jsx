@@ -15,11 +15,12 @@ import Footer from '../components/Footer'
 export default function Home() {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     api.getWebsite()
       .then(setData)
-      .catch(() => setLoading(false))
+      .catch(() => setError(true))
       .finally(() => setLoading(false))
   }, [])
 
@@ -32,6 +33,16 @@ export default function Home() {
         <div className="w-44 h-0.5 bg-black/10 rounded overflow-hidden">
           <div className="h-full w-full bg-gradient-to-r from-violet to-cyan rounded animate-pulse" />
         </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="fixed inset-0 flex flex-col items-center justify-center gap-6 bg-[#F8F9FA] z-50">
+        <div className="text-6xl">⚠️</div>
+        <div className="text-xl font-bold text-center max-w-md">Could not load website content. Make sure the backend server is running.</div>
+        <button onClick={() => window.location.reload()} className="btn-p">Retry</button>
       </div>
     )
   }
