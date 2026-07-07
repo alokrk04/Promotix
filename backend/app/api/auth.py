@@ -17,6 +17,4 @@ def login(body: LoginRequest, db: Session = Depends(get_db)):
     return TokenResponse(access_token=token)
 
 
-@router.get("/api/check-auth")
-def check_auth(admin: Admin = Depends(get_current_admin)):
-    return {"isAdmin": True, "username": admin.username}
+
