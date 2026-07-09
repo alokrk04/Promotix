@@ -1,0 +1,8 @@
+# API proxy — update the backend URL after deploying
+/api/*  https://promotix-backend.onrender.com/api/:splat  200
+
+# Admin/login HTML pages
+/login  /login.html  200
+
+# SPA fallback
+/*  /index.html  200
