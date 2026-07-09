@@ -1,12 +1,12 @@
 import secrets
 from datetime import datetime, timezone
 from typing import Optional
-from fastapi import APIRouter, Cookie, Depends, HTTPException, Response
+from fastapi import APIRouter, Cookie, Depends, HTTPException, Request, Response
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from app.core.database import get_db
 from app.models import Admin, WebsiteSection, Service, ContactMessage
-from app.core.security import verify_password
+from app.core.security import verify_password, get_admin_from_jwt
 
 router = APIRouter()
 
@@ -28,7 +28,14 @@ def get_admin_from_session(admin_session: Optional[str], db: Session) -> Optiona
     return db.query(Admin).filter(Admin.username == username).first()
 
 
-@router.post("/api/login")
+def get_admin_mixed(request: Request, admin_session: Optional[str], db: Session) -> Optional[Admin]:
+    admin = get_admin_from_session(admin_session, db)
+    if admin is None:
+        admin = get_admin_from_jwt(request, db)
+    return admin
+
+
+@router.post("/api/compat/login")
 def compat_login(body: LoginBody, response: Response, db: Session = Depends(get_db)):
     admin = db.query(Admin).filter(Admin.username == body.username).first()
     if not admin or not verify_password(body.password, admin.hashed_password):
@@ -40,8 +47,12 @@ def compat_login(body: LoginBody, response: Response, db: Session = Depends(get_
 
 
 @router.get("/api/check-auth")
-def compat_check_auth(admin_session: Optional[str] = Cookie(None), db: Session = Depends(get_db)):
-    admin = get_admin_from_session(admin_session, db)
+def compat_check_auth(
+    request: Request,
+    admin_session: Optional[str] = Cookie(None),
+    db: Session = Depends(get_db),
+):
+    admin = get_admin_mixed(request, admin_session, db)
     return {"isAdmin": admin is not None}
 
 
@@ -55,11 +66,12 @@ def compat_logout(response: Response, admin_session: Optional[str] = Cookie(None
 
 @router.post("/api/content")
 def compat_save_content(
+    request: Request,
     body: dict,
     admin_session: Optional[str] = Cookie(None),
     db: Session = Depends(get_db),
 ):
-    admin = get_admin_from_session(admin_session, db)
+    admin = get_admin_mixed(request, admin_session, db)
     if not admin:
         raise HTTPException(status_code=401, detail="Not authenticated")
 
@@ -120,10 +132,11 @@ def compat_save_content(
 
 @router.get("/api/messages")
 def compat_list_messages(
+    request: Request,
     admin_session: Optional[str] = Cookie(None),
     db: Session = Depends(get_db),
 ):
-    admin = get_admin_from_session(admin_session, db)
+    admin = get_admin_mixed(request, admin_session, db)
     if not admin:
         raise HTTPException(status_code=401, detail="Not authenticated")
     msgs = db.query(ContactMessage).order_by(ContactMessage.created_at.desc()).all()
@@ -133,6 +146,7 @@ def compat_list_messages(
             "name": m.name,
             "email": m.email,
             "company": m.company or "",
+            "location": m.location or "",
             "service": m.service or "",
             "message": m.message,
             "read": m.is_read,
@@ -144,11 +158,12 @@ def compat_list_messages(
 
 @router.post("/api/messages/read/{message_id}")
 def compat_mark_read(
+    request: Request,
     message_id: int,
     admin_session: Optional[str] = Cookie(None),
     db: Session = Depends(get_db),
 ):
-    admin = get_admin_from_session(admin_session, db)
+    admin = get_admin_mixed(request, admin_session, db)
     if not admin:
         raise HTTPException(status_code=401, detail="Not authenticated")
     msg = db.query(ContactMessage).filter(ContactMessage.id == message_id).first()
@@ -161,11 +176,12 @@ def compat_mark_read(
 
 @router.post("/api/messages/delete/{message_id}")
 def compat_delete_message(
+    request: Request,
     message_id: int,
     admin_session: Optional[str] = Cookie(None),
     db: Session = Depends(get_db),
 ):
-    admin = get_admin_from_session(admin_session, db)
+    admin = get_admin_mixed(request, admin_session, db)
     if not admin:
         raise HTTPException(status_code=401, detail="Not authenticated")
     msg = db.query(ContactMessage).filter(ContactMessage.id == message_id).first()
