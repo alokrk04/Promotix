@@ -6,8 +6,11 @@ messages.json
 logs/
 certs/
 backend/venv/
-backend/*.db
 backend/__pycache__/
 frontend/dist/
 frontend/node_modules/
+
+# Database files
+promotix.db
+backend/promotix.db
 
