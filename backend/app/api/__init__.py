@@ -9,5 +9,5 @@ from app.api.auth import router as auth_router
 
 api_router.include_router(compat_router, tags=["Compat"])
 api_router.include_router(public_router, tags=["Public"])
-api_router.include_router(admin_router, prefix="/admin", tags=["Admin"])
+api_router.include_router(admin_router, prefix="/api/admin", tags=["Admin"])
 api_router.include_router(auth_router, tags=["Auth"])
