@@ -85,7 +85,10 @@ async function loadDash() {
 }
 
 function checkAuth() {
-  loadDash();
+  fetch('/api/check-auth').then(r => r.json()).then(d => {
+    if (!d.isAdmin) { window.location.href = '/login.html'; return; }
+    loadDash();
+  }).catch(() => { loadDash(); });
 }
 
 function renderEditor() {
@@ -171,22 +174,26 @@ function renderListEditor(title, path, fields) {
 }
 
 function renderPricingEditor() {
-  let html = `<div class="section"><h3>Pricing - Premium</h3>`;
-  const p = content.pricing?.premium || {};
-  html += `<div class="field"><label>Plan Name</label><input data-path="pricing.premium.name" value="${escHtml(p.name||'')}"></div>`;
-  html += `<div class="field"><label>Price</label><input data-path="pricing.premium.price" value="${escHtml(p.price||'')}"></div>`;
-  html += `<div class="field"><label>Period</label><input data-path="pricing.premium.period" value="${escHtml(p.period||'')}"></div>`;
-  html += `<div class="field"><label>Features (one per line)</label><textarea data-path="pricing.premium.features" rows="4">${escHtml((p.features||[]).join('\n'))}</textarea></div>`;
-  html += `</div>`;
-
-  html += `<div class="section"><h3>Pricing - Premium Plus</h3>`;
-  const pp = content.pricing?.premium_plus || {};
-  html += `<div class="field"><label>Plan Name</label><input data-path="pricing.premium_plus.name" value="${escHtml(pp.name||'')}"></div>`;
-  html += `<div class="field"><label>Price</label><input data-path="pricing.premium_plus.price" value="${escHtml(pp.price||'')}"></div>`;
-  html += `<div class="field"><label>Period</label><input data-path="pricing.premium_plus.period" value="${escHtml(pp.period||'')}"></div>`;
-  html += `<div class="field"><label>Badge</label><input data-path="pricing.premium_plus.badge" value="${escHtml(pp.badge||'')}"></div>`;
-  html += `<div class="field"><label>Features (one per line)</label><textarea data-path="pricing.premium_plus.features" rows="5">${escHtml((pp.features||[]).join('\n'))}</textarea></div>`;
-  html += `</div>`;
+  const plans = [
+    { key: 'cinematic', label: 'Cinematic', hasBadge: true },
+    { key: 'branding', label: 'Branding', hasBadge: false },
+    { key: 'premium', label: 'Premium', hasBadge: false },
+    { key: 'premium_plus', label: 'Premium Plus', hasBadge: true },
+  ]
+  let html = ''
+  for (const p of plans) {
+    const data = content.pricing?.[p.key] || {}
+    html += `<div class="section"><h3>Pricing - ${p.label}</h3>`;
+    html += `<div class="field"><label>Plan Name</label><input data-path="pricing.${p.key}.name" value="${escHtml(data.name||'')}"></div>`;
+    html += `<div class="field"><label>Price</label><input data-path="pricing.${p.key}.price" value="${escHtml(data.price||'')}"></div>`;
+    html += `<div class="field"><label>Period</label><input data-path="pricing.${p.key}.period" value="${escHtml(data.period||'')}"></div>`;
+    html += `<div class="field"><label>Sold Out (true/false)</label><input data-path="pricing.${p.key}.sold_out" value="${data.sold_out ? 'true' : ''}"></div>`;
+    if (p.hasBadge) {
+      html += `<div class="field"><label>Badge</label><input data-path="pricing.${p.key}.badge" value="${escHtml(data.badge||'')}"></div>`;
+    }
+    html += `<div class="field"><label>Features (one per line)</label><textarea data-path="pricing.${p.key}.features" rows="4">${escHtml((data.features||[]).join('\n'))}</textarea></div>`;
+    html += `</div>`;
+  }
   return html;
 }
 
@@ -318,12 +325,12 @@ async function loadMessages() {
     const unread = msgs.filter(m => !m.read).length;
     const badge = document.getElementById('msg-badge');
     if (badge) { badge.textContent = unread; badge.style.display = unread ? 'inline' : 'none'; }
-    const filtered = q ? msgs.filter(m => (m.name+' '+m.email+' '+m.message+' '+(m.company||'')+' '+(m.service||'')).toLowerCase().includes(q)) : msgs;
+    const filtered = q ? msgs.filter(m => (m.name+' '+m.email+' '+m.message+' '+(m.company||'')+' '+(m.location||'')+' '+(m.service||'')).toLowerCase().includes(q)) : msgs;
     if (!filtered.length) { el.innerHTML = '<p style="color:#64748b">'+(q?'No messages match your search':'No messages yet')+'</p>'; return; }
     el.innerHTML = filtered.map(m => `
       <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:1rem;margin-bottom:.8rem;${m.read?'':'border-left:3px solid #7C3AED;background:#FAF5FF'}">
         <div style="display:flex;justify-content:space-between;align-items:start;gap:1rem;flex-wrap:wrap">
-          <div><strong>${escHtml(m.name)}</strong>${m.company?' · '+escHtml(m.company):''} · ${escHtml(m.email)}${m.service?' · '+escHtml(m.service):''}</div>
+          <div><strong>${escHtml(m.name)}</strong>${m.company?' · '+escHtml(m.company):''}${m.location?' · 📍'+escHtml(m.location):''} · ${escHtml(m.email)}${m.service?' · '+escHtml(m.service):''}</div>
           <div style="display:flex;gap:.5rem;align-items:center">
             <span style="font-size:.78rem;color:#94a3b8">${new Date(m.date).toLocaleDateString()+' '+new Date(m.date).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>
             ${m.read?'<span style="font-size:.75rem;color:#94a3b8">Read</span>':`<button class="btn-outline" style="padding:.3rem .6rem!important;font-size:.78rem!important" onclick="markRead(${m.id})">Mark Read</button>`}
@@ -348,7 +355,7 @@ async function deleteMsg(id) {
 }
 
 function viewSite() {
-  window.open('http://localhost:5173','_blank');
+  window.open('/','_blank');
 }
 
 async function logout() {
