@@ -21,7 +21,6 @@ export default function Hero({ content, stats }) {
         </p>
         <div className="flex items-center justify-center gap-5 flex-wrap">
           <a href="#contact" className="btn-p">Start Your Project →</a>
-          <a href="#portfolio" className="btn-s">▶ View Our Work</a>
         </div>
         <div className="flex items-center justify-center gap-10 mt-14 pt-10 border-t border-black/5 flex-wrap">
           {statsArr.map((stat, i) => (
