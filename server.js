@@ -149,7 +149,12 @@ function requireAdminPage(req, res, next) {
 app.get('/login.html', (req, res) => res.sendFile(path.join(__dirname, 'frontend', 'login.html')));
 app.get('/admin.html', requireAdminPage, (req, res) => res.sendFile(path.join(__dirname, 'frontend', 'admin.html')));
 app.get('/admin', (req, res) => res.redirect('/admin.html'));
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'frontend', 'promotix-website.html')));
+
+const SPA_INDEX = path.join(__dirname, 'frontend', 'dist', 'index.html');
+app.get('/', (req, res) => {
+  if (fs.existsSync(SPA_INDEX)) return res.sendFile(SPA_INDEX);
+  res.sendFile(path.join(__dirname, 'frontend', 'promotix-website.html'));
+});
 
 app.post('/api/contact', contactLimiter, (req, res) => {
   const s = v => typeof v === 'string' ? v.trim().slice(0, 2000) : '';
@@ -202,7 +207,10 @@ app.use((err, req, res, _next) => {
   res.status(500).json({ error: 'Internal server error' });
 });
 
-app.use((req, res) => res.status(404).sendFile(path.join(__dirname, 'frontend', 'promotix-website.html')));
+app.use((req, res) => {
+  if (fs.existsSync(SPA_INDEX)) return res.status(200).sendFile(SPA_INDEX);
+  res.status(404).sendFile(path.join(__dirname, 'frontend', 'promotix-website.html'));
+});
 
 const HTTP_PORT = PORT;
 const HTTPS_PORT = parseInt(process.env.HTTPS_PORT, 10) || 3443;
