@@ -30,6 +30,7 @@ def submit_contact(body: ContactCreate, db: Session = Depends(get_db)):
         name=body.name,
         email=body.email,
         company=body.company or "",
+        location=body.location or "",
         service=body.service or "",
         message=body.message,
     )
