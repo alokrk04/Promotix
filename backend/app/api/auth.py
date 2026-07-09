@@ -17,4 +17,9 @@ def login(body: LoginRequest, db: Session = Depends(get_db)):
     return TokenResponse(access_token=token)
 
 
+@router.get("/api/auth/verify")
+def verify_token(admin: Admin = Depends(get_current_admin)):
+    return {"username": admin.username, "isAdmin": True}
+
+
 
