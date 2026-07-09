@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, useEffect } from 'react'
-import { api } from './client'
+import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { api, setOnUnauthorized } from './client'
 
 const AuthContext = createContext(null)
 
@@ -7,12 +7,24 @@ export function AuthProvider({ children }) {
   const [admin, setAdmin] = useState(null)
   const [loading, setLoading] = useState(true)
 
+  const logout = useCallback(() => {
+    localStorage.removeItem('token')
+    setAdmin(null)
+  }, [])
+
+  useEffect(() => {
+    setOnUnauthorized(logout)
+  }, [logout])
+
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (token) {
-      api.checkAuth()
+      api.verifyToken()
         .then((d) => setAdmin(d))
-        .catch(() => localStorage.removeItem('token'))
+        .catch(() => {
+          localStorage.removeItem('token')
+          setAdmin(null)
+        })
         .finally(() => setLoading(false))
     } else {
       setLoading(false)
@@ -22,14 +34,9 @@ export function AuthProvider({ children }) {
   const login = async (username, password) => {
     const data = await api.login(username, password)
     localStorage.setItem('token', data.access_token)
-    const info = await api.checkAuth()
+    const info = await api.verifyToken()
     setAdmin(info)
     return info
-  }
-
-  const logout = () => {
-    localStorage.removeItem('token')
-    setAdmin(null)
   }
 
   return (
