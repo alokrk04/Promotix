@@ -74,6 +74,7 @@ class ContactMessage(Base):
     name = Column(String(255), nullable=False)
     email = Column(String(255), nullable=False)
     company = Column(String(255), nullable=True)
+    location = Column(String(255), nullable=True)
     service = Column(String(255), nullable=True)
     message = Column(Text, nullable=False)
     is_read = Column(Boolean, default=False)
