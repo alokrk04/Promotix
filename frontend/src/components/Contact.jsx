@@ -3,7 +3,7 @@ import { api } from '../lib/client'
 
 export default function Contact({ content }) {
   const c = content || {}
-  const [form, setForm] = useState({ name: '', email: '', company: '', service: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', company: '', location: '', service: '', message: '' })
   const [status, setStatus] = useState('')
 
   const handleSubmit = async (e) => {
@@ -12,7 +12,7 @@ export default function Contact({ content }) {
     try {
       await api.submitContact(form)
       setStatus('ok')
-      setForm({ name: '', email: '', company: '', service: '', message: '' })
+      setForm({ name: '', email: '', company: '', location: '', service: '', message: '' })
       setTimeout(() => setStatus(''), 3500)
     } catch {
       setStatus('error')
@@ -77,6 +77,12 @@ export default function Contact({ content }) {
               placeholder="Company / Brand Name"
               value={form.company}
               onChange={(e) => setForm((s) => ({ ...s, company: e.target.value }))}
+            />
+            <input
+              className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all mb-4"
+              placeholder="Current Location"
+              value={form.location}
+              onChange={(e) => setForm((s) => ({ ...s, location: e.target.value }))}
             />
             <select
               className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all mb-4 appearance-none cursor-pointer"
