@@ -1,16 +1,7 @@
-const icons = ['🎨', '📱', '📈', '🎬']
-const colors = ['rgba(124,58,237,.15)', 'rgba(6,182,212,.15)', 'rgba(236,72,153,.15)', 'rgba(6,182,212,.15)']
+const connectIcons = ['🎨', '📱']
+const connectColors = ['rgba(124,58,237,.15)', 'rgba(6,182,212,.15)']
 
-function ServiceCard({ name, desc, icon, color, featured }) {
-  if (featured) {
-    return (
-      <div className="col-span-full max-w-[500px] mx-auto w-full text-center gcard p-8" style={{ background: 'linear-gradient(135deg,rgba(124,58,237,.08),rgba(6,182,212,.06))', borderColor: 'rgba(124,58,237,.3)' }}>
-        <div className="w-13 h-13 rounded-xl flex items-center justify-center text-2xl mx-auto mb-5" style={{ background: 'rgba(236,72,153,.15)' }}>🎥</div>
-        <div className="font-bold text-base mb-2">{name}</div>
-        <div className="text-slate text-sm leading-relaxed">{desc}</div>
-      </div>
-    )
-  }
+function ServiceCard({ name, desc, icon, color }) {
   return (
     <div className="gcard p-8 text-center cursor-default transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_25px_60px_rgba(124,58,237,0.12)] group">
       <div className="w-13 h-13 rounded-xl flex items-center justify-center text-2xl mx-auto mb-5" style={{ background: color || 'rgba(124,58,237,.15)' }}>
@@ -38,12 +29,20 @@ export default function Services({ content, connectServices, propertiesServices 
         <div className="mb-10">
           <p className="text-center font-semibold mb-5"><span className="mr-1">🚀</span> Promotix Connect — Marketing Agency</p>
           <div className="grid grid-cols-2 gap-4 max-w-[640px] mx-auto">
-            {connect?.slice(0, 4).map((svc, i) => (
-              <ServiceCard key={i} name={svc.name} desc={svc.desc} icon={icons[i] || '🎨'} color={colors[i] || 'rgba(124,58,237,.15)'} />
+            {connect?.slice(0, 2).map((svc, i) => (
+              <ServiceCard key={i} name={svc.name} desc={svc.desc} icon={connectIcons[i] || '🎨'} color={connectColors[i] || 'rgba(124,58,237,.15)'} />
             ))}
           </div>
-          {connect?.length > 4 && (
-            <ServiceCard featured name={connect[4].name} desc={connect[4].desc} />
+          {connect?.length > 2 && (
+            <div className="max-w-[640px] mx-auto mt-4">
+              <div className="gcard p-6 flex items-center gap-6" style={{ background: 'linear-gradient(135deg,rgba(124,58,237,.08),rgba(6,182,212,.06))', borderColor: 'rgba(124,58,237,.3)' }}>
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{ background: 'rgba(236,72,153,.15)' }}>🎥</div>
+                <div className="min-w-0">
+                  <div className="font-bold text-base mb-1">{connect[2].name}</div>
+                  <div className="text-slate text-sm leading-relaxed">{connect[2].desc}</div>
+                </div>
+              </div>
+            </div>
           )}
         </div>
         <div>
