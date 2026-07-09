@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../lib/auth'
 import { api } from '../lib/client'
 import Login from './Login'
@@ -191,7 +192,7 @@ function MessagesPanel() {
   useEffect(() => { load() }, [])
 
   const filtered = messages.filter((m) =>
-    !search || `${m.name} ${m.email} ${m.message} ${m.company || ''} ${m.service || ''}`.toLowerCase().includes(search.toLowerCase())
+    !search || `${m.name} ${m.email} ${m.message} ${m.company || ''} ${m.location || ''} ${m.service || ''}`.toLowerCase().includes(search.toLowerCase())
   )
 
   return (
@@ -211,7 +212,7 @@ function MessagesPanel() {
         >
           <div className="flex justify-between items-start gap-4 flex-wrap">
             <div className="text-sm font-semibold">
-              {m.name}{m.company ? ` · ${m.company}` : ''} · {m.email}{m.service ? ` · ${m.service}` : ''}
+              {m.name}{m.company ? ` · ${m.company}` : ''}{m.location ? ` · 📍${m.location}` : ''} · {m.email}{m.service ? ` · ${m.service}` : ''}
             </div>
             <div className="flex gap-2 items-center text-xs text-slate">
               {new Date(m.created_at).toLocaleDateString()} {new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -233,6 +234,7 @@ function MessagesPanel() {
 }
 
 export default function Admin() {
+  const navigate = useNavigate()
   const { admin, loading, logout } = useAuth()
   const [sections, setSections] = useState([])
   const [services, setServices] = useState([])
@@ -265,7 +267,7 @@ export default function Admin() {
         <h2 className="font-bold">✏️ Website Editor</h2>
         <div className="flex gap-3">
           <a href="/" target="_blank" className="px-3 py-1.5 border border-slate-200 rounded-lg text-sm font-semibold hover:bg-slate-50">View Site</a>
-          <button onClick={() => { logout(); navigate('/login') }} className="px-3 py-1.5 border border-slate-200 rounded-lg text-sm font-semibold hover:bg-slate-50">Logout</button>
+          <button onClick={() => { logout(); navigate('/admin') }} className="px-3 py-1.5 border border-slate-200 rounded-lg text-sm font-semibold hover:bg-slate-50">Logout</button>
         </div>
       </div>
       <div className="border-b border-slate-200 bg-white px-6 flex gap-1">
