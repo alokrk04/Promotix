@@ -54,7 +54,7 @@ async function doLogin(e) {
   btn.textContent = 'Signing in...'
   errEl.style.display = 'none'
   try {
-    const r = await fetch('/api/login', {
+    const r = await fetch('/api/compat/login', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
