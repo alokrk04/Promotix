@@ -133,6 +133,7 @@ class ContactCreate(BaseModel):
     name: str = Field(..., min_length=1, max_length=255)
     email: str = Field(..., max_length=255)
     company: Optional[str] = Field(None, max_length=255)
+    location: Optional[str] = Field(None, max_length=255)
     service: Optional[str] = Field(None, max_length=255)
     message: str = Field(..., min_length=2, max_length=2000)
 
@@ -142,6 +143,7 @@ class ContactOut(BaseModel):
     name: str
     email: str
     company: Optional[str] = None
+    location: Optional[str] = None
     service: Optional[str] = None
     message: str
     is_read: bool
