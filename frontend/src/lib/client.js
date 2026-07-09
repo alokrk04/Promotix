@@ -1,4 +1,12 @@
-const API_BASE = '/api'
+const API_BASE = import.meta.env.VITE_API_BASE || '/api'
+
+let onUnauthorized = null
+
+export function setOnUnauthorized(cb) {
+  onUnauthorized = cb
+}
+
+const TIMEOUT_MS = 15000
 
 async function request(path, options = {}) {
   const token = localStorage.getItem('token')
@@ -7,15 +15,34 @@ async function request(path, options = {}) {
   if (!(options.body instanceof FormData)) {
     headers['Content-Type'] = 'application/json'
   }
-  const res = await fetch(`${API_BASE}${path}`, { ...options, headers })
-  if (!res.ok) {
-    const text = await res.text()
-    let detail
-    try { detail = JSON.parse(text) } catch {}
-    throw new Error(detail?.detail || detail?.error || 'Request failed')
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), TIMEOUT_MS)
+  try {
+    const res = await fetch(`${API_BASE}${path}`, { ...options, headers, signal: controller.signal })
+    if (res.status === 401) {
+      localStorage.removeItem('token')
+      if (onUnauthorized) onUnauthorized()
+      const text = await res.text()
+      let detail
+      try { detail = JSON.parse(text) } catch {}
+      throw new Error(detail?.detail || detail?.error || 'Session expired')
+    }
+    if (!res.ok) {
+      const text = await res.text()
+      let detail
+      try { detail = JSON.parse(text) } catch {}
+      throw new Error(detail?.detail || detail?.error || 'Request failed')
+    }
+    const data = await res.json()
+    return data
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      throw new Error('Request timed out')
+    }
+    throw err
+  } finally {
+    clearTimeout(timeoutId)
   }
-  const data = await res.json()
-  return data
 }
 
 export const api = {
@@ -25,7 +52,7 @@ export const api = {
 
   // Auth
   login: (username, password) => request('/login', { method: 'POST', body: JSON.stringify({ username, password }) }),
-  checkAuth: () => request('/check-auth'),
+  verifyToken: () => request('/auth/verify'),
 
   // Admin: Sections
   getSections: () => request('/admin/sections'),
