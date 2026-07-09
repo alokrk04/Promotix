@@ -24,14 +24,6 @@
           "desc": "Scroll-stopping content, viral reels, and community management that builds genuine connections."
         },
         {
-          "name": "Performance Marketing",
-          "desc": "Data-driven paid campaigns on Meta, Google & beyond that deliver measurable ROI every time."
-        },
-        {
-          "name": "Content Creation",
-          "desc": "Cinematic video, photography, copywriting, and creative assets that captivate your audience."
-        },
-        {
           "name": "Premium Single-Video Package",
           "desc": "A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
         }
@@ -137,10 +129,38 @@
     }
   },
   "pricing": {
+    "cinematic": {
+      "name": "Cinematic",
+      "price": "₹1,699",
+      "period": "Perfect for short-term campaigns",
+      "badge": "",
+      "features": [
+        "1 Cinematic Reel",
+        "Professional Color Grading",
+        "Background Music & SFX",
+        "Caption & Hashtag Strategy",
+        "1 Revision",
+        "Email Support"
+      ]
+    },
+    "branding": {
+      "name": "Branding",
+      "price": "₹2,499",
+      "period": "Perfect for new brands",
+      "features": [
+        "Logo Design (3 Concepts)",
+        "Brand Color Palette",
+        "Typography Selection",
+        "Social Media Kit",
+        "Brand Guidelines PDF",
+        "2 Revisions"
+      ]
+    },
     "premium": {
       "name": "Premium",
       "price": "₹7,499",
       "period": "Perfect for growing businesses",
+      "sold_out": true,
       "features": [
         "Brand Consultation Session",
         "8 Social Media Posts/Month",
