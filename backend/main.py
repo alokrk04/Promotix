@@ -76,6 +76,7 @@ if RESOURCES_DIR.is_dir():
 
 
 @app.get("/")
+@app.head("/")
 async def index():
     spa_path = FRONTEND_DIST / "index.html"
     if spa_path.is_file():
