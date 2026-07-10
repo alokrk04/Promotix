@@ -131,7 +131,7 @@ class TestimonialUpdate(BaseModel):
 
 class ContactCreate(BaseModel):
     name: str = Field(..., min_length=1, max_length=255)
-    email: str = Field(..., max_length=255)
+    email: str = Field(..., max_length=255, pattern=r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
     company: Optional[str] = Field(None, max_length=255)
     location: Optional[str] = Field(None, max_length=255)
     service: Optional[str] = Field(None, max_length=255)

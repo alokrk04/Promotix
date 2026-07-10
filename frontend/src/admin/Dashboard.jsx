@@ -123,8 +123,10 @@ function ListManager({ title, items, fields, onCreate, onUpdate, onDelete }) {
     for (const f of fields) {
       if (f.type === 'number') payload[f.key] = parseInt(payload[f.key], 10) || 0
     }
-    await onCreate(payload)
-    setNewItem({})
+    try {
+      await onCreate(payload)
+      setNewItem({})
+    } catch {}
   }
 
   const fieldValue = (item, key) => item[key] ?? ''
@@ -250,7 +252,7 @@ export default function Admin() {
     api.getTestimonials().then(setTestimonials).catch(() => {})
   }, [admin])
 
-  if (loading) return null
+  if (loading) return <div className="min-h-screen bg-slate-100 flex items-center justify-center text-slate text-sm">Checking authentication...</div>
   if (!admin) return <Login />
 
   const tabs = [

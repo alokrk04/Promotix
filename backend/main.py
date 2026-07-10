@@ -113,3 +113,9 @@ async def spa_fallback(request, exc):
         from fastapi.responses import JSONResponse
         return JSONResponse({"error": str(exc.detail)}, status_code=exc.status_code)
     return PlainTextResponse(str(exc.detail), status_code=exc.status_code)
+
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.getenv("PORT", "8000"))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)

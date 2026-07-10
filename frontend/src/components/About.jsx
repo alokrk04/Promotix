@@ -1,10 +1,4 @@
-function sanitize(html) {
-  const d = document.createElement('div')
-  d.innerHTML = html
-  const scripts = d.querySelectorAll('script')
-  scripts.forEach((s) => s.remove())
-  return d.innerHTML
-}
+import DOMPurify from 'dompurify'
 
 export default function About({ content }) {
   const c = content || {}
@@ -15,8 +9,8 @@ export default function About({ content }) {
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         <div className="text-center md:text-left">
           <span className="tag">About Promotix</span>
-          <h2 className="sh mt-4" dangerouslySetInnerHTML={{ __html: sanitize(tagline) }} />
-          <p className="ss mb-4" dangerouslySetInnerHTML={{ __html: sanitize(paragraph1) }} />
+          <h2 className="sh mt-4" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(tagline) }} />
+          <p className="ss mb-4" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(paragraph1) }} />
           <p className="ss">{c.paragraph2 || ''}</p>
         </div>
         <div className="relative h-[480px] min-h-[400px]">
