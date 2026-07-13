@@ -23,27 +23,26 @@ export default function Services({ content, connectServices, propertiesServices 
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <span className="tag">Our Capabilities</span>
-          <h2 className="sh mt-4">Two Brands, <span className="gt">One Promise</span></h2>
-          <p className="ss mx-auto">{c.subtitle || 'Two specialized divisions under one roof.'}</p>
+          <h2 className="sh mt-4">{c.heading || 'Promotix Connect — Marketing Agency'}</h2>
+          <p className="ss mx-auto">{c.subtitle || ''}</p>
         </div>
         <div className="mb-10">
-          <p className="text-center font-semibold mb-5"><span className="mr-1">🚀</span> Promotix Connect — Marketing Agency</p>
-          <div className="grid grid-cols-2 gap-4 max-w-[640px] mx-auto">
-            {connect?.slice(0, 2).map((svc, i) => (
-              <ServiceCard key={i} name={svc.name} desc={svc.desc} icon={connectIcons[i] || '🎨'} color={connectColors[i] || 'rgba(124,58,237,.15)'} />
-            ))}
-          </div>
-          {connect?.length > 2 && (
-            <div className="max-w-[640px] mx-auto mt-4">
+          {connect?.length > 0 && (
+            <div className="max-w-[640px] mx-auto mb-6">
               <div className="gcard p-6 flex items-center gap-6" style={{ background: 'linear-gradient(135deg,rgba(124,58,237,.08),rgba(6,182,212,.06))', borderColor: 'rgba(124,58,237,.3)' }}>
                 <div className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{ background: 'rgba(236,72,153,.15)' }}>🎥</div>
                 <div className="min-w-0">
-                  <div className="font-bold text-base mb-1">{connect[2].name}</div>
-                  <div className="text-slate text-sm leading-relaxed">{connect[2].desc}</div>
+                  <div className="font-bold text-base mb-1">{connect[0].name}</div>
+                  <div className="text-slate text-sm leading-relaxed">{connect[0].desc}</div>
                 </div>
               </div>
             </div>
           )}
+          <div className="grid grid-cols-2 gap-4 max-w-[640px] mx-auto">
+            {connect?.slice(1).map((svc, i) => (
+              <ServiceCard key={i} name={svc.name} desc={svc.desc} icon={connectIcons[i] || '🎨'} color={connectColors[i] || 'rgba(124,58,237,.15)'} />
+            ))}
+          </div>
         </div>
         <div>
           <p className="text-center font-semibold mb-5"><span className="mr-1">🏡</span> Promotix Properties — Real Estate Solutions</p>
