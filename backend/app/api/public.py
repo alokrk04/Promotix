@@ -49,7 +49,8 @@ def get_content_json(db: Session = Depends(get_db)):
             properties = db.query(Service).filter(Service.section == "properties").order_by(Service.order).all()
             content = s.content if isinstance(s.content, dict) else {}
             result["services"] = {
-                "heading": content.get("heading", "Two Brands, One Promise"),
+                "heading": content.get("heading", "Promotix Connect"),
+                "subheading": content.get("subheading", "Marketing Agency"),
                 "subtitle": content.get("subtitle", ""),
                 "connect": {
                     "heading": content.get("connect", {}).get("heading", "Promotix Connect — Marketing Agency"),
