@@ -96,8 +96,8 @@ section{padding:3rem 5%;position:relative}
 
 /* Section meta */
 .tag{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1rem;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.28);border-radius:50px;color:var(--violet-l);font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:1rem}
-.sh{font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:800;line-height:1.08;letter-spacing:-.02em;margin-bottom:.8rem}
-.ss{color:var(--slate);font-size:1.05rem;line-height:1.75;max-width:620px}
+.sh{font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:800;line-height:1.08;letter-spacing:-.02em;text-align:center;margin-bottom:.75rem;background:linear-gradient(135deg,#1E293B 0%,#334155 60%,#7C3AED 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ss{color:#475569;font-size:1.05rem;line-height:1.75;max-width:620px;text-align:center;margin-bottom:2rem}
 .gt{background:var(--gt);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .gc{background:linear-gradient(135deg,var(--cyan-l),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
@@ -324,8 +324,8 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
   .n-hamburger{gap:4px}
   .n-hamburger span{width:20px;height:2px}
   section{padding:2rem 5%}
-  .sh{font-size:clamp(1.7rem,5vw,2.4rem);margin-bottom:.6rem}
-  .ss{font-size:.95rem;line-height:1.65}
+  .sh{font-size:clamp(1.7rem,5vw,2.4rem);text-align:center;margin-bottom:.6rem}
+  .ss{font-size:.95rem;line-height:1.65;text-align:center;margin-bottom:1.5rem;color:#475569}
   .h-title{font-size:clamp(2rem,7vw,3rem);margin-bottom:.8rem}
   .h-sub{font-size:1rem;margin-bottom:1.2rem}
   .h-stats{gap:1.2rem;margin-top:1.5rem;padding-top:1.2rem}
@@ -362,8 +362,8 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
 }
 @media(max-width:480px){
   section{padding:1.5rem 5%}
-  .sh{font-size:clamp(1.4rem,6vw,1.8rem);margin-bottom:.5rem}
-  .ss{font-size:.88rem}
+  .sh{font-size:clamp(1.4rem,6vw,1.8rem);text-align:center;margin-bottom:.5rem}
+  .ss{font-size:.88rem;text-align:center;margin-bottom:1.2rem;color:#475569}
   .h-title{font-size:clamp(1.6rem,8vw,2.2rem);margin-bottom:.8rem}
   .h-sub{font-size:.92rem;margin-bottom:1.4rem}
   .h-stats{gap:.8rem;margin-top:1.2rem;padding-top:1rem;flex-direction:column;align-items:center}
@@ -472,21 +472,20 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
   <div class="c">
     <div class="svc-h">
       <div class="tag rv">Our Capabilities</div>
-      <h2 class="sh rv">Two Brands, <span class="gt">One Promise</span></h2>
-      <p class="ss rv">Promotix operates two specialized divisions — marketing excellence and property solutions — under one roof of quality.</p>
+      <h2 class="sh rv" data-content="services.heading">Promotix Connect — Marketing Agency</h2>
+      <p class="ss rv" data-content="services.subtitle">In a crowded digital landscape, we help local businesses punch above their weight. We understand the local market and know exactly what it takes to turn casual scrollers into loyal customers. Through meticulous social media management and high-end content creation, we give your shop a premium digital presence that captures attention, builds trust, and drives real business results right to your doorstep.</p>
     </div>
     <div class="svc-group">
-      <div class="svc-sub rv"><span class="svc-sub-badge">🚀</span> Promotix Connect — Marketing Agency</div>
+      <div class="svc-card svc-card-featured" style="margin-bottom:1rem;background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(6,182,212,.06));border-color:rgba(124,58,237,.3);text-align:center">
+        <div class="svc-ico" style="background:rgba(236,72,153,.15);margin:0 auto 1.4rem">🎥</div>
+        <div class="svc-name">Premium Single-Video Package</div>
+        <div class="svc-desc">A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth.</div>
+      </div>
       <div class="svc-grid">
         <div class="svc-card"><div class="svc-ico" style="background:rgba(124,58,237,.15)">🎨</div><div class="svc-name">Branding</div><div class="svc-desc">Visual identity, logo design, brand guidelines, and strategic positioning that tells your unique story.</div></div>
         <div class="svc-card"><div class="svc-ico" style="background:rgba(6,182,212,.15)">📱</div><div class="svc-name">Social Media Marketing</div><div class="svc-desc">Scroll-stopping content, viral reels, and community management that builds genuine connections.</div></div>
         <div class="svc-card"><div class="svc-ico" style="background:rgba(236,72,153,.15)">📈</div><div class="svc-name">Performance Marketing</div><div class="svc-desc">Data-driven paid campaigns on Meta, Google & beyond that deliver measurable ROI every time.</div></div>
         <div class="svc-card"><div class="svc-ico" style="background:rgba(6,182,212,.15)">🎬</div><div class="svc-name">Content Creation</div><div class="svc-desc">Cinematic video, photography, copywriting, and creative assets that captivate your audience.</div></div>
-      </div>
-      <div class="svc-card svc-card-featured" style="margin-top:.5rem;background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(6,182,212,.06));border-color:rgba(124,58,237,.3);text-align:center">
-        <div class="svc-ico" style="background:rgba(236,72,153,.15);margin:0 auto 1.4rem">🎥</div>
-        <div class="svc-name">Premium Single-Video Package</div>
-        <div class="svc-desc">A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth.</div>
       </div>
     </div>
     <div class="svc-group">
@@ -507,8 +506,7 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
       <div>
         <div class="tag rv">About Promotix</div>
         <h2 class="sh rv" data-content="about.tagline">Your Vision,<br><span class="gt">Our Strategy</span></h2>
-        <p class="ss rv" data-content="about.paragraph1">Promotix is a parent brand operating two specialized divisions — <strong>Promotix Connect</strong> for high-end marketing and <strong>Promotix Properties</strong> for premium real estate solutions. Born in Nipani, India, we blend creative excellence with data-driven strategy to build brands, spaces, and communities that resonate.</p>
-        <p class="ss rv" style="margin-top:1rem" data-content="about.paragraph2">From reels that stop thumbs to properties that feel like home — we bring your vision to life with precision and passion, every single time.</p>
+        <p class="ss rv" data-content="about.paragraph1">In real estate, timing and location are everything. We bridge the gap between traditional property buying and smart asset management. Our team analyzes market trends to source properties with the highest potential for appreciation. Whether you are looking to invest in rapidly developing commercial zones or premium residential plots, we provide the data, calculations, and transparency needed to turn today's investment into tomorrow's major profit.</p>
         <div class="abt-stats">
           <div class="abt-stat rv"><div class="abt-sv" data-n="150" data-s="+">0</div><div class="abt-sl">Brands & Properties</div></div>
           <div class="abt-stat rv"><div class="abt-sv" data-n="12" data-s="K+">0</div><div class="abt-sl">Instagram Followers</div></div>
