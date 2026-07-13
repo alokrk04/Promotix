@@ -6,15 +6,19 @@
   },
   "about": {
     "tagline": "Your Vision, Our Strategy.",
-    "paragraph1": "Promotix is a parent brand operating two specialized divisions \nPromotix Connect for high-end marketing and Promotix Properties for premium real estate solutions. Born in Nipani, India, we blend creative excellence with data-driven strategy to build brands, spaces, and communities that resonate.",
-    "paragraph2": "From reels that stop thumbs to properties that feel like home — we bring your vision to life with precision and passion, every single time."
+    "paragraph1": "In real estate, timing and location are everything. We bridge the gap between traditional property buying and smart asset management. Our team analyzes market trends to source properties with the highest potential for appreciation. Whether you are looking to invest in rapidly developing commercial zones or premium residential plots, we provide the data, calculations, and transparency needed to turn today's investment into tomorrow's major profit.",
+    "paragraph2": ""
   },
   "services": {
-    "heading": "Two Brands, One Promise",
-    "subtitle": "Promotix operates two specialized divisions — marketing excellence and property solutions — under one roof of quality.",
+    "heading": "Promotix Connect — Marketing Agency",
+    "subtitle": "In a crowded digital landscape, we help local businesses punch above their weight. We understand the local market and know exactly what it takes to turn casual scrollers into loyal customers. Through meticulous social media management and high-end content creation, we give your shop a premium digital presence that captures attention, builds trust, and drives real business results right to your doorstep.",
     "connect": {
-      "heading": "Promotix Connect — Marketing Agency",
+    "heading": "Promotix Connect — Marketing Agency",
       "items": [
+        {
+          "name": "Premium Single-Video Package",
+          "desc": "A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
+        },
         {
           "name": "Branding",
           "desc": "Visual identity, logo design, brand guidelines, and strategic positioning that tells your unique story."
@@ -22,10 +26,6 @@
         {
           "name": "Social Media Marketing",
           "desc": "Scroll-stopping content, viral reels, and community management that builds genuine connections."
-        },
-        {
-          "name": "Premium Single-Video Package",
-          "desc": "A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
         }
       ]
     },
