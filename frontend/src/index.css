@@ -27,9 +27,10 @@ body {
            rounded-full border border-violet/30 bg-violet/10 text-violet-light;
   }
   .sh {
-    @apply text-[clamp(2.2rem,4.5vw,3.6rem)] font-extrabold leading-[1.08] tracking-tight;
+    @apply text-[clamp(2.2rem,4.5vw,3.6rem)] font-extrabold leading-[1.2] tracking-tight;
     text-align: center;
     margin-bottom: 0.75rem;
+    color: #1E293B;
     background: linear-gradient(135deg,#1E293B 0%,#334155 60%,#7C3AED 100%);
     -webkit-background-clip: text;
     background-clip: text;
