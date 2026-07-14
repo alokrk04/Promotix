@@ -15,7 +15,7 @@ export default function About({ content }) {
         </div>
         <div className="relative h-[480px] min-h-[400px]">
           <div className="absolute w-[68%] h-[65%] top-0 right-0 rounded-xl bg-gradient-to-br from-violet/20 to-cyan/10 border border-black/5 flex items-center justify-center text-center p-6 animate-[float_4s_ease-in-out_infinite]">
-            <div><div className="text-5xl mb-3">🚀</div><div className="font-bold text-lg">Promotix Connect</div><div className="text-slate text-sm mt-1">Marketing & Branding</div></div>
+            <div><div className="text-5xl mb-3">🚀</div><div className="font-bold text-lg">Promotix </div><div className="text-slate text-sm mt-1">Connect with Customers</div></div>
           </div>
           <div className="absolute w-[44%] h-[44%] bottom-0 left-0 rounded-xl bg-gradient-to-br from-cyan/20 to-violet/10 border border-black/5 flex items-center justify-center text-center p-6 animate-[float_5.2s_ease-in-out_infinite_1.1s]">
             <div><div className="text-4xl mb-2">🏡</div><div className="font-semibold">Promotix Properties</div></div>
