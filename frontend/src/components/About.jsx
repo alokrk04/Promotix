@@ -2,12 +2,12 @@ import DOMPurify from 'dompurify'
 
 export default function About({ content }) {
   const c = content || {}
-  const tagline = c.tagline || 'Your Vision,<br><span class="gt">Our Strategy</span>'
+  const tagline = c.tagline || 'Connecting Your Business to Better Sales.'
   const paragraph1 = c.paragraph1 || ''
   return (
     <section id="about" className="py-20 px-[5%] bg-gradient-to-b from-transparent via-cyan/5 to-transparent">
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-        <div className="text-center md:text-left">
+        <div className="text-center">
           <span className="tag">About Promotix</span>
           <h2 className="sh mt-4" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(tagline) }} />
           <p className="ss mb-4" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(paragraph1) }} />
