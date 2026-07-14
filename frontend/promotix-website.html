@@ -160,20 +160,17 @@ section{padding:3rem 5%;position:relative}
 /* ── PORTFOLIO ───────────────────────────────── */
 .port-h{text-align:center;margin-bottom:1.5rem}
 .port-h .ss{margin:0 auto}
-.filters{display:flex;justify-content:center;gap:.65rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.flt{padding:.45rem 1.15rem;border-radius:50px;border:1.5px solid rgba(0,0,0,.1);background:transparent;color:var(--slate);font-family:inherit;font-size:.85rem;cursor:pointer;transition:all .3s}
-.flt.on,.flt:hover{background:rgba(124,58,237,.14);border-color:rgba(124,58,237,.4);color:var(--violet-l)}
 .port-grid{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:280px;gap:1.25rem;max-width:680px;margin:0 auto}
-.p-item{border-radius:16px;overflow:hidden;position:relative;cursor:pointer;transition:transform .4s cubic-bezier(.175,.885,.32,1.175),box-shadow .4s;border:1px solid rgba(0,0,0,.07)}
+.p-item{border-radius:16px;overflow:hidden;position:relative;cursor:pointer;transition:transform .4s cubic-bezier(.175,.885,.32,1.175),box-shadow .4s;border:1px solid rgba(0,0,0,.07);background-size:cover;background-position:center;background-repeat:no-repeat}
 .p-item:hover{transform:scale(1.02);box-shadow:0 24px 60px rgba(0,0,0,.12)}
 .p-item.hidden{display:none}
 .p-inner{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
 .p-emoji{font-size:3rem;line-height:1}
-.p-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(248,249,250,.95) 0%,rgba(248,249,250,.5) 50%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:1.6rem;opacity:0;transform:translateY(12px);transition:all .4s cubic-bezier(.175,.885,.32,1.175)}
-.p-item:hover .p-ov{opacity:1;transform:translateY(0)}
-.p-cat{display:inline-block;padding:.25rem .75rem;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.25);border-radius:50px;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--violet-l);margin-bottom:.5rem}
-.p-t{font-weight:700;font-size:1rem;text-align:center}
-.p-st{color:var(--slate);font-size:.78rem;margin-top:.15rem;text-align:center}
+.p-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.45) 50%,rgba(0,0,0,.15) 100%);display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:1.6rem;opacity:1;transform:translateY(0);transition:all .4s cubic-bezier(.175,.885,.32,1.175)}
+.p-item:hover .p-ov{background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(0,0,0,.3) 50%,rgba(0,0,0,.05) 100%)}
+.p-cat{display:inline-block;padding:.25rem .75rem;background:rgba(124,58,237,.35);border:1px solid rgba(124,58,237,.5);border-radius:50px;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;margin-bottom:.5rem}
+.p-t{font-weight:700;font-size:1rem;text-align:center;color:#fff}
+.p-st{color:rgba(255,255,255,.7);font-size:.78rem;margin-top:.15rem;text-align:center}
 
 /* ── PROCESS ─────────────────────────────────── */
 #process{background:linear-gradient(to bottom,transparent,rgba(124,58,237,.03),transparent)}
@@ -476,13 +473,8 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
       <p class="ss rv" data-content="services.subtitle">In a crowded digital landscape, we help local businesses punch above their weight. We understand the local market and know exactly what it takes to turn casual scrollers into loyal customers. Through meticulous social media management and high-end content creation, we give your shop a premium digital presence that captures attention, builds trust, and drives real business results right to your doorstep.</p>
     </div>
     <div class="svc-group">
-      <div class="svc-card svc-card-featured" style="margin-bottom:1rem;background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(6,182,212,.06));border-color:rgba(124,58,237,.3);text-align:center">
-        <div class="svc-ico" style="background:rgba(236,72,153,.15);margin:0 auto 1.4rem">🎥</div>
-        <div class="svc-name">Premium Single-Video Package</div>
-        <div class="svc-desc">A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth.</div>
-      </div>
       <div class="svc-grid">
-        <div class="svc-card"><div class="svc-ico" style="background:rgba(124,58,237,.15)">🎨</div><div class="svc-name">Branding</div><div class="svc-desc">Visual identity, logo design, brand guidelines, and strategic positioning that tells your unique story.</div></div>
+        <div class="svc-card"><div class="svc-ico" style="background:rgba(124,58,237,.15)">🎨</div><div class="svc-name">Premium Single-Video Package</div><div class="svc-desc">A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth.</div></div>
         <div class="svc-card"><div class="svc-ico" style="background:rgba(6,182,212,.15)">📱</div><div class="svc-name">Social Media Marketing</div><div class="svc-desc">Scroll-stopping content, viral reels, and community management that builds genuine connections.</div></div>
         <div class="svc-card"><div class="svc-ico" style="background:rgba(236,72,153,.15)">📈</div><div class="svc-name">Performance Marketing</div><div class="svc-desc">Data-driven paid campaigns on Meta, Google & beyond that deliver measurable ROI every time.</div></div>
         <div class="svc-card"><div class="svc-ico" style="background:rgba(6,182,212,.15)">🎬</div><div class="svc-name">Content Creation</div><div class="svc-desc">Cinematic video, photography, copywriting, and creative assets that captivate your audience.</div></div>
@@ -505,8 +497,8 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
     <div class="abt-grid">
       <div>
         <div class="tag rv">About Promotix</div>
-        <h2 class="sh rv" data-content="about.tagline">Your Vision,<br><span class="gt">Our Strategy</span></h2>
-        <p class="ss rv" data-content="about.paragraph1">In real estate, timing and location are everything. We bridge the gap between traditional property buying and smart asset management. Our team analyzes market trends to source properties with the highest potential for appreciation. Whether you are looking to invest in rapidly developing commercial zones or premium residential plots, we provide the data, calculations, and transparency needed to turn today's investment into tomorrow's major profit.</p>
+        <h2 class="sh rv" data-content="about.tagline">Connecting Your Business to Better Sales.</h2>
+        <p class="ss rv" data-content="about.paragraph1">At Promotix, we are a full-service brand promotion agency that bridges the gap between your business and your target market. From handling daily social media accounts to executing high-level digital marketing campaigns, our structured approach ensures every move we make is designed to elevate your brand. We don't just create engagement; we engineer promotions that accelerate your sales.</p>
         <div class="abt-stats">
           <div class="abt-stat rv"><div class="abt-sv" data-n="150" data-s="+">0</div><div class="abt-sl">Brands & Properties</div></div>
           <div class="abt-stat rv"><div class="abt-sv" data-n="12" data-s="K+">0</div><div class="abt-sl">Instagram Followers</div></div>
@@ -529,19 +521,11 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
       <h2 class="sh rv">Projects That <span class="gt">Define Excellence</span></h2>
       <p class="ss rv">A curated showcase of our most impactful campaigns, identities, and digital experiences.</p>
     </div>
-    <div class="filters rv">
-      <button class="flt on" data-filter="all">All</button>
-      <button class="flt" data-filter="branding">Branding</button>
-      <button class="flt" data-filter="social">Social Media</button>
-      <button class="flt" data-filter="video">Video</button>
-    </div>
     <div class="port-grid">
-      <div class="p-item" data-category="social" style="background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(6,182,212,.15))"><div class="p-inner"><div class="p-emoji">🏗️</div><div class="p-ov"><span class="p-cat">Social Media</span><div class="p-t">Royal Colony Campaign</div><div class="p-st">Real Estate · Social Media</div></div></div></div>
-      <div class="p-item" data-category="video" style="background:linear-gradient(135deg,rgba(236,72,153,.18),rgba(124,58,237,.25))"><div class="p-inner"><div class="p-emoji">🎬</div><div class="p-ov"><span class="p-cat">Video</span><div class="p-t">Brand Reel Production</div><div class="p-st">Content Creation · Video</div></div></div></div>
-      <div class="p-item" data-category="branding" style="background:linear-gradient(135deg,rgba(6,182,212,.2),rgba(52,211,153,.15))"><div class="p-inner"><div class="p-emoji">💼</div><div class="p-ov"><span class="p-cat">Branding</span><div class="p-t">Corporate Rebrand</div><div class="p-st">Branding · Identity</div></div></div></div>
-      <div class="p-item" data-category="social" style="background:linear-gradient(135deg,rgba(251,191,36,.12),rgba(236,72,153,.18))"><div class="p-inner"><div class="p-emoji">📊</div><div class="p-ov"><span class="p-cat">Social Media</span><div class="p-t">Performance Campaign</div><div class="p-st">Meta Ads · ROI Driven</div></div></div></div>
-      <div class="p-item" data-category="video" style="background:linear-gradient(135deg,rgba(52,211,153,.12),rgba(6,182,212,.2))"><div class="p-inner"><div class="p-emoji">🌐</div><div class="p-ov"><span class="p-cat">Video</span><div class="p-t">Premium Web Experience</div><div class="p-st">Motion Design · Development</div></div></div></div>
-      <div class="p-item" data-category="branding" style="background:linear-gradient(135deg,rgba(124,58,237,.18),rgba(236,72,153,.2))"><div class="p-inner"><div class="p-emoji">🎯</div><div class="p-ov"><span class="p-cat">Branding</span><div class="p-t">Luxury Brand Identity</div><div class="p-st">Visual Identity · Strategy</div></div></div></div>
+      <div class="p-item" data-category="social" style="background-image:url(/resources/Image1.jpg)"><div class="p-inner"><div class="p-ov"><span class="p-cat">Social Media</span><div class="p-t">Royal Colony Campaign</div><div class="p-st">Real Estate · Social Media</div></div></div></div>
+      <div class="p-item" data-category="marketing" style="background-image:url(/resources/Image2.jpg)"><div class="p-inner"><div class="p-ov"><span class="p-cat">Marketing</span><div class="p-t">Performance Campaign</div><div class="p-st">Meta Ads · ROI Driven</div></div></div></div>
+      <div class="p-item" data-category="video" style="background-image:url(/resources/Image3.jpg)"><div class="p-inner"><div class="p-ov"><span class="p-cat">Video</span><div class="p-t">Premium Web Experience</div><div class="p-st">Motion Design · Development</div></div></div></div>
+      <div class="p-item" data-category="branding" style="background-image:url(/resources/Image4.jpg)"><div class="p-inner"><div class="p-ov"><span class="p-cat">Branding</span><div class="p-t">Luxury Brand Identity</div><div class="p-st">Visual Identity · Strategy</div></div></div></div>
     </div>
   </div>
 </section>
@@ -655,12 +639,12 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
         <div class="ct-info-wrap">
           <div class="ct-ii"><div class="ct-ico">📍</div><div><div class="ct-il">Location</div><div class="ct-iv" data-content="contact.location">Nipani, Karnataka, India</div></div></div>
           <div class="ct-ii"><div class="ct-ico">📱</div><div><div class="ct-il">Phone / WhatsApp</div><div class="ct-iv" data-content="contact.phone">+91 93807 12430</div></div></div>
-          <div class="ct-ii"><div class="ct-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="1.2em" height="1.2em"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg></div><div><div class="ct-il">Instagram</div><div class="ct-iv" data-content="contact.instagram">@promotix.official</div></div></div>
+          <div class="ct-ii"><div class="ct-ico">📸</div><div><div class="ct-il">Instagram</div><div class="ct-iv" data-content="contact.instagram">@promotix.official</div></div></div>
           <div class="ct-ii"><div class="ct-ico">⏰</div><div><div class="ct-il">Working Hours</div><div class="ct-iv" data-content="contact.hours">Mon–Sat, 9 AM – 7 PM IST</div></div></div>
           <div class="ct-ii"><div class="ct-ico">✉️</div><div><div class="ct-il">Email</div><div class="ct-iv" data-content="contact.email">Promotix.officiall@gmail.com</div></div></div>
         </div>
         <div class="slinks">
-          <a href="https://www.instagram.com/promotix.official" target="_blank" class="sl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="1.1em" height="1.1em"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.instagram.com/promotix.official?igsh=bWFiaTJ0N2drNGkz" target="_blank" class="sl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="1.1em" height="1.1em"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg></a>
           <a href="https://wa.me/919380712430" target="_blank" class="sl">💬</a>
           <a href="#" class="sl">🐦</a>
           <a href="#" class="sl">💼</a>
@@ -711,11 +695,12 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
           <span class="n-name">PROMOTIX</span>
         </a>
         <p class="ft-ct">The parent brand behind Promotix Connect (Marketing) and Promotix Properties (Real Estate) — turning ideas into brands, brands into homes.</p>
-        <div class="slinks">
+        <div class="slinks" style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
           <a href="https://www.instagram.com/promotix.official" target="_blank" class="sl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="1.1em" height="1.1em"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg></a>
           <a href="https://wa.me/919380712430" target="_blank" class="sl">💬</a>
           <a href="#" class="sl">🐦</a>
           <a href="#" class="sl">💼</a>
+          <a href="#" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .9rem;background:linear-gradient(135deg,#7C3AED,#4F46E5);border-radius:50px;color:#fff;font-size:.75rem;font-weight:600;text-decoration:none;transition:all .3s;white-space:nowrap">Join Community →</a>
         </div>
       </div>
       <div>
@@ -1055,22 +1040,6 @@ function faq(q) {
   document.querySelectorAll('.faq-q').forEach(x => x.classList.remove('on'));
   if (!isOpen) { a.classList.add('open'); q.classList.add('on'); }
 }
-
-document.querySelectorAll('.flt').forEach(b => {
-  b.addEventListener('click', function(){
-    document.querySelectorAll('.flt').forEach(x => x.classList.remove('on'));
-    this.classList.add('on');
-    const filter = this.dataset.filter;
-    document.querySelectorAll('.p-item').forEach(item => {
-      if (filter === 'all' || item.dataset.category === filter) {
-        item.classList.remove('hidden');
-        gsap.fromTo(item, {opacity:0, scale:.95}, {opacity:1, scale:1, duration:.4, ease:'power3.out', clearProps:'all'});
-      } else {
-        gsap.to(item, {opacity:0, scale:.95, duration:.25, ease:'power2.in', onComplete:() => item.classList.add('hidden')});
-      }
-    });
-  });
-});
 
 async function submitForm(form) {
   const btn = form.querySelector('.ct-sub');
