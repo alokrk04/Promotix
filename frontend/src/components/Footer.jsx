@@ -8,7 +8,8 @@ export default function Footer() {
               <span className="text-lg font-extrabold tracking-widest">PROMOTIX</span>
             </div>
             <p className="text-slate text-sm leading-relaxed max-w-[270px] mx-auto md:mx-0">
-              The parent brand behind Promotix Connect (Marketing) and Promotix Properties (Real Estate).
+              Promotix is a specialized digital marketing agency. By providing focused social media management, commercial scriptwriting, and growth campaigns, the agency transforms presence into a measurable business designed to elevate brand and drive attract consumer.
+
             </p>
           </div>
           <div className="text-center">
