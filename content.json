@@ -16,8 +16,8 @@
     "heading": "Promotix Connect — Marketing Agency",
       "items": [
         {
-          "name": "Premium Single-Video Package",
-          "desc": "A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
+          "name": "Growth Package",
+          "desc": "A product only sells when the customer's actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
         },
         {
           "name": "Social Media Marketing",
@@ -56,28 +56,28 @@
     "subtitle": "A proven framework that transforms raw ideas into brands that dominate their markets.",
     "steps": [
       {
-        "name": "Discover",
-        "desc": "Deep-dive into your brand, audience, and competitive landscape to uncover hidden opportunities and strategic insights."
+        "name": "Understand Business",
+        "desc": "Deep dive into your brand's core."
       },
       {
-        "name": "Strategy",
-        "desc": "Craft a comprehensive roadmap with clear goals, messaging frameworks, channel strategies, and measurable KPIs."
+        "name": "Customer View",
+        "desc": "See the market through your audience's eyes."
       },
       {
-        "name": "Design",
-        "desc": "Create stunning visuals, brand assets, and creative concepts that authentically capture your brand's unique essence."
+        "name": "Build Strategy",
+        "desc": "Craft a precise, goal-oriented action plan."
       },
       {
-        "name": "Development",
-        "desc": "Build and implement everything — from websites to full campaign assets — with technical precision and excellence."
+        "name": "Script & Shoot",
+        "desc": "Create high-impact, engaging video content."
       },
       {
-        "name": "Launch & Market",
-        "desc": "Amplify across channels to maximize reach, engagement, and conversions with data-backed precision and creativity."
+        "name": "Drive Sales",
+        "desc": "Launch campaigns that multiply your revenue."
       },
       {
-        "name": "Scale & Grow",
-        "desc": "Continuous analysis, iteration, and intelligent scaling to drive sustainable, compounding growth for your brand."
+        "name": "Manage & Engage",
+        "desc": "Handle social accounts and customer inquiries daily."
       }
     ]
   },
