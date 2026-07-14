@@ -5,8 +5,8 @@
     "subtitle": "A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
   },
   "about": {
-    "tagline": "Your Vision, Our Strategy.",
-    "paragraph1": "In real estate, timing and location are everything. We bridge the gap between traditional property buying and smart asset management. Our team analyzes market trends to source properties with the highest potential for appreciation. Whether you are looking to invest in rapidly developing commercial zones or premium residential plots, we provide the data, calculations, and transparency needed to turn today's investment into tomorrow's major profit.",
+    "tagline": "Connecting Your Business to Better Sales.",
+    "paragraph1": "At Promotix, we are a full-service brand promotion agency that bridges the gap between your business and your target market. From handling daily social media accounts to executing high-level digital marketing campaigns, our structured approach ensures every move we make is designed to elevate your brand. We don't just create engagement; we engineer promotions that accelerate your sales.",
     "paragraph2": ""
   },
   "services": {
@@ -20,12 +20,12 @@
           "desc": "A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
         },
         {
-          "name": "Branding",
-          "desc": "Visual identity, logo design, brand guidelines, and strategic positioning that tells your unique story."
-        },
-        {
           "name": "Social Media Marketing",
           "desc": "Scroll-stopping content, viral reels, and community management that builds genuine connections."
+        },
+        {
+          "name": "Branding",
+          "desc": "Visual identity, logo design, brand guidelines, and strategic positioning that tells your unique story."
         }
       ]
     },
