@@ -21,6 +21,7 @@ export default function Hero({ content, stats }) {
         </p>
         <div className="flex items-center justify-center gap-5 flex-wrap">
           <a href="#contact" className="btn-p">Start Your Project →</a>
+          <a href="#" target="_blank" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold no-underline transition-all duration-300 hover:-translate-y-1" style={{background:'linear-gradient(135deg,#7C3AED,#4F46E5)'}}>Join Community →</a>
         </div>
         <div className="flex items-center justify-center gap-10 mt-14 pt-10 border-t border-black/5 flex-wrap">
           {statsArr.map((stat, i) => (
