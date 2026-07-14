@@ -9,7 +9,7 @@ export default function Hero({ content, stats }) {
   ]
 
   return (
-    <section id="hero" className="min-h-screen flex items-center px-[5%] relative overflow-hidden">
+    <section id="hero" className="min-h-screen flex items-center px-[5%] relative">
       <div className="absolute w-[700px] h-[700px] rounded-full bg-gradient-to-br from-violet/5 to-transparent top-[-250px] right-[-150px] pointer-events-none" />
       <div className="absolute w-[450px] h-[450px] rounded-full bg-gradient-to-br from-cyan/5 to-transparent bottom-[-100px] left-[-80px] pointer-events-none" />
       <div className="max-w-[800px] mx-auto text-center relative z-10">
@@ -20,8 +20,8 @@ export default function Hero({ content, stats }) {
           {c.subtitle || 'From cinematic marketing to premium property solutions.'}
         </p>
         <div className="flex items-center justify-center gap-5 flex-wrap">
-          <a href="#contact" className="btn-p">Start Your Project →</a>
-          <a href="#" target="_blank" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold no-underline transition-all duration-300 hover:-translate-y-1" style={{background:'linear-gradient(135deg,#7C3AED,#4F46E5)'}}>Join Community →</a>
+          <a href="#contact" className="btn-p">Start Your Package →</a>
+          <a href="https://forms.gle/pKp5jPdLpNHV17Ps5" target="_blank" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold no-underline transition-all duration-300 hover:-translate-y-1" style={{background:'linear-gradient(135deg,#7C3AED,#4F46E5)'}}>Connect With Promotix</a>
         </div>
         <div className="flex items-center justify-center gap-10 mt-14 pt-10 border-t border-black/5 flex-wrap">
           {statsArr.map((stat, i) => (
