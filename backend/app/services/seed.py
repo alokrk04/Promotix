@@ -16,12 +16,10 @@ SECTION_MAP = {
 }
 
 portfolio_data = [
-    {"title": "Royal Colony Campaign", "category": "social", "emoji": "\U0001f3d7\ufe0f", "subtitle": "Real Estate \u00b7 Social Media", "order": 0},
-    {"title": "Brand Reel Production", "category": "video", "emoji": "\U0001f3ac", "subtitle": "Content Creation \u00b7 Video", "order": 1},
-    {"title": "Corporate Rebrand", "category": "branding", "emoji": "\U0001f4bc", "subtitle": "Branding \u00b7 Identity", "order": 2},
-    {"title": "Performance Campaign", "category": "social", "emoji": "\U0001f4ca", "subtitle": "Meta Ads \u00b7 ROI Driven", "order": 3},
-    {"title": "Premium Web Experience", "category": "video", "emoji": "\U0001f310", "subtitle": "Motion Design \u00b7 Development", "order": 4},
-    {"title": "Luxury Brand Identity", "category": "branding", "emoji": "\U0001f3af", "subtitle": "Visual Identity \u00b7 Strategy", "order": 5},
+    {"title": "Royal Colony Campaign", "category": "social", "emoji": "", "subtitle": "Real Estate \u00b7 Social Media", "order": 0},
+    {"title": "Performance Campaign", "category": "social", "emoji": "", "subtitle": "Meta Ads \u00b7 ROI Driven", "order": 1},
+    {"title": "Premium Web Experience", "category": "video", "emoji": "", "subtitle": "Motion Design \u00b7 Development", "order": 2},
+    {"title": "Luxury Brand Identity", "category": "branding", "emoji": "", "subtitle": "Visual Identity \u00b7 Strategy", "order": 3},
 ]
 
 testimonial_data = [
