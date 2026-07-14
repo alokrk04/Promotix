@@ -47,7 +47,7 @@ export default function Contact({ content }) {
                   </div>
                   <div>
                     <div className="font-semibold text-sm">{info.label}</div>
-                    <div className="text-slate text-sm">{info.value}</div>
+                    {info.label === 'Instagram' ? <a href="https://www.instagram.com/promotix.official?igsh=bWFiaTJ0N2drNGkz" target="_blank" className="text-slate text-sm no-underline hover:text-violet transition-colors">{info.value}</a> : <div className="text-slate text-sm">{info.value}</div>}
                   </div>
                 </div>
               ))}
