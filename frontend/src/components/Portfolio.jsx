@@ -1,4 +1,4 @@
-const images = ['/resources/Image1.jpg', '/resources/Image2.jpg', '/resources/Image3.jpg', '/resources/Image4.jpg']
+const images = []
 
 export default function Portfolio({ items }) {
 
