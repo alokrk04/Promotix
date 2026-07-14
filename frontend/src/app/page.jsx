@@ -6,7 +6,6 @@ import Services from '../components/Services'
 import About from '../components/About'
 import Portfolio from '../components/Portfolio'
 import Process from '../components/Process'
-import Testimonials from '../components/Testimonials'
 import Pricing from '../components/Pricing'
 import FAQ from '../components/FAQ'
 import Contact from '../components/Contact'
@@ -67,7 +66,6 @@ export default function Home() {
         {about?.is_visible && <About content={about.content} />}
         {data?.portfolio?.length > 0 && <Portfolio items={data?.portfolio} />}
         {process?.is_visible && <Process content={process.content} />}
-        {data?.testimonials?.length > 0 && <Testimonials items={data?.testimonials} />}
         {pricing?.is_visible && <Pricing content={pricing.content} />}
         {faq?.is_visible && <FAQ items={faq.content} />}
         {contact?.is_visible && <Contact content={contact.content} />}
