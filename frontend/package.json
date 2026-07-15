@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp admin.html login.html dist/ 2>/dev/null; true",
+    "build": "vite build && cp login.html dist/ 2>/dev/null; true",
     "preview": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy"
   },
