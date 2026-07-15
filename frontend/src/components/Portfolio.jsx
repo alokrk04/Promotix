@@ -7,7 +7,7 @@ export default function Portfolio({ items }) {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-10">
           <span className="tag">Our Work</span>
-          <h2 className="sh mt-4">Projects That <span className="gt">Define Excellence</span></h2>
+          <h2 className="sh mt-4">Brands We <span className="gt">Work With</span></h2>
           <p className="ss mx-auto">A curated showcase of our most impactful work.</p>
         </div>
         <div className="grid grid-cols-2 gap-5 max-w-[680px] mx-auto">
