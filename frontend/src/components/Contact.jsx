@@ -29,17 +29,17 @@ export default function Contact({ content }) {
   ]
 
   return (
-    <section id="contact" className="py-20 px-[5%] bg-gradient-to-b from-transparent via-cyan/5 to-transparent">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
+    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-cyan/5 to-transparent">
+      <div className="section-shell max-w-6xl">
+        <div className="text-center mb-12 sm:mb-16">
           <span className="tag">Get In Touch</span>
           <h2 className="sh mt-4">Let's Build Something <span className="gt">Extraordinary</span></h2>
           <p className="ss mx-auto">We respond within 24 hours.</p>
         </div>
-        <div className="grid md:grid-cols-[1fr_1.25fr] gap-12">
-          <div className="text-center md:text-left">
+        <div className="grid gap-8 lg:grid-cols-[1fr_1.25fr] lg:gap-12">
+          <div className="text-center lg:text-left">
             <h3 className="text-xl font-bold mb-7">Contact Information</h3>
-            <div className="inline-block text-left space-y-5">
+            <div className="inline-block text-left space-y-5 w-full max-w-[360px] mx-auto lg:mx-0">
               {contactInfo.map((info, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-11 h-11 rounded-xl bg-violet/10 border border-violet/20 flex items-center justify-center text-lg flex-shrink-0">
@@ -53,9 +53,9 @@ export default function Contact({ content }) {
               ))}
             </div>
           </div>
-          <form onSubmit={handleSubmit} className="gcard p-9">
+          <form onSubmit={handleSubmit} className="gcard p-5 sm:p-8 lg:p-9">
             <h3 className="font-bold text-lg mb-5">Send Us a Message</h3>
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <input
                 className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all"
                 placeholder="Your Name"

@@ -22,12 +22,15 @@ body {
 }
 
 @layer components {
+  .section-shell {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
   .tag {
-    @apply inline-flex items-center gap-2 px-3 py-1.5 text-xs font-bold tracking-widest uppercase
+    @apply inline-flex items-center gap-2 px-3 py-1.5 text-[11px] sm:text-xs font-bold tracking-[0.3em] uppercase
            rounded-full border border-violet/30 bg-violet/10 text-violet-light;
   }
   .sh {
-    @apply text-[clamp(2.2rem,4.5vw,3.6rem)] font-extrabold leading-[1.2] tracking-tight;
+    @apply text-[clamp(2rem,4.2vw,3.2rem)] sm:text-[clamp(2.2rem,4.5vw,3.6rem)] font-extrabold leading-[1.15] tracking-tight;
     text-align: center;
     margin-bottom: 0.75rem;
     color: #1E293B;
@@ -37,18 +40,18 @@ body {
     -webkit-text-fill-color: transparent;
   }
   .ss {
-    @apply text-base leading-relaxed max-w-[620px];
+    @apply text-sm sm:text-base leading-relaxed max-w-[620px] px-1 sm:px-0;
     text-align: center;
     margin-bottom: 2rem;
     color: #475569;
   }
   .btn-p {
-    @apply inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-white
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-3.5 rounded-full font-semibold text-white text-sm sm:text-base
            bg-gradient-to-r from-violet to-indigo-600 shadow-lg shadow-violet/40
            transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-violet/60;
   }
   .btn-s {
-    @apply inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-frost
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-3.5 rounded-full font-semibold text-frost text-sm sm:text-base
            border border-black/15 bg-transparent
            transition-all duration-300 hover:border-violet-light hover:bg-violet/10 hover:-translate-y-1;
   }

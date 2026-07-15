@@ -46,14 +46,14 @@ export default function Pricing({ content }) {
   ]
 
   return (
-    <section id="pricing" className="py-20 px-[5%] bg-gradient-to-b from-transparent via-cyan/5 to-transparent">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+    <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-cyan/5 to-transparent">
+      <div className="section-shell max-w-6xl">
+        <div className="text-center mb-12 sm:mb-16">
           <span className="tag">Pricing Plans</span>
           <h2 className="sh mt-4">Transparent, <span className="gt">Premium Pricing</span></h2>
           <p className="ss mx-auto">Invest in your brand's future. All plans include dedicated support.</p>
         </div>
-        <div className="grid md:grid-cols-4 gap-6 mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mx-auto">
           {plans.map((plan, i) => (
             <PricingCard key={i} plan={plan} featured={plan._featured} badge={plan.badge} />
           ))}
