@@ -10,10 +10,10 @@
     "paragraph2": ""
   },
   "services": {
-    "heading": "Promotix Connect — Marketing Agency",
+    "heading": "Promotix — Marketing Agency",
     "subtitle": "In a crowded digital landscape, we help local businesses punch above their weight. We understand the local market and know exactly what it takes to turn casual scrollers into loyal customers. Through meticulous social media management and high-end content creation, we give your shop a premium digital presence that captures attention, builds trust, and drives real business results right to your doorstep.",
     "connect": {
-    "heading": "Promotix Connect — Marketing Agency",
+    "heading": "Promotix — Marketing Agency",
       "items": [
         {
           "name": "Growth Package",
@@ -131,7 +131,7 @@
   "pricing": {
     "cinematic": {
       "name": "Cinematic",
-      "price": "₹1,699/mo",
+      "price": "₹1,699",
       "period": "Perfect for short-term campaigns",
       "badge": "",
       "features": [
@@ -141,7 +141,7 @@
     },
     "branding": {
       "name": "Promotion",
-      "price": "₹2,499/mo",
+      "price": "₹2,499",
       "period": "Designed to drive foot traffic",
       "badge": "",
       "features": [
@@ -153,9 +153,8 @@
     },
     "premium": {
       "name": "Monthly Growth Plan",
-      "price": "₹7,499/mo",
+      "price": "₹7,499",
       "period": "Serious Brand Growth",
-      "badge": "🔥 RECOMMENDED",
       "features": [
         "4 Reels per Month (1 Per Week)",
         "Creating Festival Posters",
@@ -167,7 +166,7 @@
     },
     "premium_plus": {
       "name": "Premium",
-      "price": "₹19,999 mo",
+      "price": "₹19,999",
       "period": "Perfect for brands ready to scale",
       "badge": "✨ BEST VALUE",
       "features": [

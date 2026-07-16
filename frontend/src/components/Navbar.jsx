@@ -15,8 +15,6 @@ export default function Navbar() {
     return () => { document.body.style.overflow = '' }
   }, [open])
 
-  const links = ['Services', 'About', 'Portfolio', 'Pricing', 'Contact']
-
   return (
     <>
       <nav
@@ -29,36 +27,8 @@ export default function Navbar() {
             <span className="text-lg font-extrabold tracking-widest text-black">PROMOTIX</span>
             <span className="hidden sm:inline text-[10px] font-medium text-slate tracking-wider uppercase border-l border-black/15 pl-3 leading-none">connect with customers</span>
           </a>
-
-          <div className="flex justify-end">
-            <button
-              className="flex flex-col gap-1 z-50 bg-transparent border-none cursor-pointer p-1"
-              onClick={() => setOpen(!open)}
-              aria-label="Menu"
-            >
-              <span className={`block w-5 h-0.5 bg-frost rounded transition-all ${open ? 'rotate-45 translate-y-[6px]' : ''}`} />
-              <span className={`block w-5 h-0.5 bg-frost rounded transition-all ${open ? 'opacity-0' : ''}`} />
-              <span className={`block w-5 h-0.5 bg-frost rounded transition-all ${open ? '-rotate-45 -translate-y-[6px]' : ''}`} />
-            </button>
-          </div>
         </div>
       </nav>
-      <div
-        className={`fixed inset-0 bg-white/98 z-40 flex flex-col items-center justify-center gap-10 transition-transform duration-500 ${
-          open ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        {links.map((l) => (
-          <a
-            key={l}
-            href={`#${l.toLowerCase()}`}
-            onClick={() => setOpen(false)}
-            className="text-frost text-2xl font-bold no-underline"
-          >
-            {l}
-          </a>
-        ))}
-      </div>
     </>
   )
 }

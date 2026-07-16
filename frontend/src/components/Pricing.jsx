@@ -4,7 +4,7 @@ function PricingCard({ plan, featured, badge }) {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
   }
   return (
-    <div className={`gcard p-6 flex flex-col ${featured ? 'relative bg-violet/10 border-violet/40 shadow-[0_25px_60px_rgba(124,58,237,0.12)]' : ''}`}>
+    <div className={`gcard p-6 flex flex-col ${badge ? 'relative' : ''} ${featured ? 'bg-violet/10 border-violet/40 shadow-[0_25px_60px_rgba(124,58,237,0.12)]' : ''}`}>
       {badge && (
         <div className="absolute top-[-14px] left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full bg-gradient-to-r from-violet to-indigo-600 text-xs font-bold tracking-wider text-white whitespace-nowrap">
           {badge}

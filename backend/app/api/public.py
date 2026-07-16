@@ -53,7 +53,7 @@ def get_content_json(db: Session = Depends(get_db)):
                 "subheading": content.get("subheading", "Marketing Agency"),
                 "subtitle": content.get("subtitle", ""),
                 "connect": {
-                    "heading": content.get("connect", {}).get("heading", "Promotix Connect — Marketing Agency"),
+                    "heading": content.get("connect", {}).get("heading", "Promotix — Marketing Agency"),
                     "items": [{"name": svc.name, "desc": svc.description} for svc in connect],
                 },
                 "properties": {
