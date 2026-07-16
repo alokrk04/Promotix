@@ -1,5 +1,8 @@
 function PricingCard({ plan, featured, badge }) {
   const p = plan || {}
+  const scrollToContact = () => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+  }
   return (
     <div className={`gcard p-6 flex flex-col ${featured ? 'relative bg-violet/10 border-violet/40 shadow-[0_25px_60px_rgba(124,58,237,0.12)]' : ''}`}>
       {badge && (
@@ -19,19 +22,13 @@ function PricingCard({ plan, featured, badge }) {
           </li>
         ))}
       </ul>
-      {p.sold_out ? (
-        <div className="w-full py-2.5 rounded-xl font-semibold text-center bg-gray-200 text-gray-500 cursor-not-allowed text-sm">
-          Sold Out
-        </div>
-      ) : (
-        <button className={`w-full py-2.5 rounded-xl font-semibold text-sm transition-all mt-auto ${
-          featured
-            ? 'text-white bg-gradient-to-r from-violet to-indigo-600 shadow-lg shadow-violet/40 hover:-translate-y-0.5 hover:shadow-xl'
-            : 'border border-black/15 text-frost hover:border-violet-light hover:bg-violet/10'
-        }`}>
-          Get Started {featured ? '→' : ''}
-        </button>
-      )}
+      <button onClick={scrollToContact} className={`w-full py-2.5 rounded-xl font-semibold text-sm transition-all mt-auto ${
+        featured
+          ? 'text-white bg-gradient-to-r from-violet to-indigo-600 shadow-lg shadow-violet/40 hover:-translate-y-0.5 hover:shadow-xl'
+          : 'border border-black/15 text-frost hover:border-violet-light hover:bg-violet/10'
+      }`}>
+        Get Started {featured ? '→' : ''}
+      </button>
     </div>
   )
 }
@@ -46,14 +43,14 @@ export default function Pricing({ content }) {
   ]
 
   return (
-    <section id="pricing" className="py-20 px-[5%] bg-gradient-to-b from-transparent via-cyan/5 to-transparent">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+    <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-cyan/5 to-transparent">
+      <div className="section-shell max-w-6xl">
+        <div className="text-center mb-12 sm:mb-16">
           <span className="tag">Pricing Plans</span>
           <h2 className="sh mt-4">Transparent, <span className="gt">Premium Pricing</span></h2>
           <p className="ss mx-auto">Invest in your brand's future. All plans include dedicated support.</p>
         </div>
-        <div className="grid md:grid-cols-4 gap-6 mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mx-auto">
           {plans.map((plan, i) => (
             <PricingCard key={i} plan={plan} featured={plan._featured} badge={plan.badge} />
           ))}
