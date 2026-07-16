@@ -20,7 +20,7 @@ export default function Hero({ content, stats }) {
           {c.subtitle || 'From cinematic marketing to premium property solutions.'}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 flex-wrap">
-          <a href="#contact" className="btn-p w-full sm:w-auto">Start Your Package →</a>
+          <a href="#pricing" className="btn-p w-full sm:w-auto">Start Your Package →</a>
           <a href="https://forms.gle/pKp5jPdLpNHV17Ps5" target="_blank" className="btn-p w-full sm:w-auto" style={{background:'linear-gradient(135deg,#7C3AED,#4F46E5)'}}>Connect With Promotix</a>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 lg:gap-10 mt-12 sm:mt-14 pt-8 sm:pt-10 border-t border-black/5">
