@@ -1,5 +1,8 @@
 function PricingCard({ plan, featured, badge }) {
   const p = plan || {}
+  const scrollToContact = () => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+  }
   return (
     <div className={`gcard p-6 flex flex-col ${featured ? 'relative bg-violet/10 border-violet/40 shadow-[0_25px_60px_rgba(124,58,237,0.12)]' : ''}`}>
       {badge && (
@@ -19,19 +22,13 @@ function PricingCard({ plan, featured, badge }) {
           </li>
         ))}
       </ul>
-      {p.sold_out ? (
-        <div className="w-full py-2.5 rounded-xl font-semibold text-center bg-gray-200 text-gray-500 cursor-not-allowed text-sm">
-          Sold Out
-        </div>
-      ) : (
-        <button className={`w-full py-2.5 rounded-xl font-semibold text-sm transition-all mt-auto ${
-          featured
-            ? 'text-white bg-gradient-to-r from-violet to-indigo-600 shadow-lg shadow-violet/40 hover:-translate-y-0.5 hover:shadow-xl'
-            : 'border border-black/15 text-frost hover:border-violet-light hover:bg-violet/10'
-        }`}>
-          Get Started {featured ? '→' : ''}
-        </button>
-      )}
+      <button onClick={scrollToContact} className={`w-full py-2.5 rounded-xl font-semibold text-sm transition-all mt-auto ${
+        featured
+          ? 'text-white bg-gradient-to-r from-violet to-indigo-600 shadow-lg shadow-violet/40 hover:-translate-y-0.5 hover:shadow-xl'
+          : 'border border-black/15 text-frost hover:border-violet-light hover:bg-violet/10'
+      }`}>
+        Get Started {featured ? '→' : ''}
+      </button>
     </div>
   )
 }
@@ -40,9 +37,9 @@ export default function Pricing({ content }) {
   const c = content || {}
   const plans = [
     c.cinematic || {},
-    c.promotion || {},
-    { ...(c.monthly_growth || {}), _featured: true },
-    c.premium_plus || {},
+    c.branding || {},
+    c.premium || {},
+    { ...(c.premium_plus || {}), _featured: true },
   ]
 
   return (

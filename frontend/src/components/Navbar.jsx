@@ -29,15 +29,7 @@ export default function Navbar() {
             <span className="text-lg font-extrabold tracking-widest text-black">PROMOTIX</span>
             <span className="hidden sm:inline text-[10px] font-medium text-slate tracking-wider uppercase border-l border-black/15 pl-3 leading-none">connect with customers</span>
           </a>
-          <ul className="hidden md:flex items-center justify-center gap-6 lg:gap-9 list-none">
-            {links.map((l) => (
-              <li key={l}>
-                <a href={`#${l.toLowerCase()}`} className="text-slate text-sm font-medium no-underline hover:text-black transition-colors">
-                  {l}
-                </a>
-              </li>
-            ))}
-          </ul>
+
           <div className="flex justify-end">
             <button
               className="flex flex-col gap-1 z-50 bg-transparent border-none cursor-pointer p-1"

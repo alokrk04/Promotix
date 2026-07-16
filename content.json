@@ -30,7 +30,7 @@
       ]
     },
     "properties": {
-      "heading": "Promotix Properties — Real Estate Solutions",
+      "heading": "Promotix — Marketing Agency",
       "items": [
         {
           "name": "Property Listings",
@@ -131,48 +131,43 @@
   "pricing": {
     "cinematic": {
       "name": "Cinematic",
-      "price": "₹1,699",
+      "price": "₹1,699/mo",
       "period": "Perfect for short-term campaigns",
       "badge": "",
       "features": [
         "1 Cinematic Reel",
-        "Professional Color Grading",
-        "Background Music & SFX",
-        "Caption & Hashtag Strategy",
-        "1 Revision",
-        "Email Support"
+        "1 Collab"
       ]
     },
     "branding": {
-      "name": "Branding",
-      "price": "₹2,499",
-      "period": "Perfect for new brands",
+      "name": "Promotion",
+      "price": "₹2,499/mo",
+      "period": "Designed to drive foot traffic",
+      "badge": "",
       "features": [
-        "Logo Design (3 Concepts)",
-        "Brand Color Palette",
-        "Typography Selection",
-        "Social Media Kit",
-        "Brand Guidelines PDF",
-        "2 Revisions"
+        "Hook-Driven Scriptwriting",
+        "Scroll-Stopping Video Edits",
+        "Strategic Shop Spotlights",
+        "ROI-Focused Results"
       ]
     },
     "premium": {
-      "name": "Premium",
-      "price": "₹7,499",
-      "period": "Perfect for growing businesses",
-      "sold_out": true,
+      "name": "Monthly Growth Plan",
+      "price": "₹7,499/mo",
+      "period": "Serious Brand Growth",
+      "badge": "🔥 RECOMMENDED",
       "features": [
-        "Brand Consultation Session",
-        "8 Social Media Posts/Month",
-        "2 Reels/Month",
-        "Basic SEO Setup",
-        "Monthly Performance Report",
-        "Email Support"
+        "4 Reels per Month (1 Per Week)",
+        "Creating Festival Posters",
+        "Custom Designs",
+        "Managing Instagram",
+        "Sales Strategies",
+        "Market Visibility"
       ]
     },
     "premium_plus": {
-      "name": "Premium Plus",
-      "price": "₹19,999",
+      "name": "Premium",
+      "price": "₹19,999 mo",
       "period": "Perfect for brands ready to scale",
       "badge": "✨ BEST VALUE",
       "features": [
@@ -180,10 +175,11 @@
         "15 Social Media Posts/Month",
         "5 Cinematic Reels/Month",
         "Advanced SEO & Content Strategy",
-        "Meta & Google Ads Management",
-        "Landing Page Design",
+        "Specialized Marketing",
+        "End to End Management",
         "Weekly Performance Reports",
-        "WhatsApp Priority Support"
+        "WhatsApp Priority Support",
+        "Ads Management"
       ]
     }
   }
