@@ -16,6 +16,10 @@ export default {
       return response
     }
 
+    if (url.pathname === '/login') {
+      return env.ASSETS.fetch(new Request(new URL('/login.html', url)))
+    }
+
     return env.ASSETS.fetch(request)
   },
 }
