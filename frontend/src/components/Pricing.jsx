@@ -40,9 +40,9 @@ export default function Pricing({ content }) {
   const c = content || {}
   const plans = [
     c.cinematic || {},
-    c.branding || {},
-    c.premium || {},
-    { ...(c.premium_plus || {}), _featured: true },
+    c.promotion || {},
+    { ...(c.monthly_growth || {}), _featured: true },
+    c.premium_plus || {},
   ]
 
   return (
