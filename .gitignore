@@ -7,7 +7,6 @@ logs/
 certs/
 backend/venv/
 backend/__pycache__/
-frontend/dist/
 frontend/node_modules/
 
 # Database files
@@ -16,3 +15,9 @@ backend/promotix.db
 
 *.pyc
 __pycache__/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
