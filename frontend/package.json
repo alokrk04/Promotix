@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node -e \"const fs=require('fs'); const path=require('path'); const src=path.join(process.cwd(),'login.html'); const dest=path.join(process.cwd(),'dist','login.html'); fs.copyFileSync(src,dest);\"",
+    "build": "vite build && node -e \"const fs=require('fs'); const path=require('path'); const cwd=process.cwd(); ['login.html','admin.html'].forEach(f=>fs.copyFileSync(path.join(cwd,f),path.join(cwd,'dist',f)));\"",
     "preview": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy"
   },
