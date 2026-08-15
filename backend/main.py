@@ -35,6 +35,17 @@ app.add_middleware(
 app.include_router(api_router)
 
 
+def deep_merge(base, overlay):
+    if isinstance(base, dict) and isinstance(overlay, dict):
+        for k, v in overlay.items():
+            if k not in base:
+                base[k] = v
+            else:
+                base[k] = deep_merge(base[k], v)
+        return base
+    return base
+
+
 @app.on_event("startup")
 def seed_database():
     from app.core.database import SessionLocal
@@ -47,23 +58,60 @@ def seed_database():
     if not db.query(Admin).first():
         db.add(Admin(username=settings.ADMIN_USERNAME, hashed_password=hash_password(settings.ADMIN_PASSWORD)))
 
-    if not db.query(WebsiteSection).first():
-        data = load_content_data(BACKEND_DIR)
-        for key, meta in SECTION_MAP.items():
-            content = data.get(key, {})
-            if key == "services" and "services" in data:
-                content = data["services"]
-            db.add(WebsiteSection(key=key, title=meta["title"], content=content, is_visible=True, order=meta["order"]))
+    data = load_content_data(BACKEND_DIR)
 
-        services_data = data.get("services", {})
-        for i, item in enumerate(services_data.get("connect", {}).get("items", [])):
+    for key, meta in SECTION_MAP.items():
+        section = db.query(WebsiteSection).filter(WebsiteSection.key == key).first()
+        json_content = data.get(key, {})
+        if key == "services" and "services" in data:
+            json_content = data["services"]
+        if section is None:
+            db.add(WebsiteSection(key=key, title=meta["title"], content=json_content, is_visible=True, order=meta["order"]))
+        elif isinstance(section.content, dict) and isinstance(json_content, dict):
+            section.content = deep_merge(dict(section.content), json_content)
+
+    services_data = data.get("services", {})
+    connect_names = {s.name for s in db.query(Service).filter(Service.section == "connect").all()}
+    for i, item in enumerate(services_data.get("connect", {}).get("items", [])):
+        if item.get("name") not in connect_names:
             db.add(Service(section="connect", name=item.get("name", ""), description=item.get("desc", ""), icon="", order=i))
-        for i, item in enumerate(services_data.get("properties", {}).get("items", [])):
+
+    properties_names = {s.name for s in db.query(Service).filter(Service.section == "properties").all()}
+    for i, item in enumerate(services_data.get("properties", {}).get("items", [])):
+        if item.get("name") not in properties_names:
             db.add(Service(section="properties", name=item.get("name", ""), description=item.get("desc", ""), icon="", order=i))
 
+    json_portfolio = data.get("portfolio")
+    if isinstance(json_portfolio, list):
+        portfolio_titles = {p.title for p in db.query(PortfolioItem).all()}
+        for i, item in enumerate(json_portfolio):
+            if item.get("title") not in portfolio_titles:
+                db.add(PortfolioItem(
+                    title=item.get("title", ""),
+                    category=item.get("category", "social"),
+                    emoji=item.get("emoji", ""),
+                    subtitle=item.get("subtitle", ""),
+                    gradient=item.get("gradient", ""),
+                    order=i,
+                ))
+    elif not db.query(PortfolioItem).first():
         for item in portfolio_data:
             db.add(PortfolioItem(**item))
 
+    json_testimonials = data.get("testimonials")
+    if isinstance(json_testimonials, list):
+        testimonial_names = {t.name for t in db.query(Testimonial).all()}
+        for i, item in enumerate(json_testimonials):
+            if item.get("name") not in testimonial_names:
+                db.add(Testimonial(
+                    initials=item.get("initials", ""),
+                    name=item.get("name", ""),
+                    role=item.get("role", ""),
+                    content=item.get("content", ""),
+                    rating=item.get("rating", 5),
+                    order=i,
+                ))
+    elif not db.query(Testimonial).first():
         for t in testimonial_data:
             db.add(Testimonial(**t))
 
@@ -96,17 +144,6 @@ async def index():
 @app.get("/promotix-website.html")
 async def legacy_website():
     return FileResponse(str(FRONTEND_DIST.parent / "promotix-website.html"))
-
-
-@app.get("/admin.html")
-async def legacy_admin():
-    return FileResponse(str(FRONTEND_DIST.parent / "admin.html"))
-
-
-@app.get("/login.html")
-@app.get("/login")
-async def legacy_login():
-    return FileResponse(str(FRONTEND_DIST.parent / "login.html"))
 
 
 @app.exception_handler(StarletteHTTPException)
