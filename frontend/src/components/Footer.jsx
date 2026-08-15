@@ -39,7 +39,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-center md:justify-between items-center pt-6 border-t border-black/5 text-slate text-xs gap-3">
           <div>© 2026 Promotix. All rights reserved.</div>
           <div className="flex flex-wrap justify-center gap-5">
-            <a href="/login" className="text-slate no-underline hover:text-black transition-colors">Admin</a>
+            <a href="/admin" className="text-slate no-underline hover:text-black transition-colors">Admin</a>
             <a href="#" className="text-slate no-underline hover:text-black transition-colors">Privacy Policy</a>
             <a href="#" className="text-slate no-underline hover:text-black transition-colors">Terms of Service</a>
           </div>
