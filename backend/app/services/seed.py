@@ -16,10 +16,9 @@ SECTION_MAP = {
 }
 
 portfolio_data = [
-    {"title": "Royal Colony Campaign", "category": "social", "emoji": "", "subtitle": "Real Estate \u00b7 Social Media", "order": 0},
-    {"title": "Performance Campaign", "category": "social", "emoji": "", "subtitle": "Meta Ads \u00b7 ROI Driven", "order": 1},
-    {"title": "Premium Web Experience", "category": "video", "emoji": "", "subtitle": "Motion Design \u00b7 Development", "order": 2},
-    {"title": "Luxury Brand Identity", "category": "branding", "emoji": "", "subtitle": "Visual Identity \u00b7 Strategy", "order": 3},
+    {"title": "Performance Campaign", "category": "social", "emoji": "", "subtitle": "Meta Ads \u00b7 ROI Driven", "order": 0},
+    {"title": "Premium Web Experience", "category": "video", "emoji": "", "subtitle": "Motion Design \u00b7 Development", "order": 1},
+    {"title": "Luxury Brand Identity", "category": "branding", "emoji": "", "subtitle": "Visual Identity \u00b7 Strategy", "order": 2},
 ]
 
 testimonial_data = [
@@ -41,38 +40,80 @@ def load_content_data(backend_dir: Path) -> dict:
     return {}
 
 
+def deep_merge(base, overlay):
+    if isinstance(base, dict) and isinstance(overlay, dict):
+        for k, v in overlay.items():
+            if k not in base:
+                base[k] = v
+            else:
+                base[k] = deep_merge(base[k], v)
+        return base
+    return base
+
+
 def seed_database():
     Base.metadata.create_all(bind=engine)
     db = SessionLocal()
 
-    if db.query(Admin).first():
-        db.close()
-        return
+    if not db.query(Admin).first():
+        db.add(Admin(username="admin", hashed_password=hash_password("promotix123")))
 
-    db.add(Admin(username="admin", hashed_password=hash_password("promotix123")))
     data = load_content_data(Path(__file__).resolve().parent.parent)
 
     for key, meta in SECTION_MAP.items():
-        content = data.get(key, {})
+        section = db.query(WebsiteSection).filter(WebsiteSection.key == key).first()
+        json_content = data.get(key, {})
         if key == "services" and "services" in data:
-            content = data["services"]
-        section = WebsiteSection(key=key, title=meta["title"], content=content, is_visible=True, order=meta["order"])
-        db.add(section)
+            json_content = data["services"]
+        if section is None:
+            db.add(WebsiteSection(key=key, title=meta["title"], content=json_content, is_visible=True, order=meta["order"]))
+        elif isinstance(section.content, dict) and isinstance(json_content, dict):
+            section.content = deep_merge(dict(section.content), json_content)
 
     services_data = data.get("services", {})
-    connect_items = services_data.get("connect", {}).get("items", [])
-    for i, item in enumerate(connect_items):
-        db.add(Service(section="connect", name=item.get("name", ""), description=item.get("desc", ""), icon="", order=i))
+    connect_names = {s.name for s in db.query(Service).filter(Service.section == "connect").all()}
+    for i, item in enumerate(services_data.get("connect", {}).get("items", [])):
+        if item.get("name") not in connect_names:
+            db.add(Service(section="connect", name=item.get("name", ""), description=item.get("desc", ""), icon="", order=i))
 
-    properties_items = services_data.get("properties", {}).get("items", [])
-    for i, item in enumerate(properties_items):
-        db.add(Service(section="properties", name=item.get("name", ""), description=item.get("desc", ""), icon="", order=i))
+    properties_names = {s.name for s in db.query(Service).filter(Service.section == "properties").all()}
+    for i, item in enumerate(services_data.get("properties", {}).get("items", [])):
+        if item.get("name") not in properties_names:
+            db.add(Service(section="properties", name=item.get("name", ""), description=item.get("desc", ""), icon="", order=i))
 
-    for item in portfolio_data:
-        db.add(PortfolioItem(**item))
+    json_portfolio = data.get("portfolio")
+    if isinstance(json_portfolio, list):
+        portfolio_titles = {p.title for p in db.query(PortfolioItem).all()}
+        for i, item in enumerate(json_portfolio):
+            if item.get("title") not in portfolio_titles:
+                db.add(PortfolioItem(
+                    title=item.get("title", ""),
+                    category=item.get("category", "social"),
+                    emoji=item.get("emoji", ""),
+                    subtitle=item.get("subtitle", ""),
+                    gradient=item.get("gradient", ""),
+                    order=i,
+                ))
+    elif not db.query(PortfolioItem).first():
+        for item in portfolio_data:
+            db.add(PortfolioItem(**item))
 
-    for t in testimonial_data:
-        db.add(Testimonial(**t))
+    json_testimonials = data.get("testimonials")
+    if isinstance(json_testimonials, list):
+        testimonial_names = {t.name for t in db.query(Testimonial).all()}
+        for i, item in enumerate(json_testimonials):
+            if item.get("name") not in testimonial_names:
+                db.add(Testimonial(
+                    initials=item.get("initials", ""),
+                    name=item.get("name", ""),
+                    role=item.get("role", ""),
+                    content=item.get("content", ""),
+                    rating=item.get("rating", 5),
+                    order=i,
+                ))
+    elif not db.query(Testimonial).first():
+        for t in testimonial_data:
+            db.add(Testimonial(**t))
 
     db.commit()
     db.close()
