@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.security import get_current_admin
 from app.models import Admin, WebsiteSection, Service, PortfolioItem, Testimonial, ContactMessage
+from app.services.sync import sync_section, sync_services, sync_portfolio, sync_testimonials
 from app.schemas import (
     WebsiteSectionOut, WebsiteSectionUpdate,
     ServiceOut, ServiceCreate, ServiceUpdate,
@@ -39,6 +40,12 @@ def update_section(section_id: int, body: WebsiteSectionUpdate, admin: Admin = D
     section.updated_at = datetime.now(timezone.utc)
     db.commit()
     db.refresh(section)
+    if section.key == "services":
+        connect = db.query(Service).filter(Service.section == "connect").order_by(Service.order).all()
+        properties = db.query(Service).filter(Service.section == "properties").order_by(Service.order).all()
+        sync_services(connect, properties)
+    else:
+        sync_section(section.key, section.content)
     return WebsiteSectionOut.model_validate(section)
 
 
@@ -63,6 +70,10 @@ def create_service(body: ServiceCreate, admin: Admin = Depends(get_current_admin
     db.add(service)
     db.commit()
     db.refresh(service)
+    sync_services(
+        db.query(Service).filter(Service.section == "connect").order_by(Service.order).all(),
+        db.query(Service).filter(Service.section == "properties").order_by(Service.order).all(),
+    )
     return ServiceOut.model_validate(service)
 
 
@@ -77,6 +88,10 @@ def update_service(service_id: int, body: ServiceUpdate, admin: Admin = Depends(
             setattr(service, field, val)
     db.commit()
     db.refresh(service)
+    sync_services(
+        db.query(Service).filter(Service.section == "connect").order_by(Service.order).all(),
+        db.query(Service).filter(Service.section == "properties").order_by(Service.order).all(),
+    )
     return ServiceOut.model_validate(service)
 
 
@@ -87,6 +102,10 @@ def delete_service(service_id: int, admin: Admin = Depends(get_current_admin), d
         raise HTTPException(status_code=404, detail="Service not found")
     db.delete(service)
     db.commit()
+    sync_services(
+        db.query(Service).filter(Service.section == "connect").order_by(Service.order).all(),
+        db.query(Service).filter(Service.section == "properties").order_by(Service.order).all(),
+    )
     return {"ok": True}
 
 
@@ -112,6 +131,7 @@ def create_portfolio(body: PortfolioCreate, admin: Admin = Depends(get_current_a
     db.add(item)
     db.commit()
     db.refresh(item)
+    sync_portfolio(db.query(PortfolioItem).order_by(PortfolioItem.order).all())
     return PortfolioOut.model_validate(item)
 
 
@@ -126,6 +146,7 @@ def update_portfolio(item_id: int, body: PortfolioUpdate, admin: Admin = Depends
             setattr(item, field, val)
     db.commit()
     db.refresh(item)
+    sync_portfolio(db.query(PortfolioItem).order_by(PortfolioItem.order).all())
     return PortfolioOut.model_validate(item)
 
 
@@ -136,6 +157,7 @@ def delete_portfolio(item_id: int, admin: Admin = Depends(get_current_admin), db
         raise HTTPException(status_code=404, detail="Portfolio item not found")
     db.delete(item)
     db.commit()
+    sync_portfolio(db.query(PortfolioItem).order_by(PortfolioItem.order).all())
     return {"ok": True}
 
 
@@ -161,6 +183,7 @@ def create_testimonial(body: TestimonialCreate, admin: Admin = Depends(get_curre
     db.add(t)
     db.commit()
     db.refresh(t)
+    sync_testimonials(db.query(Testimonial).order_by(Testimonial.order).all())
     return TestimonialOut.model_validate(t)
 
 
@@ -175,6 +198,7 @@ def update_testimonial(testimonial_id: int, body: TestimonialUpdate, admin: Admi
             setattr(t, field, val)
     db.commit()
     db.refresh(t)
+    sync_testimonials(db.query(Testimonial).order_by(Testimonial.order).all())
     return TestimonialOut.model_validate(t)
 
 
@@ -185,6 +209,7 @@ def delete_testimonial(testimonial_id: int, admin: Admin = Depends(get_current_a
         raise HTTPException(status_code=404, detail="Testimonial not found")
     db.delete(t)
     db.commit()
+    sync_testimonials(db.query(Testimonial).order_by(Testimonial.order).all())
     return {"ok": True}
 
 
