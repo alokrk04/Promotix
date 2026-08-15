@@ -1,7 +1,6 @@
 {
   "hero": {
     "line1": "Promotion That Sticks.",
-    "line2": "",
     "subtitle": "A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
   },
   "about": {
@@ -13,7 +12,7 @@
     "heading": "Promotix — Marketing Agency",
     "subtitle": "In a crowded digital landscape, we help local businesses punch above their weight. We understand the local market and know exactly what it takes to turn casual scrollers into loyal customers. Through meticulous social media management and high-end content creation, we give your shop a premium digital presence that captures attention, builds trust, and drives real business results right to your doorstep.",
     "connect": {
-    "heading": "Promotix — Marketing Agency",
+      "heading": "Promotix — Marketing Agency",
       "items": [
         {
           "name": "Growth Package",
@@ -116,7 +115,7 @@
       "label": "Brands & Properties"
     },
     "followers": {
-      "value": "12.1K",
+      "value": "15.1K",
       "label": "Instagram Followers"
     },
     "years": {
@@ -155,6 +154,7 @@
       "name": "Monthly Growth Plan",
       "price": "₹7,499",
       "period": "Serious Brand Growth",
+      "badge": "Recommended",
       "features": [
         "4 Reels per Month (1 Per Week)",
         "Creating Festival Posters",
@@ -168,7 +168,7 @@
       "name": "Premium",
       "price": "₹19,999",
       "period": "Perfect for brands ready to scale",
-      "badge": "✨ BEST VALUE",
+      "badge": "Best Value",
       "features": [
         "Complete Brand Identity & Guidelines",
         "15 Social Media Posts/Month",
@@ -181,5 +181,29 @@
         "Ads Management"
       ]
     }
-  }
+  },
+  "portfolio": [
+    {
+      "title": "Performance Campaign",
+      "category": "social",
+      "emoji": "",
+      "subtitle": "Meta Ads · ROI Driven",
+      "gradient": ""
+    },
+    {
+      "title": "Premium Web Experience",
+      "category": "video",
+      "emoji": "",
+      "subtitle": "Motion Design · Development",
+      "gradient": ""
+    },
+    {
+      "title": "Luxury Brand Identity",
+      "category": "branding",
+      "emoji": "",
+      "subtitle": "Visual Identity · Strategy",
+      "gradient": ""
+    }
+  ],
+  "testimonials": []
 }
