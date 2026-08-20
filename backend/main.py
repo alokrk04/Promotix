@@ -35,17 +35,6 @@ app.add_middleware(
 app.include_router(api_router)
 
 
-def deep_merge(base, overlay):
-    if isinstance(base, dict) and isinstance(overlay, dict):
-        for k, v in overlay.items():
-            if k not in base:
-                base[k] = v
-            else:
-                base[k] = deep_merge(base[k], v)
-        return base
-    return base
-
-
 @app.on_event("startup")
 def seed_database():
     from app.core.database import SessionLocal
@@ -60,15 +49,14 @@ def seed_database():
 
     data = load_content_data(BACKEND_DIR)
 
+    existing_keys = {key for (key,) in db.query(WebsiteSection.key).all()}
     for key, meta in SECTION_MAP.items():
-        section = db.query(WebsiteSection).filter(WebsiteSection.key == key).first()
+        if key in existing_keys:
+            continue
         json_content = data.get(key, {})
         if key == "services" and "services" in data:
             json_content = data["services"]
-        if section is None:
-            db.add(WebsiteSection(key=key, title=meta["title"], content=json_content, is_visible=True, order=meta["order"]))
-        elif isinstance(section.content, dict) and isinstance(json_content, dict):
-            section.content = deep_merge(dict(section.content), json_content)
+        db.add(WebsiteSection(key=key, title=meta["title"], content=json_content, is_visible=True, order=meta["order"]))
 
     services_data = data.get("services", {})
     connect_names = {s.name for s in db.query(Service).filter(Service.section == "connect").all()}
