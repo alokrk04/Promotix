@@ -8411,18 +8411,9 @@ function Navbar() {
     "nav",
     {
       className: `fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-white/85 backdrop-blur-xl border-b border-black/5" : ""}`,
-      children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-shell flex items-center justify-between py-3 sm:py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "#", className: "flex items-center gap-3 no-underline min-w-0", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 100 100", width: "38", height: "38", className: "shrink-0", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("defs", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("linearGradient", { id: "logoGrad", x1: "0%", y1: "0%", x2: "100%", y2: "100%", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("stop", { offset: "0%", stopColor: "#3322ff" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("stop", { offset: "50%", stopColor: "#b81cd4" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("stop", { offset: "100%", stopColor: "#ff007a" })
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "50", cy: "50", r: "42", fill: "none", stroke: "url(#logoGrad)", strokeWidth: "4.5" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M 33 30 L 33 52 L 25 65 L 39 59 L 31 77 L 47 62 L 72 36 Z", fill: "url(#logoGrad)" })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg font-extrabold tracking-widest text-black", children: "PROMOTIX" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "hidden sm:inline text-[10px] font-medium text-slate tracking-wider uppercase border-l border-black/15 pl-3 leading-none", children: "connect with customers" })
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-shell flex items-center justify-center py-3 sm:py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "#", className: "flex items-center gap-3 no-underline min-w-0", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "/resources/New%20Logo%20Promotix.png", alt: "Promotix logo", width: "38", height: "38", className: "shrink-0 object-contain" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg font-extrabold tracking-widest text-black", children: "PROMOTIX" })
       ] }) })
     }
   ) });
@@ -8487,8 +8478,8 @@ function Hero({ content, stats }) {
   ] });
 }
 function ServiceCard({ name, desc, icon, color, horizontal, delay }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { delay, from: horizontal ? "left" : "up", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `gcard p-8 cursor-default transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_25px_60px_rgba(124,58,237,0.12)] group ${horizontal ? "flex items-center gap-6 text-left max-w-[640px] mx-auto" : "text-center"}`, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-13 h-13 rounded-xl flex items-center justify-center text-2xl ${horizontal ? "shrink-0 mb-0" : "mx-auto mb-5"}`, style: { background: color || "rgba(124,58,237,.15)" }, children: icon }),
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { delay, from: horizontal ? "left" : "up", className: "h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `gcard h-full p-8 cursor-default transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_25px_60px_rgba(124,58,237,0.12)] group ${horizontal ? "flex items-center gap-5 text-left max-w-[640px] mx-auto" : "text-center flex flex-col justify-center"}`, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-12 h-12 shrink-0 rounded-xl flex items-center justify-center text-2xl ${horizontal ? "mb-0" : "mx-auto mb-5"}`, style: { background: color || "rgba(124,58,237,.15)" }, children: icon }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-bold text-base mb-2", children: name }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-slate text-sm leading-relaxed", children: desc })
@@ -8500,11 +8491,10 @@ const connectColors = ["rgba(124,58,237,.15)", "rgba(6,182,212,.15)", "rgba(236,
 const propertiesIcons = ["🏠", "📷", "🔑", "🏗️"];
 const propertiesColors = ["rgba(52,211,153,.15)", "rgba(251,191,36,.15)", "rgba(124,58,237,.15)", "rgba(6,182,212,.15)"];
 function Services({ content, connectServices, propertiesServices }) {
-  var _a, _b, _c, _d;
+  var _a, _b, _c, _d, _e;
   const c = content || {};
   const connect = ((_a = c.connect) == null ? void 0 : _a.items) || connectServices;
   const properties = ((_b = c.properties) == null ? void 0 : _b.items) || propertiesServices;
-  const [first, ...rest] = connect || [];
   return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "services", className: "py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-violet/5 to-transparent", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-shell max-w-6xl", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-12 sm:mb-16", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "tag", children: "Our Capabilities" }),
@@ -8512,12 +8502,15 @@ function Services({ content, connectServices, propertiesServices }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "ss mx-auto", children: c.subtitle || "" })
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-12", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-        first && /* @__PURE__ */ jsxRuntimeExports.jsx(ServiceCard, { horizontal: true, name: first.name, desc: first.desc, icon: connectIcons[0], color: connectColors[0], delay: 100 }),
-        (rest == null ? void 0 : rest.length) > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[640px] mx-auto", children: rest.map((svc, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(ServiceCard, { name: svc.name, desc: svc.desc, icon: connectIcons[i + 1] || "🎨", color: connectColors[i + 1] || "rgba(124,58,237,.15)", delay: 200 + i * 100 }, i)) })
-      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-6", children: (connect == null ? void 0 : connect.length) > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(ServiceCard, { horizontal: true, name: connect[0].name, desc: connect[0].desc, icon: connectIcons[0], color: connectColors[0], delay: 100 }),
+        connect.slice(1).length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[640px] mx-auto", children: connect.slice(1).map((svc, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(ServiceCard, { name: svc.name, desc: svc.desc, icon: connectIcons[i + 1] || "🎨", color: connectColors[i + 1] || "rgba(124,58,237,.15)", delay: 200 + i * 100 }, i)) })
+      ] }) }),
       (properties == null ? void 0 : properties.length) > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center mb-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-bold tracking-widest uppercase text-slate/60", children: ((_d = c.properties) == null ? void 0 : _d.heading) || "Promotix — Marketing Agency" }) }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-8", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-bold tracking-widest uppercase text-slate/60", children: ((_d = c.properties) == null ? void 0 : _d.heading) || "Promotix — Marketing Agency" }),
+          ((_e = c.properties) == null ? void 0 : _e.subtitle) && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-slate mt-2", children: c.properties.subtitle })
+        ] }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[640px] mx-auto", children: properties == null ? void 0 : properties.map((svc, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(ServiceCard, { name: svc.name, desc: svc.desc, icon: propertiesIcons[i] || "🏠", color: propertiesColors[i] || "rgba(52,211,153,.15)", delay: 150 + i * 100 }, i)) })
       ] })
     ] })
@@ -10036,12 +10029,12 @@ function About({ content }) {
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { from: "right", delay: 150, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative mx-auto w-full max-w-[480px] aspect-[4/5] sm:h-[480px] h-[360px]", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute w-[68%] h-[65%] top-0 right-0 rounded-xl bg-gradient-to-br from-violet/20 to-cyan/10 border border-black/5 flex items-center justify-center text-center p-6 animate-[float_4s_ease-in-out_infinite]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-4xl sm:text-5xl mb-3", children: "🚀" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "/resources/New%20Logo%20Promotix.png", alt: "Promotix logo", className: "w-[110px] h-[110px] sm:w-[129px] sm:h-[129px] mb-3 object-contain mx-auto" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-bold text-lg", children: "Promotix " }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-slate text-sm mt-1", children: "Connect with Customers" })
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute w-[44%] h-[44%] bottom-0 left-0 rounded-xl bg-gradient-to-br from-cyan/20 to-violet/10 border border-black/5 flex items-center justify-center text-center p-4 sm:p-6 animate-[float_5.2s_ease-in-out_infinite_1.1s]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl sm:text-4xl mb-2", children: "🏡" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "/resources/Properties%20Logo.png", alt: "Promotix Properties logo", className: "w-16 h-16 sm:w-20 sm:h-20 mb-2 object-contain mx-auto" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-semibold text-sm sm:text-base", children: "Promotix Properties" })
       ] }) })
     ] }) })
@@ -10229,10 +10222,7 @@ function PricingCard({ plan, featured, badge, delay }) {
       " ",
       f
     ] }, i)) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { onClick: scrollToContact, className: `w-full py-2.5 rounded-xl font-semibold text-sm transition-all mt-auto ${featured ? "text-white bg-gradient-to-r from-violet to-indigo-600 shadow-lg shadow-violet/40 hover:-translate-y-0.5 hover:shadow-xl" : "border border-black/15 text-frost hover:border-violet-light hover:bg-violet/10"}`, children: [
-      "Get Started ",
-      featured ? "→" : ""
-    ] })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: scrollToContact, className: `w-full py-2.5 rounded-xl font-semibold text-sm transition-all mt-auto text-white bg-gradient-to-r from-violet to-indigo-600 shadow-lg shadow-violet/40 hover:-translate-y-0.5 hover:shadow-xl`, children: "Get Started →" })
   ] }) });
 }
 function Pricing({ content }) {
