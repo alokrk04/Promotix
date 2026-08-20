@@ -22,21 +22,10 @@ export default function Navbar() {
           scrolled ? 'bg-white/85 backdrop-blur-xl border-b border-black/5' : ''
         }`}
       >
-        <div className="section-shell flex items-center justify-between py-3 sm:py-4">
+        <div className="section-shell flex items-center justify-center py-3 sm:py-4">
           <a href="#" className="flex items-center gap-3 no-underline min-w-0">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="38" height="38" className="shrink-0">
-              <defs>
-                <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#3322ff" />
-                  <stop offset="50%" stopColor="#b81cd4" />
-                  <stop offset="100%" stopColor="#ff007a" />
-                </linearGradient>
-              </defs>
-              <circle cx="50" cy="50" r="42" fill="none" stroke="url(#logoGrad)" strokeWidth="4.5" />
-              <path d="M 33 30 L 33 52 L 25 65 L 39 59 L 31 77 L 47 62 L 72 36 Z" fill="url(#logoGrad)" />
-            </svg>
+            <img src="/resources/New%20Logo%20Promotix.png" alt="Promotix logo" width="38" height="38" className="shrink-0 object-contain" />
             <span className="text-lg font-extrabold tracking-widest text-black">PROMOTIX</span>
-            <span className="hidden sm:inline text-[10px] font-medium text-slate tracking-wider uppercase border-l border-black/15 pl-3 leading-none">connect with customers</span>
           </a>
         </div>
       </nav>
