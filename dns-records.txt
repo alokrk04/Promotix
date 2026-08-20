@@ -1,0 +1,26 @@
+; Promotix DNS zone file for Cloudflare import
+; Hosting: Render (promotix-cpuq.onrender.com)
+; Import: Cloudflare Dashboard -> DNS -> Import/Export -> Import zone file
+$ORIGIN promotix.in.
+$TTL 300
+
+; Apex (flattened by Cloudflare automatically)
+@	300	IN	CNAME	promotix-cpuq.onrender.com.
+
+; www subdomain
+www	300	IN	CNAME	promotix-cpuq.onrender.com.
+
+; SPF
+@	300	IN	TXT	"v=spf1 -all"
+
+; Optional: Google Workspace email (uncomment when needed)
+; @	300	IN	MX	1	ASPMX.L.GOOGLE.COM.
+; @	300	IN	MX	5	ALT1.ASPMX.L.GOOGLE.COM.
+; @	300	IN	MX	5	ALT2.ASPMX.L.GOOGLE.COM.
+; @	300	IN	MX	10	ALT3.ASPMX.L.GOOGLE.COM.
+; @	300	IN	MX	10	ALT4.ASPMX.L.GOOGLE.COM.
+
+; Notes:
+; 1. Set proxy status to DNS-only (grey cloud) so Render's SSL works.
+; 2. Add promotix.in + www.promotix.in as custom domains in the Render dashboard.
+; 3. Delete old GoDaddy A records if they still exist after the import.
