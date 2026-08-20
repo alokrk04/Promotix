@@ -25,12 +25,8 @@ function PricingCard({ plan, featured, badge, delay }) {
             </li>
           ))}
         </ul>
-        <button onClick={scrollToContact} className={`w-full py-2.5 rounded-xl font-semibold text-sm transition-all mt-auto ${
-          featured
-            ? 'text-white bg-gradient-to-r from-violet to-indigo-600 shadow-lg shadow-violet/40 hover:-translate-y-0.5 hover:shadow-xl'
-            : 'border border-black/15 text-frost hover:border-violet-light hover:bg-violet/10'
-        }`}>
-          Get Started {featured ? '→' : ''}
+        <button onClick={scrollToContact} className={`w-full py-2.5 rounded-xl font-semibold text-sm transition-all mt-auto text-white bg-gradient-to-r from-violet to-indigo-600 shadow-lg shadow-violet/40 hover:-translate-y-0.5 hover:shadow-xl`}>
+          Get Started →
         </button>
       </div>
     </Reveal>
