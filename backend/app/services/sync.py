@@ -5,7 +5,7 @@ BACKEND_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 def content_path() -> Path:
-    for p in [BACKEND_DIR / "content.json", BACKEND_DIR.parent / "content.json"]:
+    for p in [BACKEND_DIR.parent / "content.json", BACKEND_DIR / "content.json"]:
         if p.is_file():
             return p
     return BACKEND_DIR / "content.json"
