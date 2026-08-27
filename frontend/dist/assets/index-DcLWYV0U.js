@@ -8411,7 +8411,7 @@ function Navbar() {
     "nav",
     {
       className: `fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-white/85 backdrop-blur-xl border-b border-black/5" : ""}`,
-      children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-shell flex items-center justify-center py-3 sm:py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "#", className: "flex items-center gap-3 no-underline min-w-0", children: [
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-shell flex items-center justify-start py-3 sm:py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "#", className: "flex items-center gap-3 no-underline min-w-0", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "/resources/New%20Logo%20Promotix.png", alt: "Promotix logo", width: "38", height: "38", className: "shrink-0 object-contain" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg font-extrabold tracking-widest text-black", children: "PROMOTIX" })
       ] }) })
@@ -8478,14 +8478,25 @@ function Hero({ content, stats }) {
   ] });
 }
 function ServiceCard({ name, desc, icon, color, horizontal, delay }) {
+  const logo = serviceLogos[name];
+  const iconEl = logo ? /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: logo, alt: name, className: "w-full h-full object-contain" }) : icon;
   return /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { delay, from: horizontal ? "left" : "up", className: "h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `gcard h-full p-8 cursor-default transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_25px_60px_rgba(124,58,237,0.12)] group ${horizontal ? "flex items-center gap-5 text-left max-w-[640px] mx-auto" : "text-center flex flex-col justify-center"}`, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-12 h-12 shrink-0 rounded-xl flex items-center justify-center text-2xl ${horizontal ? "mb-0" : "mx-auto mb-5"}`, style: { background: color || "rgba(124,58,237,.15)" }, children: icon }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-12 h-12 shrink-0 rounded-xl flex items-center justify-center text-2xl ${horizontal ? "mb-0" : "mx-auto mb-5"}`, style: { background: color || "rgba(124,58,237,.15)" }, children: iconEl }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-bold text-base mb-2", children: name }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-slate text-sm leading-relaxed", children: desc })
     ] })
   ] }) });
 }
+const serviceLogos = {
+  "Growth Package": "/resources/growth%20package.png",
+  "Social Media Marketing": "/resources/Social%20Media%20Marketing.png",
+  "Branding": "/resources/branding.png",
+  "Property Listings": "/resources/Property%20Listings%20.png",
+  "Real Estate Photography": "/resources/Real%20Estate%20Photography.png",
+  "Property Marketing": "/resources/Property%20Marketing.png",
+  "Consultation & Staging": "/resources/Consultation%20%26%20Staging.png"
+};
 const connectIcons = ["🎨", "📱", "📈", "🎬"];
 const connectColors = ["rgba(124,58,237,.15)", "rgba(6,182,212,.15)", "rgba(236,72,153,.15)", "rgba(6,182,212,.15)"];
 const propertiesIcons = ["🏠", "📷", "🔑", "🏗️"];
