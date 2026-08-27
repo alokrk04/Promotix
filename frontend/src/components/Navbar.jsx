@@ -22,7 +22,7 @@ export default function Navbar() {
           scrolled ? 'bg-white/85 backdrop-blur-xl border-b border-black/5' : ''
         }`}
       >
-        <div className="section-shell flex items-center justify-center py-3 sm:py-4">
+        <div className="section-shell flex items-center justify-start py-3 sm:py-4">
           <a href="#" className="flex items-center gap-3 no-underline min-w-0">
             <img src="/resources/New%20Logo%20Promotix.png" alt="Promotix logo" width="38" height="38" className="shrink-0 object-contain" />
             <span className="text-lg font-extrabold tracking-widest text-black">PROMOTIX</span>
