@@ -4,9 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PROMOTIX – Your Vision, Our Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
 <meta name="description" content="High-End Marketing Agency. Ads, Reels & Brand Promotions that turn ideas into powerful brands.">
 <meta name="theme-color" content="#7C3AED">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+<link rel="icon" type="image/png" href="resources/browser%20tab%20logo.png" />
 <meta property="og:title" content="PROMOTIX – Your Vision, Our Strategy">
 <meta property="og:description" content="Premium marketing agency &amp; real estate solutions. Promotix Connect builds your brand, Promotix Properties finds your space.">
 <meta property="og:type" content="website">
@@ -168,6 +171,16 @@ section{padding:3rem 5%;position:relative}
 .p-emoji{font-size:3rem;line-height:1}
 .p-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.45) 50%,rgba(0,0,0,.15) 100%);display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:1.6rem;opacity:1;transform:translateY(0);transition:all .4s cubic-bezier(.175,.885,.32,1.175)}
 .p-item:hover .p-ov{background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(0,0,0,.3) 50%,rgba(0,0,0,.05) 100%)}
+.brand-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;max-width:920px;margin:1.5rem auto 0}
+.brand-item{display:flex;flex-direction:column;gap:.7rem;padding:1.4rem 1.4rem;border-radius:18px;background:rgba(0,0,0,.02);border:1px solid rgba(0,0,0,.1);transition:all .3s}
+.brand-item:hover{border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.05);transform:translateY(-4px);box-shadow:0 20px 45px rgba(124,58,237,.12)}
+.brand-top{display:flex;align-items:center;gap:.8rem}
+.brand-num{flex:0 0 auto;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#4F46E5);color:#fff;font-weight:700;font-size:.9rem;box-shadow:0 6px 16px rgba(124,58,237,.3)}
+.brand-name{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:1.15rem;letter-spacing:-.01em;color:#1e293b;line-height:1.25;transition:color .3s}
+.brand-item:hover .brand-name{color:#7C3AED}
+.brand-desc{font-size:.88rem;line-height:1.5;color:#64748b}
+@media(max-width:768px){.brand-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.brand-grid{grid-template-columns:1fr}}
 .p-cat{display:inline-block;padding:.25rem .75rem;background:rgba(124,58,237,.35);border:1px solid rgba(124,58,237,.5);border-radius:50px;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;margin-bottom:.5rem}
 .p-t{font-weight:700;font-size:1rem;text-align:center;color:#fff}
 .p-st{color:rgba(255,255,255,.7);font-size:.78rem;margin-top:.15rem;text-align:center}
@@ -518,14 +531,19 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
   <div class="c">
     <div class="port-h">
       <div class="tag rv">Our Work</div>
-      <h2 class="sh rv">Projects That <span class="gt">Define Excellence</span></h2>
-      <p class="ss rv">A curated showcase of our most impactful campaigns, identities, and digital experiences.</p>
+      <h2 class="sh rv">Brands We <span class="gt">Work With</span></h2>
+      <p class="ss rv">A curated showcase of the brands we've partnered with.</p>
     </div>
-    <div class="port-grid">
-      <div class="p-item" data-category="social" style="background-image:url(/resources/Image1.jpg)"><div class="p-inner"><div class="p-ov"><span class="p-cat">Social Media</span><div class="p-t">Royal Colony Campaign</div><div class="p-st">Real Estate · Social Media</div></div></div></div>
-      <div class="p-item" data-category="marketing" style="background-image:url(/resources/Image2.jpg)"><div class="p-inner"><div class="p-ov"><span class="p-cat">Marketing</span><div class="p-t">Performance Campaign</div><div class="p-st">Meta Ads · ROI Driven</div></div></div></div>
-      <div class="p-item" data-category="video" style="background-image:url(/resources/Image3.jpg)"><div class="p-inner"><div class="p-ov"><span class="p-cat">Video</span><div class="p-t">Premium Web Experience</div><div class="p-st">Motion Design · Development</div></div></div></div>
-      <div class="p-item" data-category="branding" style="background-image:url(/resources/Image4.jpg)"><div class="p-inner"><div class="p-ov"><span class="p-cat">Branding</span><div class="p-t">Luxury Brand Identity</div><div class="p-st">Visual Identity · Strategy</div></div></div></div>
+    <div class="brand-grid">
+      <div class="brand-item"><div class="brand-top"><span class="brand-num">1</span><span class="brand-name">Pooja Dining</span></div><p class="brand-desc">Restaurant &amp; dining brand — social media, reels and menu promotions that bring more covers through the door.</p></div>
+      <div class="brand-item"><div class="brand-top"><span class="brand-num">2</span><span class="brand-name">Shree Shyam Gulacha Chaha</span></div><p class="brand-desc">Local chai brand — identity, packaging and social reach that turned a corner stall into a community favourite.</p></div>
+      <div class="brand-item"><div class="brand-top"><span class="brand-num">3</span><span class="brand-name">Creative Enterprises</span></div><p class="brand-desc">Wholesale decorators for events — branding and digital presence built to look credible and win bookings.</p></div>
+      <div class="brand-item"><div class="brand-top"><span class="brand-num">4</span><span class="brand-name">Jay Jagganath Hospital</span></div><p class="brand-desc">Healthcare brand — awareness campaigns and reputation building that earn patient trust.</p></div>
+      <div class="brand-item"><div class="brand-top"><span class="brand-num">5</span><span class="brand-name">Mangal Alankar</span></div><p class="brand-desc">Jewellery brand — cinematic product videos and festive campaigns that drive footfall.</p></div>
+      <div class="brand-item"><div class="brand-top"><span class="brand-num">6</span><span class="brand-name">SD Cabinets</span></div><p class="brand-desc">Cabinet manufacturers — product shoots and promotions that showcase precision craftsmanship and drive enquiries.</p></div>
+      <div class="brand-item"><div class="brand-top"><span class="brand-num">7</span><span class="brand-name">Sai Mobiles Gallery</span></div><p class="brand-desc">Retail mobile store — offers, reels and local ads that fill the sales floor.</p></div>
+      <div class="brand-item"><div class="brand-top"><span class="brand-num">8</span><span class="brand-name">Denzfox</span></div><p class="brand-desc">Clothing store — fashion shoots, reels and seasonal campaigns that drive footfall and online sales.</p></div>
+      <div class="brand-item"><div class="brand-top"><span class="brand-num">9</span><span class="brand-name">Radhika Dining</span></div><p class="brand-desc">Veg &amp; non-veg restaurant — menu promotions, reels and local ads that fill the tables.</p></div>
     </div>
   </div>
 </section>
@@ -653,18 +671,16 @@ footer{padding:3.5rem 5% 2rem;border-top:1px solid rgba(0,0,0,.06);position:rela
         <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1.4rem">Send Us a Message</h3>
         <div class="frow">
           <input type="text" class="fi" name="name" placeholder="Your Name" required>
-          <input type="email" class="fi" name="email" placeholder="Email Address" required>
+          <input type="tel" class="fi" name="mobile" placeholder="Mobile Number" required>
         </div>
         <div class="fg"><input type="text" class="fi" name="company" placeholder="Company / Brand Name"></div>
         <div class="fg">
           <select class="fi" name="service" style="cursor:pointer">
             <option value="">Service Interested In</option>
-            <option>Branding</option>
-            <option>Social Media Marketing</option>
-            <option>Performance Marketing</option>
-            <option>Content Creation</option>
-            <option>Promotix Properties</option>
-            <option>Full-Service Package</option>
+            <option>Cinematic</option>
+            <option>Promotion</option>
+            <option>Monthly Growth Plan</option>
+            <option>Premium</option>
           </select>
         </div>
         <div class="fg"><textarea class="fi" name="message" placeholder="Tell us about your project, goals, and budget..." required></textarea></div>
@@ -984,10 +1000,10 @@ function initGSAP() {
      scrollTrigger:{trigger:'.svc-grid', start:'top 82%'}}
   );
 
-  gsap.fromTo('.p-item',
+  gsap.fromTo('.brand-item',
     {opacity:0, scale:.95},
     {opacity:1, scale:1, stagger:.07, duration:.6, ease:'power3.out', clearProps:'opacity',
-     scrollTrigger:{trigger:'.port-grid', start:'top 82%'}}
+     scrollTrigger:{trigger:'.brand-grid', start:'top 82%'}}
   );
 
   document.querySelectorAll('.abt-sv[data-n]').forEach(el => {

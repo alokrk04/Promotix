@@ -4,7 +4,7 @@ import Reveal from './Reveal'
 
 export default function Contact({ content }) {
   const c = content || {}
-  const [form, setForm] = useState({ name: '', email: '', company: '', location: '', service: '', message: '' })
+  const [form, setForm] = useState({ name: '', mobile: '', company: '', location: '', service: '', message: '' })
   const [status, setStatus] = useState('')
 
   const handleSubmit = async (e) => {
@@ -13,7 +13,7 @@ export default function Contact({ content }) {
     try {
       await api.submitContact(form)
       setStatus('ok')
-      setForm({ name: '', email: '', company: '', location: '', service: '', message: '' })
+      setForm({ name: '', mobile: '', company: '', location: '', service: '', message: '' })
       setTimeout(() => setStatus(''), 3500)
     } catch {
       setStatus('error')
@@ -71,10 +71,10 @@ export default function Contact({ content }) {
               />
               <input
                 className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all"
-                type="email"
-                placeholder="Email Address"
-                value={form.email}
-                onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))}
+                type="tel"
+                placeholder="Mobile Number"
+                value={form.mobile}
+                onChange={(e) => setForm((s) => ({ ...s, mobile: e.target.value }))}
                 required
               />
             </div>
@@ -96,12 +96,10 @@ export default function Contact({ content }) {
               onChange={(e) => setForm((s) => ({ ...s, service: e.target.value }))}
             >
               <option value="">Service Interested In</option>
-              <option>Branding</option>
-              <option>Social Media Marketing</option>
-              <option>Performance Marketing</option>
-              <option>Content Creation</option>
-              <option>Promotix Properties</option>
-              <option>Full-Service Package</option>
+              <option>Cinematic</option>
+              <option>Promotion</option>
+              <option>Monthly Growth Plan</option>
+              <option>Premium</option>
             </select>
             <textarea
               className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all mb-4 min-h-[110px] resize-y"
