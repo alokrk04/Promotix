@@ -1,7 +1,8 @@
 import json
 from pathlib import Path
+from sqlalchemy import inspect, text
 from app.core.database import SessionLocal, engine, Base
-from app.models import Admin, WebsiteSection, Service, PortfolioItem, Testimonial
+from app.models import Admin, WebsiteSection, Service, PortfolioItem, Testimonial, ContactMessage
 from app.core.security import hash_password
 
 SECTION_MAP = {
@@ -40,8 +41,24 @@ def load_content_data(backend_dir: Path) -> dict:
     return {}
 
 
-def seed_database():
+def migrate_schema():
     Base.metadata.create_all(bind=engine)
+    inspector = inspect(engine)
+    with engine.connect() as conn:
+        if inspector.has_table("contact_messages"):
+            columns = {c["name"] for c in inspector.get_columns("contact_messages")}
+            if "mobile" not in columns:
+                conn.execute(text("ALTER TABLE contact_messages ADD COLUMN mobile VARCHAR(255)"))
+            if "email" in columns:
+                try:
+                    conn.execute(text("ALTER TABLE contact_messages ALTER COLUMN email DROP NOT NULL"))
+                except Exception:
+                    pass
+            conn.commit()
+
+
+def seed_database():
+    migrate_schema()
     db = SessionLocal()
 
     if not db.query(Admin).first():

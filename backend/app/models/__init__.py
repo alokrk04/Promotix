@@ -72,7 +72,8 @@ class ContactMessage(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(255), nullable=False)
-    email = Column(String(255), nullable=False)
+    email = Column(String(255), nullable=True)
+    mobile = Column(String(255), nullable=True)
     company = Column(String(255), nullable=True)
     location = Column(String(255), nullable=True)
     service = Column(String(255), nullable=True)

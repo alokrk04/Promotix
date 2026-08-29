@@ -4,7 +4,7 @@ import Reveal from './Reveal'
 
 export default function Contact({ content }) {
   const c = content || {}
-  const [form, setForm] = useState({ name: '', mobile: '', company: '', location: '', service: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', mobile: '', company: '', location: '', service: '', message: '' })
   const [status, setStatus] = useState('')
 
   const handleSubmit = async (e) => {
@@ -13,7 +13,7 @@ export default function Contact({ content }) {
     try {
       await api.submitContact(form)
       setStatus('ok')
-      setForm({ name: '', mobile: '', company: '', location: '', service: '', message: '' })
+      setForm({ name: '', email: '', mobile: '', company: '', location: '', service: '', message: '' })
       setTimeout(() => setStatus(''), 3500)
     } catch {
       setStatus('error')
@@ -71,13 +71,20 @@ export default function Contact({ content }) {
               />
               <input
                 className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all"
-                type="tel"
-                placeholder="Mobile Number"
-                value={form.mobile}
-                onChange={(e) => setForm((s) => ({ ...s, mobile: e.target.value }))}
+                type="email"
+                placeholder="Email Address"
+                value={form.email}
+                onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))}
                 required
               />
             </div>
+            <input
+              className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all mb-4"
+              type="tel"
+              placeholder="Mobile Number"
+              value={form.mobile}
+              onChange={(e) => setForm((s) => ({ ...s, mobile: e.target.value }))}
+            />
             <input
               className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all mb-4"
               placeholder="Company / Brand Name"

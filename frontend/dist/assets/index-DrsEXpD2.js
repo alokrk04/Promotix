@@ -10215,7 +10215,7 @@ function FAQ({ items }) {
 }
 function Contact({ content }) {
   const c = content || {};
-  const [form, setForm] = reactExports.useState({ name: "", mobile: "", company: "", location: "", service: "", message: "" });
+  const [form, setForm] = reactExports.useState({ name: "", email: "", mobile: "", company: "", location: "", service: "", message: "" });
   const [status, setStatus] = reactExports.useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -10223,7 +10223,7 @@ function Contact({ content }) {
     try {
       await api.submitContact(form);
       setStatus("ok");
-      setForm({ name: "", mobile: "", company: "", location: "", service: "", message: "" });
+      setForm({ name: "", email: "", mobile: "", company: "", location: "", service: "", message: "" });
       setTimeout(() => setStatus(""), 3500);
     } catch {
       setStatus("error");
@@ -10278,14 +10278,24 @@ function Contact({ content }) {
             "input",
             {
               className: "w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all",
-              type: "tel",
-              placeholder: "Mobile Number",
-              value: form.mobile,
-              onChange: (e) => setForm((s) => ({ ...s, mobile: e.target.value })),
+              type: "email",
+              placeholder: "Email Address",
+              value: form.email,
+              onChange: (e) => setForm((s) => ({ ...s, email: e.target.value })),
               required: true
             }
           )
         ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            className: "w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all mb-4",
+            type: "tel",
+            placeholder: "Mobile Number",
+            value: form.mobile,
+            onChange: (e) => setForm((s) => ({ ...s, mobile: e.target.value }))
+          }
+        ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "input",
           {
@@ -10663,7 +10673,7 @@ function MessagesPanel() {
     load();
   }, []);
   const filtered = messages.filter(
-    (m) => !search || `${m.name} ${m.email} ${m.message} ${m.company || ""} ${m.location || ""} ${m.service || ""}`.toLowerCase().includes(search.toLowerCase())
+    (m) => !search || `${m.name} ${m.email || ""} ${m.mobile || ""} ${m.message} ${m.company || ""} ${m.location || ""} ${m.service || ""}`.toLowerCase().includes(search.toLowerCase())
   );
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-lg font-bold mb-4", children: [
@@ -10691,8 +10701,8 @@ function MessagesPanel() {
               m.name,
               m.company ? ` · ${m.company}` : "",
               m.location ? ` · 📍${m.location}` : "",
-              " · ",
-              m.email,
+              m.email ? ` · ✉️${m.email}` : "",
+              m.mobile ? ` · 📱${m.mobile}` : "",
               m.service ? ` · ${m.service}` : ""
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2 items-center text-xs text-slate", children: [

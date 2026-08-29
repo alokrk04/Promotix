@@ -194,7 +194,7 @@ function MessagesPanel() {
   useEffect(() => { load() }, [])
 
   const filtered = messages.filter((m) =>
-    !search || `${m.name} ${m.email} ${m.message} ${m.company || ''} ${m.location || ''} ${m.service || ''}`.toLowerCase().includes(search.toLowerCase())
+    !search || `${m.name} ${m.email || ''} ${m.mobile || ''} ${m.message} ${m.company || ''} ${m.location || ''} ${m.service || ''}`.toLowerCase().includes(search.toLowerCase())
   )
 
   return (
@@ -214,7 +214,7 @@ function MessagesPanel() {
         >
           <div className="flex justify-between items-start gap-4 flex-wrap">
             <div className="text-sm font-semibold">
-              {m.name}{m.company ? ` · ${m.company}` : ''}{m.location ? ` · 📍${m.location}` : ''} · {m.email}{m.service ? ` · ${m.service}` : ''}
+              {m.name}{m.company ? ` · ${m.company}` : ''}{m.location ? ` · 📍${m.location}` : ''}{m.email ? ` · ✉️${m.email}` : ''}{m.mobile ? ` · 📱${m.mobile}` : ''}{m.service ? ` · ${m.service}` : ''}
             </div>
             <div className="flex gap-2 items-center text-xs text-slate">
               {new Date(m.created_at).toLocaleDateString()} {new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
