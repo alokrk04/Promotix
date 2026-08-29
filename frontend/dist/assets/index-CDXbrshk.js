@@ -10051,110 +10051,18 @@ function About({ content }) {
     ] }) })
   ] }) });
 }
-const categoryStyle = {
-  social: { gradient: "linear-gradient(135deg,#7C3AED 0%,#0EA5E9 100%)", icon: "📈", chip: "bg-cyan/20 border-cyan/50 text-cyan-200" },
-  video: { gradient: "linear-gradient(135deg,#0EA5E9 0%,#EC4899 100%)", icon: "🎬", chip: "bg-pink/20 border-pink/50 text-pink-200" },
-  branding: { gradient: "linear-gradient(135deg,#F59E0B 0%,#EF4444 100%)", icon: "🎨", chip: "bg-amber/20 border-amber/50 text-amber-200" },
-  default: { gradient: "linear-gradient(135deg,#4F46E5 0%,#7C3AED 100%)", icon: "🚀", chip: "bg-violet/35 border-violet/50 text-white" }
-};
-const palette = [
-  "linear-gradient(135deg,#7C3AED 0%,#0EA5E9 100%)",
-  "linear-gradient(135deg,#0EA5E9 0%,#EC4899 100%)",
-  "linear-gradient(135deg,#F59E0B 0%,#EF4444 100%)",
-  "linear-gradient(135deg,#4F46E5 0%,#7C3AED 100%)",
-  "linear-gradient(135deg,#10B981 0%,#0EA5E9 100%)"
-];
-function DepthLayer({ mx, my, className, children }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "div",
-    {
-      className: `absolute inset-0 pointer-events-none ${className || ""}`,
-      style: { transform: `translate3d(calc(var(--mx, 0) * ${mx}px), calc(var(--my, 0) * ${my}px), 0)` },
-      children
-    }
-  );
-}
-function Float({ duration = "5s", delay = "0s", className, children }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-float": true, className, style: { animation: `float3d ${duration} ease-in-out infinite ${delay}` }, children });
-}
-function PortfolioCard({ item, index, big }) {
-  const cardRef = reactExports.useRef(null);
-  const [hovering, setHovering] = reactExports.useState(false);
-  const handleMove = (e) => {
-    const el = cardRef.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
-    el.style.setProperty("--mx", x.toFixed(3));
-    el.style.setProperty("--my", y.toFixed(3));
-    el.style.setProperty("--rx", `${(-y * 8).toFixed(2)}deg`);
-    el.style.setProperty("--ry", `${(x * 10).toFixed(2)}deg`);
-  };
-  const style = categoryStyle[item.category] || categoryStyle.default;
-  const gradient = item.gradient || palette[index % palette.length];
-  const icon = item.emoji || style.icon;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    "div",
-    {
-      ref: cardRef,
-      onMouseMove: handleMove,
-      onMouseEnter: () => setHovering(true),
-      onMouseLeave: () => setHovering(false),
-      className: `group relative rounded-2xl overflow-hidden cursor-pointer border border-black/5 hover:shadow-[0_30px_60px_rgba(0,0,0,0.35)] ${big ? "h-[320px] sm:h-[400px]" : "h-[270px] sm:h-[320px]"}`,
-      style: {
-        background: gradient,
-        transform: `perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))${hovering ? " translateY(-6px) scale(1.015)" : ""}`,
-        transition: hovering ? "transform 0.12s ease-out" : "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)"
-      },
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "div",
-          {
-            className: "absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300",
-            style: { background: "radial-gradient(circle at calc(50% + var(--mx, 0) * 45%) calc(50% + var(--my, 0) * 45%), rgba(255,255,255,0.22), transparent 55%)" }
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(DepthLayer, { mx: 14, my: 14, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Float, { duration: "6s", className: "absolute w-[140px] h-[140px] rounded-full bg-white/15 blur-2xl top-[-20px] right-[-10px]" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Float, { duration: "7s", delay: "0.8s", className: "absolute w-[90px] h-[90px] rounded-full border border-white/25 top-[30%] left-[8%]" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Float, { duration: "5s", delay: "0.4s", className: "absolute w-[50px] h-[50px] rounded-full bg-white/10 bottom-[18%] right-[12%]" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Float, { duration: "4s", delay: "1.2s", className: "absolute w-3 h-3 rounded-full bg-white/40 top-[22%] right-[20%]" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Float, { duration: "8s", delay: "1.6s", className: "absolute w-2 h-2 rounded-full bg-white/30 bottom-[38%] left-[22%]" })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(DepthLayer, { mx: -22, my: -22, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Float, { duration: "5.5s", delay: "0.6s", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "div",
-          {
-            className: `leading-none opacity-10 select-none transition-[scale,rotate] duration-500 group-hover:[scale:1.12] group-hover:[rotate:-8deg] ${big ? "text-[220px] sm:text-[280px]" : "text-[150px]"}`,
-            children: icon
-          }
-        ) }) }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "div",
-          {
-            className: "absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-5 sm:p-6",
-            style: { transform: "translate3d(calc(var(--mx, 0) * 8px), calc(var(--my, 0) * 8px), 0)" },
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `self-start px-2.5 py-1 rounded-full border text-[10px] sm:text-[11px] font-bold tracking-widest uppercase mb-2.5 ${style.chip}`, children: item.category }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `text-white font-bold leading-snug ${big ? "text-xl sm:text-2xl" : "text-base sm:text-lg"}`, children: item.title }),
-              item.subtitle && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `text-white/70 mt-1 flex items-center gap-1.5 ${big ? "text-sm sm:text-base" : "text-xs sm:text-sm"}`, children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-1.5 h-1.5 rounded-full bg-white/50" }),
-                item.subtitle
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 flex items-center gap-2 text-xs font-semibold text-white/0 transition-all duration-300 group-hover:text-white/90", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1.5 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100", children: [
-                "View Project ",
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "aria-hidden": "true", children: "→" })
-              ] }) })
-            ]
-          }
-        )
-      ]
-    }
-  );
-}
-function Portfolio({ items }) {
-  const list = Array.isArray(items) ? items : [];
-  const [featured, ...rest] = list;
+function Portfolio() {
+  const brands = [
+    { name: "Pooja Dining", desc: "Restaurant & dining brand — social media, reels and menu promotions that bring more covers through the door." },
+    { name: "Shree Shyam Gulacha Chaha", desc: "Local chai brand — identity, packaging and social reach that turned a corner stall into a community favourite." },
+    { name: "Creative Enterprises", desc: "Wholesale decorators for events — branding and digital presence built to look credible and win bookings." },
+    { name: "Jay Jagganath Hospital", desc: "Healthcare brand — awareness campaigns and reputation building that earn patient trust." },
+    { name: "Mangal Alankar", desc: "Jewellery brand — cinematic product videos and festive campaigns that drive footfall." },
+    { name: "SD Cabinets", desc: "Cabinet manufacturers — product shoots and promotions that showcase precision craftsmanship and drive enquiries." },
+    { name: "Sai Mobiles Gallery", desc: "Retail mobile store — offers, reels and local ads that fill the sales floor." },
+    { name: "Denzfox", desc: "Clothing store — fashion shoots, reels and seasonal campaigns that drive footfall and online sales." },
+    { name: "Radhika Dining", desc: "Veg & non-veg restaurant — menu promotions, reels and local ads that fill the tables." }
+  ];
   return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "portfolio", className: "py-20 px-4 sm:px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-shell max-w-6xl", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-12", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "tag", children: "Our Work" }),
@@ -10162,12 +10070,22 @@ function Portfolio({ items }) {
         "Brands We ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gt", children: "Work With" })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "ss mx-auto", children: "A curated showcase of our most impactful work." })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "ss mx-auto", children: "A curated showcase of the brands we've partnered with." })
     ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-[680px] mx-auto space-y-5", children: [
-      featured && /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(PortfolioCard, { item: featured, index: 0, big: true }) }),
-      rest.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-5", children: rest.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { delay: 100 + i * 90, children: /* @__PURE__ */ jsxRuntimeExports.jsx(PortfolioCard, { item, index: i + 1 }) }, item.id || i)) })
-    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { delay: 120, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto", children: brands.map((b, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "div",
+      {
+        className: "group gcard p-5 sm:p-6 flex flex-col gap-3 hover:-translate-y-1",
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex items-center justify-center w-9 h-9 shrink-0 rounded-full bg-gradient-to-br from-violet to-indigo-600 text-white text-sm font-bold shadow-sm shadow-violet/30", children: i + 1 }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-xl leading-snug tracking-tight text-slate-800 group-hover:text-violet transition-colors duration-300", children: b.name })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-relaxed text-slate-500", children: b.desc })
+        ]
+      },
+      b.name
+    )) }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { delay: 200, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-12 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "#contact", className: "btn-s", children: [
       "Want your brand featured here? ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gt", children: "Let's Talk" })
@@ -10297,7 +10215,7 @@ function FAQ({ items }) {
 }
 function Contact({ content }) {
   const c = content || {};
-  const [form, setForm] = reactExports.useState({ name: "", email: "", company: "", location: "", service: "", message: "" });
+  const [form, setForm] = reactExports.useState({ name: "", mobile: "", company: "", location: "", service: "", message: "" });
   const [status, setStatus] = reactExports.useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -10305,7 +10223,7 @@ function Contact({ content }) {
     try {
       await api.submitContact(form);
       setStatus("ok");
-      setForm({ name: "", email: "", company: "", location: "", service: "", message: "" });
+      setForm({ name: "", mobile: "", company: "", location: "", service: "", message: "" });
       setTimeout(() => setStatus(""), 3500);
     } catch {
       setStatus("error");
@@ -10360,10 +10278,10 @@ function Contact({ content }) {
             "input",
             {
               className: "w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all",
-              type: "email",
-              placeholder: "Email Address",
-              value: form.email,
-              onChange: (e) => setForm((s) => ({ ...s, email: e.target.value })),
+              type: "tel",
+              placeholder: "Mobile Number",
+              value: form.mobile,
+              onChange: (e) => setForm((s) => ({ ...s, mobile: e.target.value })),
               required: true
             }
           )
@@ -10394,12 +10312,10 @@ function Contact({ content }) {
             onChange: (e) => setForm((s) => ({ ...s, service: e.target.value })),
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "", children: "Service Interested In" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { children: "Branding" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { children: "Social Media Marketing" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { children: "Performance Marketing" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { children: "Content Creation" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { children: "Promotix Properties" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { children: "Full-Service Package" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { children: "Cinematic" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { children: "Promotion" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { children: "Monthly Growth Plan" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { children: "Premium" })
             ]
           }
         ),
@@ -10465,7 +10381,6 @@ function Footer() {
   ] }) });
 }
 function Home() {
-  var _a;
   const [data, setData] = reactExports.useState(null);
   const [loading, setLoading] = reactExports.useState(true);
   const [error, setError] = reactExports.useState(false);
@@ -10486,12 +10401,12 @@ function Home() {
     ] });
   }
   const getSection = (key) => {
-    var _a2;
-    return (_a2 = data == null ? void 0 : data.sections) == null ? void 0 : _a2.find((s) => s.key === key);
+    var _a;
+    return (_a = data == null ? void 0 : data.sections) == null ? void 0 : _a.find((s) => s.key === key);
   };
   const getServices = (section) => {
-    var _a2;
-    return ((_a2 = data == null ? void 0 : data.services) == null ? void 0 : _a2.filter((s) => s.section === section)) || [];
+    var _a;
+    return ((_a = data == null ? void 0 : data.services) == null ? void 0 : _a.filter((s) => s.section === section)) || [];
   };
   const hero = getSection("hero");
   const about = getSection("about");
@@ -10507,7 +10422,7 @@ function Home() {
       (hero == null ? void 0 : hero.is_visible) && /* @__PURE__ */ jsxRuntimeExports.jsx(Hero, { content: hero.content, stats: stats == null ? void 0 : stats.content }),
       (services == null ? void 0 : services.is_visible) && /* @__PURE__ */ jsxRuntimeExports.jsx(Services, { content: services.content, connectServices: getServices("connect"), propertiesServices: getServices("properties") }),
       (about == null ? void 0 : about.is_visible) && /* @__PURE__ */ jsxRuntimeExports.jsx(About, { content: about.content }),
-      ((_a = data == null ? void 0 : data.portfolio) == null ? void 0 : _a.length) > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(Portfolio, { items: data == null ? void 0 : data.portfolio }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Portfolio, {}),
       (process == null ? void 0 : process.is_visible) && /* @__PURE__ */ jsxRuntimeExports.jsx(Process, { content: process.content }),
       (pricing == null ? void 0 : pricing.is_visible) && /* @__PURE__ */ jsxRuntimeExports.jsx(Pricing, { content: pricing.content }),
       (faq == null ? void 0 : faq.is_visible) && /* @__PURE__ */ jsxRuntimeExports.jsx(FAQ, { items: faq.content }),

@@ -49,14 +49,17 @@ def seed_database():
 
     data = load_content_data(BACKEND_DIR)
 
-    existing_keys = {key for (key,) in db.query(WebsiteSection.key).all()}
+    existing = {s.key: s for s in db.query(WebsiteSection).all()}
     for key, meta in SECTION_MAP.items():
-        if key in existing_keys:
-            continue
         json_content = data.get(key, {})
         if key == "services" and "services" in data:
             json_content = data["services"]
-        db.add(WebsiteSection(key=key, title=meta["title"], content=json_content, is_visible=True, order=meta["order"]))
+        if key in existing:
+            existing[key].content = json_content
+            existing[key].title = meta["title"]
+            existing[key].is_visible = True
+        else:
+            db.add(WebsiteSection(key=key, title=meta["title"], content=json_content, is_visible=True, order=meta["order"]))
 
     services_data = data.get("services", {})
     connect_names = {s.name for s in db.query(Service).filter(Service.section == "connect").all()}
