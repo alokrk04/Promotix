@@ -5,7 +5,7 @@ export default function Hero({ content, stats }) {
   const s = stats || {}
   const statsArr = [
     { value: s.brands?.value || '150+', label: s.brands?.label || 'Brands & Properties' },
-    { value: s.followers?.value || '12.1K', label: s.followers?.label || 'Instagram Followers' },
+    { value: s.followers?.value || '14K', label: s.followers?.label || 'Instagram Followers' },
     { value: s.years?.value || '3+', label: s.years?.label || 'Years of Excellence' },
     { value: s.satisfaction?.value || '98%', label: s.satisfaction?.label || 'Client Satisfaction' },
   ]

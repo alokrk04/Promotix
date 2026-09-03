@@ -1,7 +1,7 @@
 {
   "hero": {
     "line1": "Promotion That Sticks.",
-    "subtitle": "A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
+    "subtitle": "A product only sells when the market actually sees it. Our Monthly growth package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
   },
   "about": {
     "tagline": "Connecting Your Business to Better Sales.",
@@ -16,7 +16,7 @@
       "items": [
         {
           "name": "Growth Package",
-          "desc": "A product only sells when the customer's actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
+          "desc": "A product only sells when the customer's actually sees it. Our Monthly growth package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
         },
         {
           "name": "Social Media Marketing",
@@ -115,7 +115,7 @@
       "label": "Brands & Properties"
     },
     "followers": {
-      "value": "15.1K",
+      "value": "14K",
       "label": "Instagram Followers"
     },
     "years": {
@@ -130,7 +130,7 @@
   "pricing": {
     "cinematic": {
       "name": "Cinematic",
-      "price": "₹1,699",
+      "price": "₹1,999",
       "period": "Perfect for short-term campaigns",
       "badge": "",
       "features": [
@@ -140,7 +140,7 @@
     },
     "branding": {
       "name": "Promotion",
-      "price": "₹2,499",
+      "price": "₹2,999",
       "period": "Designed to drive foot traffic",
       "badge": "",
       "features": [
@@ -166,18 +166,18 @@
     },
     "premium_plus": {
       "name": "Premium",
-      "price": "₹19,999",
+      "price": "₹24,999",
       "period": "Perfect for brands ready to scale",
       "features": [
-        "Complete Brand Identity & Guidelines",
-        "15 Social Media Posts/Month",
-        "5 Cinematic Reels/Month",
-        "Advanced SEO & Content Strategy",
-        "Specialized Marketing",
-        "End to End Management",
-        "Weekly Performance Reports",
-        "WhatsApp Priority Support",
-        "Ads Management"
+        "8 Premium Social Media Posts/Month",
+        "4 Ultra-Premium Cinematic Reels/Month",
+        "Professional Actors & Scriptwriting",
+        "Advanced Meta Ads Management",
+        "2 Dedicated Ad Campaigns",
+        "Lead Generation & Retargeting",
+        "Local SEO & GMB Optimization",
+        "Weekly GMB Profile Updates",
+        "End-to-End Agency Management"
       ]
     }
   },
