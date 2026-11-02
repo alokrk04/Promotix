@@ -204,5 +204,43 @@
       "gradient": ""
     }
   ],
+  "brands": [
+    {
+      "name": "Pooja Dining",
+      "description": "Restaurant & dining brand — social media, reels and menu promotions that bring more covers through the door."
+    },
+    {
+      "name": "Shree Shyam Gulacha Chaha",
+      "description": "Local chai brand — identity, packaging and social reach that turned a corner stall into a community favourite."
+    },
+    {
+      "name": "Creative Enterprises",
+      "description": "Wholesale decorators for events — branding and digital presence built to look credible and win bookings."
+    },
+    {
+      "name": "Jay Jagganath Hospital",
+      "description": "Healthcare brand — awareness campaigns and reputation building that earn patient trust."
+    },
+    {
+      "name": "Mangal Alankar",
+      "description": "Jewellery brand — cinematic product videos and festive campaigns that drive footfall."
+    },
+    {
+      "name": "SD Cabinets",
+      "description": "Cabinet manufacturers — product shoots and promotions that showcase precision craftsmanship and drive enquiries."
+    },
+    {
+      "name": "Sai Mobiles Gallery",
+      "description": "Retail mobile store — offers, reels and local ads that fill the sales floor."
+    },
+    {
+      "name": "Denzfox",
+      "description": "Clothing store — fashion shoots, reels and seasonal campaigns that drive footfall and online sales."
+    },
+    {
+      "name": "Radhika Dining",
+      "description": "Veg & non-veg restaurant — menu promotions, reels and local ads that fill the tables."
+    }
+  ],
   "testimonials": []
 }

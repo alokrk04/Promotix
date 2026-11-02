@@ -3,14 +3,14 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.security import get_current_admin
-from app.models import Admin, WebsiteSection, Service, PortfolioItem, Testimonial, ContactMessage
+from app.models import Admin, WebsiteSection, Service, PortfolioItem, Testimonial, ContactMessage, Brand
 from app.services.sync import sync_section, sync_services, sync_portfolio, sync_testimonials
 from app.schemas import (
     WebsiteSectionOut, WebsiteSectionUpdate,
     ServiceOut, ServiceCreate, ServiceUpdate,
     PortfolioOut, PortfolioCreate, PortfolioUpdate,
     TestimonialOut, TestimonialCreate, TestimonialUpdate,
-    ContactOut,
+    ContactOut, BrandOut,
 )
 
 router = APIRouter()
@@ -237,5 +237,52 @@ def delete_message(message_id: int, admin: Admin = Depends(get_current_admin), d
     if not msg:
         raise HTTPException(status_code=404, detail="Message not found")
     db.delete(msg)
+    db.commit()
+    return {"ok": True}
+
+
+# ─── Brands ──────────────────────────────────────────────
+
+@router.get("/brands", response_model=list[BrandOut])
+def list_brands(admin: Admin = Depends(get_current_admin), db: Session = Depends(get_db)):
+    brands = db.query(Brand).order_by(Brand.order).all()
+    return [BrandOut.model_validate(b) for b in brands]
+
+
+@router.post("/brands", response_model=BrandOut)
+def create_brand(body: BrandCreate, admin: Admin = Depends(get_current_admin), db: Session = Depends(get_db)):
+    max_order = db.query(Brand.order).order_by(Brand.order.desc()).first()
+    brand = Brand(
+        name=body.name,
+        description=body.description,
+        order=body.order or ((max_order[0] + 1) if max_order else 0),
+        is_visible=body.is_visible if body.is_visible is not None else True,
+    )
+    db.add(brand)
+    db.commit()
+    db.refresh(brand)
+    return BrandOut.model_validate(brand)
+
+
+@router.put("/brands/{brand_id}", response_model=BrandOut)
+def update_brand(brand_id: int, body: BrandUpdate, admin: Admin = Depends(get_current_admin), db: Session = Depends(get_db)):
+    brand = db.query(Brand).filter(Brand.id == brand_id).first()
+    if not brand:
+        raise HTTPException(status_code=404, detail="Brand not found")
+    for field in ["name", "description", "order", "is_visible"]:
+        val = getattr(body, field, None)
+        if val is not None:
+            setattr(brand, field, val)
+    db.commit()
+    db.refresh(brand)
+    return BrandOut.model_validate(brand)
+
+
+@router.delete("/brands/{brand_id}")
+def delete_brand(brand_id: int, admin: Admin = Depends(get_current_admin), db: Session = Depends(get_db)):
+    brand = db.query(Brand).filter(Brand.id == brand_id).first()
+    if not brand:
+        raise HTTPException(status_code=404, detail="Brand not found")
+    db.delete(brand)
     db.commit()
     return {"ok": True}

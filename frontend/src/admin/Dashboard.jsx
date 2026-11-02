@@ -242,6 +242,7 @@ export default function Admin() {
   const [services, setServices] = useState([])
   const [portfolio, setPortfolio] = useState([])
   const [testimonials, setTestimonials] = useState([])
+  const [brands, setBrands] = useState([])
   const [tab, setTab] = useState('sections')
 
   useEffect(() => {
@@ -250,6 +251,7 @@ export default function Admin() {
     api.getServices().then(setServices).catch(() => {})
     api.getPortfolio().then(setPortfolio).catch(() => {})
     api.getTestimonials().then(setTestimonials).catch(() => {})
+    api.getBrands().then(setBrands).catch(() => {})
   }, [admin])
 
   if (loading) return <div className="min-h-screen bg-slate-100 flex items-center justify-center text-slate text-sm">Checking authentication...</div>
@@ -261,6 +263,7 @@ export default function Admin() {
     { key: 'portfolio', label: 'Portfolio' },
     { key: 'testimonials', label: 'Testimonials' },
     { key: 'messages', label: 'Messages' },
+    { key: 'brands', label: 'Brands' },
   ]
 
   return (
@@ -344,6 +347,21 @@ export default function Admin() {
           />
         )}
         {tab === 'messages' && <MessagesPanel />}
+        {tab === 'brands' && (
+          <ListManager
+            title="Brands"
+            items={brands}
+            fields={[
+              { key: 'name', label: 'Brand Name' },
+              { key: 'description', label: 'Description' },
+              { key: 'order', label: 'Order', type: 'number' },
+              { key: 'is_visible', label: 'Visible' },
+            ]}
+            onCreate={(body) => api.createBrand(body).then(() => api.getBrands().then(setBrands))}
+            onUpdate={(id, body) => api.updateBrand(id, body).then(() => api.getBrands().then(setBrands))}
+            onDelete={(id) => api.deleteBrand(id).then(() => api.getBrands().then(setBrands))}
+          />
+        )}
       </div>
     </div>
   )

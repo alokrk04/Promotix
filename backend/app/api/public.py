@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.core.database import get_db
-from app.models import WebsiteSection, Service, PortfolioItem, Testimonial, ContactMessage
+from app.models import WebsiteSection, Service, PortfolioItem, Testimonial, ContactMessage, Brand
 from app.schemas import (
     WebsiteSectionOut, ServiceOut, PortfolioOut, TestimonialOut,
-    ContactCreate, ContactOut, PublicWebsiteData,
+    ContactCreate, ContactOut, PublicWebsiteData, BrandOut,
 )
 
 router = APIRouter()
@@ -16,11 +16,13 @@ def get_public_website(db: Session = Depends(get_db)):
     services = db.query(Service).filter(Service.is_visible == True).order_by(Service.order).all()
     portfolio = db.query(PortfolioItem).filter(PortfolioItem.is_visible == True).order_by(PortfolioItem.order).all()
     testimonials = db.query(Testimonial).filter(Testimonial.is_visible == True).order_by(Testimonial.order).all()
+    brands = db.query(Brand).filter(Brand.is_visible == True).order_by(Brand.order).all()
     return PublicWebsiteData(
         sections=[WebsiteSectionOut.model_validate(s) for s in sections],
         services=[ServiceOut.model_validate(s) for s in services],
         portfolio=[PortfolioOut.model_validate(p) for p in portfolio],
         testimonials=[TestimonialOut.model_validate(t) for t in testimonials],
+        brands=[BrandOut.model_validate(b) for b in brands],
     )
 
 

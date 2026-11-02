@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from sqlalchemy import inspect, text
 from app.core.database import SessionLocal, engine, Base
-from app.models import Admin, WebsiteSection, Service, PortfolioItem, Testimonial, ContactMessage
+from app.models import Admin, WebsiteSection, Service, PortfolioItem, Testimonial, ContactMessage, Brand
 from app.core.security import hash_password
 
 SECTION_MAP = {
@@ -14,6 +14,7 @@ SECTION_MAP = {
     "contact": {"title": "Contact", "order": 5},
     "stats": {"title": "Statistics", "order": 6},
     "pricing": {"title": "Pricing", "order": 7},
+    "brands": {"title": "Brands We Work With", "order": 8},
 }
 
 portfolio_data = [
@@ -119,6 +120,28 @@ def seed_database():
     elif not db.query(Testimonial).first():
         for t in testimonial_data:
             db.add(Testimonial(**t))
+
+    # Seed default brands if none exist
+    brand_names = {b.name for b in db.query(Brand).all()}
+    default_brands = [
+        {"name": "Pooja Dining", "description": "Restaurant & dining brand — social media, reels and menu promotions that bring more covers through the door.", "order": 0, "is_visible": True},
+        {"name": "Shree Shyam Gulacha Chaha", "description": "Local chai brand — identity, packaging and social reach that turned a corner stall into a community favourite.", "order": 1, "is_visible": True},
+        {"name": "Creative Enterprises", "description": "Wholesale decorators for events — branding and digital presence built to look credible and win bookings.", "order": 2, "is_visible": True},
+        {"name": "Jay Jagganath Hospital", "description": "Healthcare brand — awareness campaigns and reputation building that earn patient trust.", "order": 3, "is_visible": True},
+        {"name": "Mangal Alankar", "description": "Jewellery brand — cinematic product videos and festive campaigns that drive footfall.", "order": 4, "is_visible": True},
+        {"name": "SD Cabinets", "description": "Cabinet manufacturers — product shoots and promotions that showcase precision craftsmanship and drive enquiries.", "order": 5, "is_visible": True},
+        {"name": "Sai Mobiles Gallery", "description": "Retail mobile store — offers, reels and local ads that fill the sales floor.", "order": 6, "is_visible": True},
+        {"name": "Denzfox", "description": "Clothing store — fashion shoots, reels and seasonal campaigns that drive footfall and online sales.", "order": 7, "is_visible": True},
+        {"name": "Radhika Dining", "description": "Veg & non-veg restaurant — menu promotions, reels and local ads that fill the tables.", "order": 8, "is_visible": True},
+    ]
+    for i, bd in enumerate(default_brands):
+        if bd["name"] not in brand_names:
+            db.add(Brand(
+                name=bd["name"],
+                description=bd["description"],
+                order=bd["order"],
+                is_visible=bd["is_visible"],
+            ))
 
     db.commit()
     db.close()

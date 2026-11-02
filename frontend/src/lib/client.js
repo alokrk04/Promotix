@@ -80,4 +80,10 @@ export const api = {
   getMessages: () => request('/admin/messages'),
   markRead: (id) => request(`/admin/messages/${id}/read`, { method: 'POST' }),
   deleteMessage: (id) => request(`/admin/messages/${id}`, { method: 'DELETE' }),
+
+  // Admin: Brands
+  getBrands: () => request('/admin/brands'),
+  createBrand: (body) => request('/admin/brands', { method: 'POST', body: JSON.stringify(body) }),
+  updateBrand: (id, body) => request(`/admin/brands/${id}`, { method: 'PUT', body: JSON.stringify(body) }),
+  deleteBrand: (id) => request(`/admin/brands/${id}`, { method: 'DELETE' }),
 }

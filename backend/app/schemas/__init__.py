@@ -155,8 +155,35 @@ class ContactOut(BaseModel):
         from_attributes = True
 
 
+class BrandOut(BaseModel):
+    id: int
+    name: str
+    description: Optional[str] = None
+    is_visible: bool
+    order: int
+
+    class Config:
+        from_attributes = True
+
+
+class BrandCreate(BaseModel):
+    name: str
+    description: Optional[str] = None
+    order: Optional[int] = None
+    is_visible: bool = True
+
+
+class BrandUpdate(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+    order: Optional[int] = None
+    is_visible: Optional[bool] = None
+
+
 class PublicWebsiteData(BaseModel):
     sections: list[WebsiteSectionOut]
     services: list[ServiceOut]
     portfolio: list[PortfolioOut]
     testimonials: list[TestimonialOut]
+    brands: list[BrandOut]
+    brands: list[BrandOut]

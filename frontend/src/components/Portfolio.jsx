@@ -1,17 +1,21 @@
-import Reveal from './Reveal'
+import { useEffect, useState } from 'react'
 
 export default function Portfolio() {
-  const brands = [
-    { name: 'Pooja Dining', desc: 'Restaurant & dining brand — social media, reels and menu promotions that bring more covers through the door.' },
-    { name: 'Shree Shyam Gulacha Chaha', desc: 'Local chai brand — identity, packaging and social reach that turned a corner stall into a community favourite.' },
-    { name: 'Creative Enterprises', desc: 'Wholesale decorators for events — branding and digital presence built to look credible and win bookings.' },
-    { name: 'Jay Jagganath Hospital', desc: 'Healthcare brand — awareness campaigns and reputation building that earn patient trust.' },
-    { name: 'Mangal Alankar', desc: 'Jewellery brand — cinematic product videos and festive campaigns that drive footfall.' },
-    { name: 'SD Cabinets', desc: 'Cabinet manufacturers — product shoots and promotions that showcase precision craftsmanship and drive enquiries.' },
-    { name: 'Sai Mobiles Gallery', desc: 'Retail mobile store — offers, reels and local ads that fill the sales floor.' },
-    { name: 'Denzfox', desc: 'Clothing store — fashion shoots, reels and seasonal campaigns that drive footfall and online sales.' },
-    { name: 'Radhika Dining', desc: 'Veg & non-veg restaurant — menu promotions, reels and local ads that fill the tables.' },
-  ]
+  const [brands, setBrands] = useState([])
+
+  useEffect(() => {
+    fetch('/api/public/website')
+      .then((res) => {
+        if (!res.ok) throw new Error('API error')
+        return res.json()
+      })
+      .then((data) => {
+        setBrands(data.brands || [])
+      })
+      .catch((err) => {
+        console.error('Failed to fetch brands:', err)
+      })
+  }, [])
 
   return (
     <section id="portfolio" className="py-20 px-4 sm:px-6 lg:px-8">
@@ -27,7 +31,7 @@ export default function Portfolio() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {brands.map((b, i) => (
               <div
-                key={b.name}
+                key={b.id || i}
                 className="group gcard p-5 sm:p-6 flex flex-col gap-3 hover:-translate-y-1"
               >
                 <div className="flex items-center gap-3">
@@ -38,9 +42,12 @@ export default function Portfolio() {
                     {b.name}
                   </h3>
                 </div>
-                <p className="text-sm leading-relaxed text-slate-500">{b.desc}</p>
+                <p className="text-sm leading-relaxed text-slate-500">{b.description || ''}</p>
               </div>
             ))}
+            {brands.length === 0 && (
+              <p className="col-span-full text-center text-slate-500">No brands added yet. Add some from the admin dashboard.</p>
+            )}
           </div>
         </Reveal>
         <Reveal delay={200}>
