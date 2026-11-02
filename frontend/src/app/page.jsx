@@ -17,9 +17,19 @@ export default function Home() {
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    api.getWebsite()
-      .then(setData)
-      .catch(() => setError(true))
+    // Use the direct API fetch that goes through the proxy to port 8000
+    fetch('/api/public/website')
+      .then((res) => {
+        if (!res.ok) throw new Error('API error')
+        return res.json()
+      })
+      .then((data) => {
+        setData(data)
+      })
+      .catch((err) => {
+        console.error('Failed to fetch website:', err)
+        setError(true)
+      })
       .finally(() => setLoading(false))
   }, [])
 
