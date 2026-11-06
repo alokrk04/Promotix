@@ -1,8 +1,7 @@
 {
   "hero": {
     "line1": "Promotion That Sticks.",
-    "line2": "",
-    "subtitle": "A product only sells when the market actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
+    "subtitle": "A product only sells when the market actually sees it. Our Monthly growth package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
   },
   "about": {
     "tagline": "Connecting Your Business to Better Sales.",
@@ -10,14 +9,14 @@
     "paragraph2": ""
   },
   "services": {
-    "heading": "Promotix Connect — Marketing Agency",
+    "heading": "Promotix — Marketing Agency",
     "subtitle": "In a crowded digital landscape, we help local businesses punch above their weight. We understand the local market and know exactly what it takes to turn casual scrollers into loyal customers. Through meticulous social media management and high-end content creation, we give your shop a premium digital presence that captures attention, builds trust, and drives real business results right to your doorstep.",
     "connect": {
-    "heading": "Promotix Connect — Marketing Agency",
+      "heading": "Promotix — Marketing Agency",
       "items": [
         {
           "name": "Growth Package",
-          "desc": "A product only sells when the customer's actually sees it. Our premium single-video package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
+          "desc": "A product only sells when the customer's actually sees it. Our Monthly growth package is engineered to instantly grab your target audience's attention, turning market visibility into real customers, higher sales, and rapid business growth."
         },
         {
           "name": "Social Media Marketing",
@@ -30,7 +29,7 @@
       ]
     },
     "properties": {
-      "heading": "Promotix — Marketing Agency",
+      "heading": "Promotix — Properties",
       "items": [
         {
           "name": "Property Listings",
@@ -116,7 +115,7 @@
       "label": "Brands & Properties"
     },
     "followers": {
-      "value": "12.1K",
+      "value": "14K",
       "label": "Instagram Followers"
     },
     "years": {
@@ -131,7 +130,7 @@
   "pricing": {
     "cinematic": {
       "name": "Cinematic",
-      "price": "₹1,699/mo",
+      "price": "₹1,999",
       "period": "Perfect for short-term campaigns",
       "badge": "",
       "features": [
@@ -141,7 +140,7 @@
     },
     "branding": {
       "name": "Promotion",
-      "price": "₹2,499/mo",
+      "price": "₹2,999",
       "period": "Designed to drive foot traffic",
       "badge": "",
       "features": [
@@ -153,9 +152,9 @@
     },
     "premium": {
       "name": "Monthly Growth Plan",
-      "price": "₹7,499/mo",
+      "price": "₹7,499",
       "period": "Serious Brand Growth",
-      "badge": "🔥 RECOMMENDED",
+      "badge": "Recommended",
       "features": [
         "4 Reels per Month (1 Per Week)",
         "Creating Festival Posters",
@@ -167,20 +166,81 @@
     },
     "premium_plus": {
       "name": "Premium",
-      "price": "₹19,999 mo",
+      "price": "₹24,999",
       "period": "Perfect for brands ready to scale",
-      "badge": "✨ BEST VALUE",
       "features": [
-        "Complete Brand Identity & Guidelines",
-        "15 Social Media Posts/Month",
-        "5 Cinematic Reels/Month",
-        "Advanced SEO & Content Strategy",
-        "Specialized Marketing",
-        "End to End Management",
-        "Weekly Performance Reports",
-        "WhatsApp Priority Support",
-        "Ads Management"
+        "8 Premium Social Media Posts/Month",
+        "4 Ultra-Premium Cinematic Reels/Month",
+        "Professional Actors & Scriptwriting",
+        "Advanced Meta Ads Management",
+        "2 Dedicated Ad Campaigns",
+        "Lead Generation & Retargeting",
+        "Local SEO & GMB Optimization",
+        "Weekly GMB Profile Updates",
+        "End-to-End Agency Management"
       ]
     }
-  }
+  },
+  "portfolio": [
+    {
+      "title": "Performance Campaign",
+      "category": "social",
+      "emoji": "",
+      "subtitle": "Meta Ads · ROI Driven",
+      "gradient": ""
+    },
+    {
+      "title": "Premium Web Experience",
+      "category": "video",
+      "emoji": "",
+      "subtitle": "Motion Design · Development",
+      "gradient": ""
+    },
+    {
+      "title": "Luxury Brand Identity",
+      "category": "branding",
+      "emoji": "",
+      "subtitle": "Visual Identity · Strategy",
+      "gradient": ""
+    }
+  ],
+  "brands": [
+    {
+      "name": "Pooja Dining",
+      "description": "Restaurant & dining brand — social media, reels and menu promotions that bring more covers through the door."
+    },
+    {
+      "name": "Shree Shyam Gulacha Chaha",
+      "description": "Local chai brand — identity, packaging and social reach that turned a corner stall into a community favourite."
+    },
+    {
+      "name": "Creative Enterprises",
+      "description": "Wholesale decorators for events — branding and digital presence built to look credible and win bookings."
+    },
+    {
+      "name": "Jay Jagganath Hospital",
+      "description": "Healthcare brand — awareness campaigns and reputation building that earn patient trust."
+    },
+    {
+      "name": "Mangal Alankar",
+      "description": "Jewellery brand — cinematic product videos and festive campaigns that drive footfall."
+    },
+    {
+      "name": "SD Cabinets",
+      "description": "Cabinet manufacturers — product shoots and promotions that showcase precision craftsmanship and drive enquiries."
+    },
+    {
+      "name": "Sai Mobiles Gallery",
+      "description": "Retail mobile store — offers, reels and local ads that fill the sales floor."
+    },
+    {
+      "name": "Denzfox",
+      "description": "Clothing store — fashion shoots, reels and seasonal campaigns that drive footfall and online sales."
+    },
+    {
+      "name": "Radhika Dining",
+      "description": "Veg & non-veg restaurant — menu promotions, reels and local ads that fill the tables."
+    }
+  ],
+  "testimonials": []
 }

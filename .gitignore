@@ -7,7 +7,6 @@ logs/
 certs/
 backend/venv/
 backend/__pycache__/
-frontend/dist/
 frontend/node_modules/
 
 # Database files

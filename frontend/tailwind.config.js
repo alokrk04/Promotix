@@ -13,6 +13,7 @@ export default {
       },
       fontFamily: {
         jakarta: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['"Playfair Display"', 'Georgia', 'serif'],
       },
     },
   },

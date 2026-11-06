@@ -1,7 +1,11 @@
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
+DEFAULT_DB_PATH = str(PROJECT_ROOT / "promotix.db").replace("\\", "/")
 
 
 class Settings:

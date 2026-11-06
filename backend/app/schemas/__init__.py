@@ -131,7 +131,8 @@ class TestimonialUpdate(BaseModel):
 
 class ContactCreate(BaseModel):
     name: str = Field(..., min_length=1, max_length=255)
-    email: str = Field(..., max_length=255, pattern=r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
+    email: Optional[str] = Field(None, max_length=255, pattern=r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
+    mobile: Optional[str] = Field(None, max_length=255)
     company: Optional[str] = Field(None, max_length=255)
     location: Optional[str] = Field(None, max_length=255)
     service: Optional[str] = Field(None, max_length=255)
@@ -141,7 +142,8 @@ class ContactCreate(BaseModel):
 class ContactOut(BaseModel):
     id: int
     name: str
-    email: str
+    email: Optional[str] = None
+    mobile: Optional[str] = None
     company: Optional[str] = None
     location: Optional[str] = None
     service: Optional[str] = None
@@ -153,8 +155,35 @@ class ContactOut(BaseModel):
         from_attributes = True
 
 
+class BrandOut(BaseModel):
+    id: int
+    name: str
+    description: Optional[str] = None
+    is_visible: bool
+    order: int
+
+    class Config:
+        from_attributes = True
+
+
+class BrandCreate(BaseModel):
+    name: str
+    description: Optional[str] = None
+    order: Optional[int] = None
+    is_visible: bool = True
+
+
+class BrandUpdate(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+    order: Optional[int] = None
+    is_visible: Optional[bool] = None
+
+
 class PublicWebsiteData(BaseModel):
     sections: list[WebsiteSectionOut]
     services: list[ServiceOut]
     portfolio: list[PortfolioOut]
     testimonials: list[TestimonialOut]
+    brands: list[BrandOut]
+    brands: list[BrandOut]

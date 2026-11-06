@@ -17,9 +17,19 @@ export default function Home() {
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    api.getWebsite()
-      .then(setData)
-      .catch(() => setError(true))
+    // Use the direct API fetch that goes through the proxy to port 8000
+    fetch('/api/public/website')
+      .then((res) => {
+        if (!res.ok) throw new Error('API error')
+        return res.json()
+      })
+      .then((data) => {
+        setData(data)
+      })
+      .catch((err) => {
+        console.error('Failed to fetch website:', err)
+        setError(true)
+      })
       .finally(() => setLoading(false))
   }, [])
 
@@ -64,7 +74,7 @@ export default function Home() {
         {hero?.is_visible && <Hero content={hero.content} stats={stats?.content} />}
         {services?.is_visible && <Services content={services.content} connectServices={getServices('connect')} propertiesServices={getServices('properties')} />}
         {about?.is_visible && <About content={about.content} />}
-        {data?.portfolio?.length > 0 && <Portfolio items={data?.portfolio} />}
+        <Portfolio />
         {process?.is_visible && <Process content={process.content} />}
         {pricing?.is_visible && <Pricing content={pricing.content} />}
         {faq?.is_visible && <FAQ items={faq.content} />}

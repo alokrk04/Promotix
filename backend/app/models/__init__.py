@@ -53,6 +53,18 @@ class PortfolioItem(Base):
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
 
+class Brand(Base):
+    __tablename__ = "brands"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(255), nullable=False)
+    description = Column(Text, nullable=True)
+    order = Column(Integer, default=0)
+    is_visible = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
+
+
 class Testimonial(Base):
     __tablename__ = "testimonials"
 
@@ -72,7 +84,8 @@ class ContactMessage(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(255), nullable=False)
-    email = Column(String(255), nullable=False)
+    email = Column(String(255), nullable=True)
+    mobile = Column(String(255), nullable=True)
     company = Column(String(255), nullable=True)
     location = Column(String(255), nullable=True)
     service = Column(String(255), nullable=True)
