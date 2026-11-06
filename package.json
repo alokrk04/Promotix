@@ -12,6 +12,7 @@
     "lint": "eslint . --ignore-pattern node_modules",
     "format": "prettier --write . --ignore-path .gitignore",
     "format:check": "prettier --check . --ignore-path .gitignore",
+main
     "deploy": "wrangler deploy",
     "preview": "wrangler dev"
   },
