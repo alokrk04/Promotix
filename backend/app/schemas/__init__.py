@@ -186,4 +186,3 @@ class PublicWebsiteData(BaseModel):
     portfolio: list[PortfolioOut]
     testimonials: list[TestimonialOut]
     brands: list[BrandOut]
-    brands: list[BrandOut]

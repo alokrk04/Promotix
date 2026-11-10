@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Reveal from './Reveal'
 
 export default function Portfolio() {
   const [brands, setBrands] = useState([])

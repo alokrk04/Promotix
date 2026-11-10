@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -15,28 +16,9 @@ BACKEND_DIR = Path(__file__).resolve().parent
 FRONTEND_DIST = BACKEND_DIR.parent / "frontend" / "dist"
 RESOURCES_DIR = BACKEND_DIR.parent / "resources"
 
-app = FastAPI(title="Promotix API", docs_url="/docs")
 
-
-@app.get("/health")
-async def health():
-    return {"status": "ok"}
-
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=settings.CORS_ALLOWED_ORIGINS,
-    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?|.*\.netlify\.app|.*\.onrender\.com|.*\.pages\.dev|https?://(.*\.)?promotix\.in",
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-app.include_router(api_router)
-
-
-@app.on_event("startup")
-def seed_database():
+@asynccontextmanager
+async def lifespan(app):
     from app.core.database import SessionLocal
     from app.models import Admin, WebsiteSection, Service, PortfolioItem, Testimonial
     from app.core.security import hash_password
@@ -90,7 +72,7 @@ def seed_database():
             db.add(PortfolioItem(**item))
 
     json_testimonials = data.get("testimonials")
-    if isinstance(json_testimonials, list):
+    if isinstance(json_testimonials, list) and json_testimonials:
         testimonial_names = {t.name for t in db.query(Testimonial).all()}
         for i, item in enumerate(json_testimonials):
             if item.get("name") not in testimonial_names:
@@ -108,6 +90,28 @@ def seed_database():
 
     db.commit()
     db.close()
+
+    yield
+
+
+app = FastAPI(title="Promotix API", docs_url="/docs", lifespan=lifespan)
+
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.CORS_ALLOWED_ORIGINS,
+    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?|.*\.netlify\.app|.*\.onrender\.com|.*\.pages\.dev|https?://(.*\.)?promotix\.in",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(api_router)
 
 
 # ─── Static Files & SPA ─────────────────────────────────

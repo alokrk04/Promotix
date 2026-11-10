@@ -33,7 +33,7 @@ testimonial_data = [
 
 
 def load_content_data(backend_dir: Path) -> dict:
-    for path in [backend_dir.parent / "content.json", backend_dir / "content.json"]:
+    for path in [backend_dir.parent / "content.json", backend_dir / "content.json", backend_dir.parent.parent / "content.json"]:
         try:
             with open(path) as f:
                 return json.load(f)
@@ -105,7 +105,7 @@ def seed_database():
             db.add(PortfolioItem(**item))
 
     json_testimonials = data.get("testimonials")
-    if isinstance(json_testimonials, list):
+    if isinstance(json_testimonials, list) and json_testimonials:
         testimonial_names = {t.name for t in db.query(Testimonial).all()}
         for i, item in enumerate(json_testimonials):
             if item.get("name") not in testimonial_names:
