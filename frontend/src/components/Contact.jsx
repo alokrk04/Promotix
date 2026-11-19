@@ -1,31 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useForm, ValidationError } from '@formspree/react'
 import Reveal from './Reveal'
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/maeojgkd'
+const FORMSPREE_FORM_ID = 'maeojgkd'
+const EMPTY_FORM = { name: '', email: '', mobile: '', company: '', location: '', service: '', message: '' }
 
 export default function Contact({ content }) {
   const c = content || {}
-  const [form, setForm] = useState({ name: '', email: '', mobile: '', company: '', location: '', service: '', message: '' })
-  const [status, setStatus] = useState('')
+  const [form, setForm] = useState(EMPTY_FORM)
+  const [state, handleSubmit, resetFormspree] = useForm(FORMSPREE_FORM_ID)
+  const resetRef = useRef(resetFormspree)
+  resetRef.current = resetFormspree
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setStatus('sending')
-    try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ ...form, _subject: 'New contact message from Promotix website' }),
-      })
-      if (!res.ok) throw new Error('Formspree submission failed')
-      setStatus('ok')
-      setForm({ name: '', email: '', mobile: '', company: '', location: '', service: '', message: '' })
-      setTimeout(() => setStatus(''), 3500)
-    } catch {
-      setStatus('error')
-      setTimeout(() => setStatus(''), 3500)
-    }
-  }
+  useEffect(() => {
+    if (!state.succeeded) return
+    setForm(EMPTY_FORM)
+    const timer = setTimeout(() => resetRef.current(), 4000)
+    return () => clearTimeout(timer)
+  }, [state.succeeded])
+
+  const formErrors = state.errors ? state.errors.getFormErrors() : []
+  const status = state.submitting ? 'sending' : state.succeeded ? 'ok' : formErrors.length ? 'error' : ''
+  const update = (key) => (e) => setForm((prev) => ({ ...prev, [key]: e.target.value }))
 
   const contactInfo = [
     { icon: '📍', label: 'Location', value: c.location || 'Nipani, Karnataka, India' },
@@ -67,46 +63,61 @@ export default function Contact({ content }) {
           <Reveal from="right" delay={120}>
             <form onSubmit={handleSubmit} className="gcard p-5 sm:p-8 lg:p-9">
             <h3 className="font-bold text-lg mb-5">Send Us a Message</h3>
+            <input type="hidden" name="_subject" value="New contact message from Promotix website" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-              <input
-                className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all"
-                placeholder="Your Name"
-                value={form.name}
-                onChange={(e) => setForm((s) => ({ ...s, name: e.target.value }))}
-                required
-              />
-              <input
-                className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all"
-                type="email"
-                placeholder="Email Address"
-                value={form.email}
-                onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))}
-                required
-              />
+              <div>
+                <input
+                  className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all"
+                  name="name"
+                  placeholder="Your Name"
+                  value={form.name}
+                  onChange={update('name')}
+                  aria-invalid={state.errors?.getFieldErrors('name').length > 0}
+                  required
+                />
+                <ValidationError field="name" errors={state.errors} className="mt-1 text-xs text-red-600" />
+              </div>
+              <div>
+                <input
+                  className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all"
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  value={form.email}
+                  onChange={update('email')}
+                  aria-invalid={state.errors?.getFieldErrors('email').length > 0}
+                  required
+                />
+                <ValidationError field="email" errors={state.errors} className="mt-1 text-xs text-red-600" />
+              </div>
             </div>
             <input
               className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all mb-4"
               type="tel"
+              name="mobile"
               placeholder="Mobile Number"
               value={form.mobile}
-              onChange={(e) => setForm((s) => ({ ...s, mobile: e.target.value }))}
+              onChange={update('mobile')}
             />
             <input
               className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all mb-4"
+              name="company"
               placeholder="Company / Brand Name"
               value={form.company}
-              onChange={(e) => setForm((s) => ({ ...s, company: e.target.value }))}
+              onChange={update('company')}
             />
             <input
               className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all mb-4"
+              name="location"
               placeholder="Current Location"
               value={form.location}
-              onChange={(e) => setForm((s) => ({ ...s, location: e.target.value }))}
+              onChange={update('location')}
             />
             <select
               className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all mb-4 appearance-none cursor-pointer"
+              name="service"
               value={form.service}
-              onChange={(e) => setForm((s) => ({ ...s, service: e.target.value }))}
+              onChange={update('service')}
             >
               <option value="">Service Interested In</option>
               <option>Cinematic</option>
@@ -115,15 +126,18 @@ export default function Contact({ content }) {
               <option>Premium</option>
             </select>
             <textarea
-              className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all mb-4 min-h-[110px] resize-y"
+              className="w-full px-4 py-3 bg-black/[0.03] border border-black/10 rounded-xl outline-none focus:border-violet focus:bg-violet/5 text-sm transition-all min-h-[110px] resize-y"
+              name="message"
               placeholder="Tell us about your project..."
               value={form.message}
-              onChange={(e) => setForm((s) => ({ ...s, message: e.target.value }))}
+              onChange={update('message')}
+              aria-invalid={state.errors?.getFieldErrors('message').length > 0}
               required
             />
+            <ValidationError field="message" errors={state.errors} className="mt-1 mb-4 text-xs text-red-600" />
             <button
               type="submit"
-              disabled={status === 'sending'}
+              disabled={state.submitting}
               className={`w-full py-4 rounded-xl text-white font-semibold transition-all shadow-lg ${
                 status === 'ok'
                   ? 'bg-gradient-to-r from-emerald-600 to-emerald-500'
@@ -134,6 +148,9 @@ export default function Contact({ content }) {
             >
               {status === 'sending' ? 'Sending…' : status === 'ok' ? 'Message Sent! ✓' : status === 'error' ? 'Failed — Try Again' : 'Send Message →'}
             </button>
+            {status === 'error' && formErrors.length > 0 && (
+              <p className="mt-3 text-xs text-red-600 text-center" role="alert">{formErrors[0].message}</p>
+            )}
             </form>
           </Reveal>
         </div>
