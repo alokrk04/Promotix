@@ -10221,6 +10221,7 @@ function FAQ({ items }) {
     ] }) }, i)) })
   ] }) });
 }
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/maeojgkd";
 function Contact({ content }) {
   const c = content || {};
   const [form, setForm] = reactExports.useState({ name: "", email: "", mobile: "", company: "", location: "", service: "", message: "" });
@@ -10229,7 +10230,12 @@ function Contact({ content }) {
     e.preventDefault();
     setStatus("sending");
     try {
-      await api.submitContact(form);
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ ...form, _subject: "New contact message from Promotix website" })
+      });
+      if (!res.ok) throw new Error("Formspree submission failed");
       setStatus("ok");
       setForm({ name: "", email: "", mobile: "", company: "", location: "", service: "", message: "" });
       setTimeout(() => setStatus(""), 3500);
