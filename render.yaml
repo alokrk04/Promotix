@@ -26,10 +26,13 @@ projects:
       - key: CORS_ALLOWED_ORIGINS
         value: https://promotix.in,https://www.promotix.in,https://promotix.netlify.app
       region: oregon
-      buildCommand: pip install -r requirements.txt
-      startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+      # Build the frontend during deploy so frontend/dist is never stale.
+      # rootDir is intentionally the repo root so the Python service can serve
+      # frontend/dist at runtime (Render hides files outside rootDir).
+      buildCommand: pip install -r backend/requirements.txt && cd frontend && npm ci --include=dev && npm run build
+      startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+      healthCheckPath: /health
       autoDeployTrigger: commit
-      rootDir: backend
 
 databases:
 - name: promotix-db

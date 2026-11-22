@@ -3,14 +3,14 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.security import get_current_admin
-from app.models import Admin, WebsiteSection, Service, PortfolioItem, Testimonial, ContactMessage, Brand
+from app.models import Admin, WebsiteSection, Service, PortfolioItem, Testimonial, Brand
 from app.services.sync import sync_section, sync_services, sync_portfolio, sync_testimonials
 from app.schemas import (
     WebsiteSectionOut, WebsiteSectionUpdate,
     ServiceOut, ServiceCreate, ServiceUpdate,
     PortfolioOut, PortfolioCreate, PortfolioUpdate,
     TestimonialOut, TestimonialCreate, TestimonialUpdate,
-    ContactOut, BrandOut,
+    BrandOut, BrandCreate, BrandUpdate,
 )
 
 router = APIRouter()
@@ -210,34 +210,6 @@ def delete_testimonial(testimonial_id: int, admin: Admin = Depends(get_current_a
     db.delete(t)
     db.commit()
     sync_testimonials(db.query(Testimonial).order_by(Testimonial.order).all())
-    return {"ok": True}
-
-
-# ─── Messages ──────────────────────────────────────────────
-
-@router.get("/messages", response_model=list[ContactOut])
-def list_messages(admin: Admin = Depends(get_current_admin), db: Session = Depends(get_db)):
-    msgs = db.query(ContactMessage).order_by(ContactMessage.created_at.desc()).all()
-    return [ContactOut.model_validate(m) for m in msgs]
-
-
-@router.post("/messages/{message_id}/read")
-def mark_read(message_id: int, admin: Admin = Depends(get_current_admin), db: Session = Depends(get_db)):
-    msg = db.query(ContactMessage).filter(ContactMessage.id == message_id).first()
-    if not msg:
-        raise HTTPException(status_code=404, detail="Message not found")
-    msg.is_read = True
-    db.commit()
-    return {"ok": True}
-
-
-@router.delete("/messages/{message_id}")
-def delete_message(message_id: int, admin: Admin = Depends(get_current_admin), db: Session = Depends(get_db)):
-    msg = db.query(ContactMessage).filter(ContactMessage.id == message_id).first()
-    if not msg:
-        raise HTTPException(status_code=404, detail="Message not found")
-    db.delete(msg)
-    db.commit()
     return {"ok": True}
 
 

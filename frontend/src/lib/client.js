@@ -76,11 +76,6 @@ export const api = {
   updateTestimonial: (id, body) => request(`/admin/testimonials/${id}`, { method: 'PUT', body: JSON.stringify(body) }),
   deleteTestimonial: (id) => request(`/admin/testimonials/${id}`, { method: 'DELETE' }),
 
-  // Admin: Messages
-  getMessages: () => request('/admin/messages'),
-  markRead: (id) => request(`/admin/messages/${id}/read`, { method: 'POST' }),
-  deleteMessage: (id) => request(`/admin/messages/${id}`, { method: 'DELETE' }),
-
   // Admin: Brands
   getBrands: () => request('/admin/brands'),
   createBrand: (body) => request('/admin/brands', { method: 'POST', body: JSON.stringify(body) }),

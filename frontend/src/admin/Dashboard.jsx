@@ -186,55 +186,6 @@ function ListManager({ title, items, fields, onCreate, onUpdate, onDelete }) {
   )
 }
 
-function MessagesPanel() {
-  const [messages, setMessages] = useState([])
-  const [search, setSearch] = useState('')
-
-  const load = () => api.getMessages().then(setMessages).catch(() => {})
-  useEffect(() => { load() }, [])
-
-  const filtered = messages.filter((m) =>
-    !search || `${m.name} ${m.email || ''} ${m.mobile || ''} ${m.message} ${m.company || ''} ${m.location || ''} ${m.service || ''}`.toLowerCase().includes(search.toLowerCase())
-  )
-
-  return (
-    <div>
-      <h2 className="text-lg font-bold mb-4">Contact Messages ({messages.filter((m) => !m.is_read).length} unread)</h2>
-      <input
-        className="w-full px-4 py-2 border border-slate-200 rounded-lg mb-4 outline-none focus:border-violet text-sm"
-        placeholder="Search messages..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      {filtered.length === 0 && <p className="text-slate text-sm">No messages</p>}
-      {filtered.map((m) => (
-        <div
-          key={m.id}
-          className={`rounded-xl p-4 mb-3 border ${m.is_read ? 'bg-white border-slate-200' : 'bg-purple-50 border-l-4 border-l-violet'}`}
-        >
-          <div className="flex justify-between items-start gap-4 flex-wrap">
-            <div className="text-sm font-semibold">
-              {m.name}{m.company ? ` · ${m.company}` : ''}{m.location ? ` · 📍${m.location}` : ''}{m.email ? ` · ✉️${m.email}` : ''}{m.mobile ? ` · 📱${m.mobile}` : ''}{m.service ? ` · ${m.service}` : ''}
-            </div>
-            <div className="flex gap-2 items-center text-xs text-slate">
-              {new Date(m.created_at).toLocaleDateString()} {new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-              {!m.is_read && (
-                <button onClick={() => api.markRead(m.id).then(load)} className="px-2 py-1 border border-slate-200 rounded-lg hover:bg-slate-50">
-                  Mark Read
-                </button>
-              )}
-              <button onClick={() => api.deleteMessage(m.id).then(load)} className="px-2 py-1 bg-red-100 text-red-600 rounded-lg hover:bg-red-200">
-                ✕
-              </button>
-            </div>
-          </div>
-          <p className="mt-2 text-sm leading-relaxed">{m.message}</p>
-        </div>
-      ))}
-    </div>
-  )
-}
-
 export default function Admin() {
   const navigate = useNavigate()
   const { admin, loading, logout } = useAuth()
@@ -262,7 +213,6 @@ export default function Admin() {
     { key: 'services', label: 'Services' },
     { key: 'portfolio', label: 'Portfolio' },
     { key: 'testimonials', label: 'Testimonials' },
-    { key: 'messages', label: 'Messages' },
     { key: 'brands', label: 'Brands' },
   ]
 
@@ -346,7 +296,6 @@ export default function Admin() {
             onDelete={(id) => api.deleteTestimonial(id).then(() => api.getTestimonials().then(setTestimonials))}
           />
         )}
-        {tab === 'messages' && <MessagesPanel />}
         {tab === 'brands' && (
           <ListManager
             title="Brands"

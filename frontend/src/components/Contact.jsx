@@ -1,27 +1,40 @@
-import { useEffect, useRef, useState } from 'react'
-import { useForm, ValidationError } from '@formspree/react'
+import { useState } from 'react'
 import Reveal from './Reveal'
 
-const FORMSPREE_FORM_ID = 'maeojgkd'
+const FORM_ENDPOINT = 'https://formspree.io/f/xnpdoard'
 const EMPTY_FORM = { name: '', email: '', mobile: '', company: '', location: '', service: '', message: '' }
 
 export default function Contact({ content }) {
   const c = content || {}
   const [form, setForm] = useState(EMPTY_FORM)
-  const [state, handleSubmit, resetFormspree] = useForm(FORMSPREE_FORM_ID)
-  const resetRef = useRef(resetFormspree)
-  resetRef.current = resetFormspree
+  const [status, setStatus] = useState('')
+  const [error, setError] = useState('')
 
-  useEffect(() => {
-    if (!state.succeeded) return
-    setForm(EMPTY_FORM)
-    const timer = setTimeout(() => resetRef.current(), 4000)
-    return () => clearTimeout(timer)
-  }, [state.succeeded])
-
-  const formErrors = state.errors ? state.errors.getFormErrors() : []
-  const status = state.submitting ? 'sending' : state.succeeded ? 'ok' : formErrors.length ? 'error' : ''
   const update = (key) => (e) => setForm((prev) => ({ ...prev, [key]: e.target.value }))
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (status === 'sending') return
+    setStatus('sending')
+    setError('')
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => null)
+        throw new Error(data?.errors?.[0]?.message || 'Something went wrong. Please try again.')
+      }
+      setForm(EMPTY_FORM)
+      setStatus('ok')
+      setTimeout(() => setStatus(''), 4000)
+    } catch (err) {
+      setError(err.message || 'Something went wrong. Please try again.')
+      setStatus('error')
+    }
+  }
 
   const contactInfo = [
     { icon: '📍', label: 'Location', value: c.location || 'Nipani, Karnataka, India' },
@@ -63,7 +76,6 @@ export default function Contact({ content }) {
           <Reveal from="right" delay={120}>
             <form onSubmit={handleSubmit} className="gcard p-5 sm:p-8 lg:p-9">
             <h3 className="font-bold text-lg mb-5">Send Us a Message</h3>
-            <input type="hidden" name="_subject" value="New contact message from Promotix website" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div>
                 <input
@@ -72,10 +84,8 @@ export default function Contact({ content }) {
                   placeholder="Your Name"
                   value={form.name}
                   onChange={update('name')}
-                  aria-invalid={state.errors?.getFieldErrors('name').length > 0}
                   required
                 />
-                <ValidationError field="name" errors={state.errors} className="mt-1 text-xs text-red-600" />
               </div>
               <div>
                 <input
@@ -85,10 +95,8 @@ export default function Contact({ content }) {
                   placeholder="Email Address"
                   value={form.email}
                   onChange={update('email')}
-                  aria-invalid={state.errors?.getFieldErrors('email').length > 0}
                   required
                 />
-                <ValidationError field="email" errors={state.errors} className="mt-1 text-xs text-red-600" />
               </div>
             </div>
             <input
@@ -131,13 +139,11 @@ export default function Contact({ content }) {
               placeholder="Tell us about your project..."
               value={form.message}
               onChange={update('message')}
-              aria-invalid={state.errors?.getFieldErrors('message').length > 0}
               required
             />
-            <ValidationError field="message" errors={state.errors} className="mt-1 mb-4 text-xs text-red-600" />
             <button
               type="submit"
-              disabled={state.submitting}
+              disabled={status === 'sending'}
               className={`w-full py-4 rounded-xl text-white font-semibold transition-all shadow-lg ${
                 status === 'ok'
                   ? 'bg-gradient-to-r from-emerald-600 to-emerald-500'
@@ -148,8 +154,8 @@ export default function Contact({ content }) {
             >
               {status === 'sending' ? 'Sending…' : status === 'ok' ? 'Message Sent! ✓' : status === 'error' ? 'Failed — Try Again' : 'Send Message →'}
             </button>
-            {status === 'error' && formErrors.length > 0 && (
-              <p className="mt-3 text-xs text-red-600 text-center" role="alert">{formErrors[0].message}</p>
+            {status === 'error' && error && (
+              <p className="mt-3 text-xs text-red-600 text-center" role="alert">{error}</p>
             )}
             </form>
           </Reveal>

@@ -129,32 +129,6 @@ class TestimonialUpdate(BaseModel):
     is_visible: Optional[bool] = None
 
 
-class ContactCreate(BaseModel):
-    name: str = Field(..., min_length=1, max_length=255)
-    email: Optional[str] = Field(None, max_length=255, pattern=r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
-    mobile: Optional[str] = Field(None, max_length=255)
-    company: Optional[str] = Field(None, max_length=255)
-    location: Optional[str] = Field(None, max_length=255)
-    service: Optional[str] = Field(None, max_length=255)
-    message: str = Field(..., min_length=2, max_length=2000)
-
-
-class ContactOut(BaseModel):
-    id: int
-    name: str
-    email: Optional[str] = None
-    mobile: Optional[str] = None
-    company: Optional[str] = None
-    location: Optional[str] = None
-    service: Optional[str] = None
-    message: str
-    is_read: bool
-    created_at: datetime
-
-    class Config:
-        from_attributes = True
-
-
 class BrandOut(BaseModel):
     id: int
     name: str

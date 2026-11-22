@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.core.database import get_db
-from app.models import WebsiteSection, Service, PortfolioItem, Testimonial, ContactMessage, Brand
+from app.models import WebsiteSection, Service, PortfolioItem, Testimonial, Brand
 from app.schemas import (
     WebsiteSectionOut, ServiceOut, PortfolioOut, TestimonialOut,
-    ContactCreate, ContactOut, PublicWebsiteData, BrandOut,
+    PublicWebsiteData, BrandOut,
 )
 
 router = APIRouter()
@@ -33,8 +33,11 @@ def get_public_website(db: Session = Depends(get_db)):
     
     # Add WebsiteSection brands first (these are the ones editable via admin 'Sections' tab)
     for b in section_brands:
+        if not isinstance(b, dict):
+            continue
         name = b.get('name', '')
-        if name:
+        if name and name not in seen_names:
+            seen_names.add(name)
             combined_brands.append(BrandOut(id=0, name=name, description=b.get('description', ''), is_visible=True, order=0))
     
     # Add Brand model brands not already included
@@ -49,22 +52,6 @@ def get_public_website(db: Session = Depends(get_db)):
         testimonials=[TestimonialOut.model_validate(t) for t in testimonials],
         brands=combined_brands,
     )
-
-
-@router.post("/api/contact")
-def submit_contact(body: ContactCreate, db: Session = Depends(get_db)):
-    msg = ContactMessage(
-        name=body.name,
-        email=body.email or "",
-        mobile=body.mobile or "",
-        company=body.company or "",
-        location=body.location or "",
-        service=body.service or "",
-        message=body.message,
-    )
-    db.add(msg)
-    db.commit()
-    return {"ok": True}
 
 
 @router.get("/api/content")
